@@ -9,6 +9,7 @@
     content="GrooveLinx is the command center for modern jam bands – song library, setlists, practice workflow, and gig logistics all in one place."
   />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --bg: #050510;
@@ -28,11 +29,27 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #181842 0, #050510 55%, #020208 100%);
+
+      background: linear-gradient(
+        120deg,
+        #050510,
+        #0f0f3d,
+        #1a0f35,
+        #050510
+      );
+      background-size: 400% 400%;
+      animation: psychedelicFlow 18s ease infinite;
+
       color: var(--text);
       min-height: 100vh;
       display: flex;
       justify-content: center;
+    }
+
+    @keyframes psychedelicFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .page {
@@ -119,6 +136,47 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(
+        circle,
+        rgba(255,140,60,0.35),
+        rgba(75,141,255,0.25),
+        transparent 70%
+      );
+      top: -200px;
+      left: -200px;
+      animation: pulseWave 8s ease-in-out infinite;
+      filter: blur(80px);
+      z-index: 0;
+    }
+
+    @keyframes pulseWave {
+      0% {
+        transform: scale(0.9);
+        opacity: .6;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: .9;
+      }
+      100% {
+        transform: scale(0.9);
+        opacity: .6;
+      }
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-eyebrow {
@@ -407,7 +465,7 @@
         <div class="hero-eyebrow">New • Built by a jam-band guitarist</div>
         <h1>
           One place to
-          <span class="highlight">learn, rehearse & manage</span>
+          <span class="highlight">learn, rehearse &amp; manage</span>
           your band.
         </h1>
         <p class="hero-sub">
