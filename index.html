@@ -44,12 +44,29 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
+      position: relative;
+      overflow-x: hidden;
     }
 
     @keyframes psychedelicFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* subtle grain / noise overlay */
+    .noise-overlay {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.18;
+      mix-blend-mode: soft-light;
+      background-image:
+        radial-gradient(circle at 0 0, rgba(255,255,255,0.14) 0, transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(255,255,255,0.07) 0, transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(255,255,255,0.05) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(255,255,255,0.1) 0, transparent 55%);
+      z-index: 0;
     }
 
     .page {
@@ -59,6 +76,8 @@
       display: flex;
       flex-direction: column;
       gap: 32px;
+      position: relative;
+      z-index: 1;
     }
 
     header {
@@ -196,6 +215,12 @@
     .hero-sub strong {
       color: #fdfdfd;
       font-weight: 600;
+    }
+
+    .hero-tagline {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #dadbf5;
     }
 
     .hero-actions {
@@ -460,9 +485,47 @@
 
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    /* floating hippie icons */
+    .floating-icons {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+      font-size: 1.6rem;
+    }
+
+    .floating-icons span {
+      position: absolute;
+      animation: float 28s linear infinite;
+    }
+
+    .floating-icons span:nth-child(1) { top: 10%; left: 5%; animation-duration: 26s; }
+    .floating-icons span:nth-child(2) { top: 20%; right: 8%; animation-duration: 32s; }
+    .floating-icons span:nth-child(3) { bottom: 15%; left: 18%; animation-duration: 30s; }
+    .floating-icons span:nth-child(4) { bottom: 18%; right: 14%; animation-duration: 34s; }
+    .floating-icons span:nth-child(5) { top: 45%; left: 50%; animation-duration: 29s; }
+
+    @keyframes float {
+      0%   { transform: translateY(0px) rotate(0deg); }
+      50%  { transform: translateY(-25px) rotate(2deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
   </style>
 </head>
 <body>
+  <div class="noise-overlay"></div>
+
+  <div class="floating-icons">
+    <span>🎸</span>
+    <span>🐻</span>
+    <span>⚡️</span>
+    <span>🍩</span>
+    <span>🌈</span>
+  </div>
+
   <div class="page">
     <header>
       <div class="brand">
@@ -490,6 +553,9 @@
           GrooveLinx is the command center for modern jam bands. Song DNA, setlists, rehearsal notes,
           stems, and gig logistics all in one shared space—so your band can <strong>stay in the pocket</strong>
           instead of drowning in texts and spreadsheets.
+        </p>
+        <p class="hero-tagline">
+          From rehearsal room to second set, GrooveLinx keeps the details tight so the jams can stay loose.
         </p>
 
         <div class="hero-actions">
@@ -537,8 +603,8 @@
         GrooveLinx helps your band stay organized, rehearse smarter, and lock into the groove together.
       </p>
       <p>
-        From rehearsal rooms to late-night second sets, GrooveLinx keeps the details tight so the music
-        can stay loose.
+        From basement jams to festival stages, GrooveLinx keeps everyone on the same page so the music
+        can wander wherever it wants.
       </p>
     </section>
 
@@ -546,7 +612,7 @@
       <article class="panel">
         <div class="panel-inner">
           <div class="panel-title">Learn songs together, not alone.</div>
-          <div class="panel-sub">Everything from your current app, reframed for any jam band.</div>
+          <div class="panel-sub">Everything from your current app, tuned for any jam band.</div>
           <ul>
             <li><strong>Song Library &amp; Song DNA:</strong> one place for key, BPM, lead singer, harmonies, structure, and notes.</li>
             <li><strong>The North Star:</strong> band-voted reference version (Archive.org, YouTube, Spotify, etc.).</li>
