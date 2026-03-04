@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -59,6 +59,27 @@
       z-index:0;
     }
 
+    /* drifting aurora shapes behind everything */
+    .aurora{
+      position:fixed;
+      inset:-20%;
+      z-index:0;
+      pointer-events:none;
+      filter: blur(50px);
+      opacity:.55;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,140,60,.18), transparent 40%),
+        radial-gradient(circle at 80% 25%, rgba(75,141,255,.16), transparent 45%),
+        radial-gradient(circle at 45% 75%, rgba(167,75,255,.16), transparent 45%),
+        radial-gradient(circle at 70% 80%, rgba(34,197,94,.12), transparent 45%);
+      animation: auroraDrift 14s ease-in-out infinite;
+    }
+    @keyframes auroraDrift{
+      0%{transform: translate3d(0,0,0) scale(1)}
+      50%{transform: translate3d(40px,-25px,0) scale(1.05)}
+      100%{transform: translate3d(0,0,0) scale(1)}
+    }
+
     .wrap{
       position:relative;
       z-index:1;
@@ -67,7 +88,7 @@
       padding:28px 16px 72px;
       display:flex;
       flex-direction:column;
-      gap:28px;
+      gap:24px;
     }
 
     header{
@@ -81,17 +102,20 @@
       display:flex;
       align-items:center;
       gap:12px;
+      min-width: 280px;
     }
     .brand img{
       height:46px;
       width:auto;
       border-radius:16px;
       box-shadow:0 10px 30px rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.08);
     }
     .brand .name{
       font-weight:900;
       letter-spacing:-.02em;
       font-size:1.12rem;
+      line-height:1.05;
     }
     .brand .tag{
       color:var(--muted2);
@@ -123,8 +147,8 @@
     .hero{
       display:grid;
       grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr);
-      gap:26px;
-      align-items:center;
+      gap:22px;
+      align-items:stretch;
     }
     @media (max-width:900px){ .hero{grid-template-columns:1fr} }
 
@@ -143,7 +167,7 @@
 
     .eyebrow{
       color:var(--accent2);
-      font-weight:800;
+      font-weight:900;
       font-size:.82rem;
       letter-spacing:.18em;
       text-transform:uppercase;
@@ -169,26 +193,29 @@
       font-size:1.02rem;
       max-width:46rem;
     }
-    .sub strong{color:#fff;font-weight:700}
+    .sub strong{color:#fff;font-weight:800}
 
     .ctaRow{
       display:flex;
       flex-wrap:wrap;
       gap:12px;
-      margin-top:18px;
+      margin-top:16px;
     }
 
-    a.btn{
+    a.btn, button.btn{
       display:inline-flex;
       align-items:center;
+      justify-content:center;
       gap:8px;
       padding:12px 18px;
       border-radius:999px;
       text-decoration:none;
-      font-weight:800;
+      font-weight:900;
       font-size:.92rem;
       letter-spacing:.01em;
       user-select:none;
+      border: none;
+      cursor:pointer;
     }
     .primary{
       color:#050510;
@@ -202,19 +229,89 @@
       backdrop-filter: blur(12px);
     }
 
+    /* 2) Scrolling jam-band ticker */
+    .ticker{
+      margin-top:16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(5,5,26,.55);
+      backdrop-filter: blur(12px);
+      overflow:hidden;
+    }
+    .tickerTrack{
+      display:flex;
+      gap:34px;
+      padding:10px 14px;
+      white-space:nowrap;
+      will-change: transform;
+      animation: tickerMove 26s linear infinite;
+    }
+    .tickerItem{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(246,247,255,.92);
+      font-weight:800;
+      font-size:.85rem;
+      letter-spacing:.02em;
+    }
+    .spark{
+      width:7px;height:7px;border-radius:50%;
+      background: linear-gradient(135deg,#4b8dff,#a74bff,#ff8a3c);
+      box-shadow:0 0 14px rgba(167,75,255,.55);
+    }
+    @keyframes tickerMove{
+      0%{ transform: translateX(0); }
+      100%{ transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .tickerTrack{ animation: none; }
+    }
+
     .heroRight{
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:14px;
+      padding:20px;
+      border-radius:var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(5,5,26,.48);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
     }
+    .heroRight:before{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,140,60,.18), transparent 45%),
+        radial-gradient(circle at 70% 35%, rgba(75,141,255,.18), transparent 45%),
+        radial-gradient(circle at 55% 80%, rgba(167,75,255,.16), transparent 45%);
+      filter: blur(38px);
+      opacity:.85;
+      animation: panelDrift 12s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes panelDrift{
+      0%{transform: translate3d(0,0,0) scale(1)}
+      50%{transform: translate3d(-18px,12px,0) scale(1.03)}
+      100%{transform: translate3d(0,0,0) scale(1)}
+    }
+
     .poster{
+      position:relative;
+      z-index:1;
       width:100%;
       max-width:520px;
       border-radius:22px;
       box-shadow:0 26px 70px rgba(0,0,0,.85);
+      border: 1px solid rgba(255,255,255,.10);
     }
     .chips{
+      position:relative;
+      z-index:1;
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
@@ -237,11 +334,11 @@
       border:none;
       height:1px;
       width:60%;
-      margin:14px auto 6px;
+      margin:8px auto 2px;
       background:rgba(255,255,255,.10);
     }
 
-    /* Screenshot feature section */
+    /* Screenshot feature section (1) psychedelic glow + motion already built in */
     .shots{
       margin-top:6px;
       padding:74px 18px;
@@ -258,7 +355,6 @@
       overflow:hidden;
     }
 
-    /* animated glow */
     .shots:before{
       content:"";
       position:absolute;
@@ -336,7 +432,6 @@
       line-height:1.5;
     }
 
-    /* “iPhone snapshot” look even with raw screenshots */
     .phoneFrame{
       display:inline-block;
       padding:14px;
@@ -344,6 +439,12 @@
       background: rgba(0,0,0,.28);
       border:1px solid rgba(255,255,255,.12);
       box-shadow: 0 28px 70px rgba(0,0,0,.60);
+      transform: translateZ(0);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .phoneFrame:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 36px 86px rgba(0,0,0,.72);
     }
     .phoneFrame img{
       display:block;
@@ -352,7 +453,7 @@
       border-radius:28px;
     }
 
-    /* Early access section */
+    /* Early access */
     .early{
       margin-top:18px;
       padding:18px;
@@ -421,7 +522,7 @@
       font-size:.82rem;
     }
 
-    /* Sticky Join Beta button */
+    /* Sticky Join Beta */
     .stickyBeta{
       position:fixed;
       right:16px;
@@ -454,22 +555,135 @@
     @media(min-width:980px){
       .stickyBeta .tiny{display:block}
     }
+
+    /* 3) Interactive demo modal */
+    .modalOverlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      z-index:200;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .modal{
+      width:min(1100px, 96vw);
+      height:min(720px, 86vh);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(6,6,22,.92);
+      box-shadow: 0 40px 120px rgba(0,0,0,.80);
+      overflow:hidden;
+      position:relative;
+    }
+    .modalTop{
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 12px 0 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(10,10,40,.50);
+    }
+    .modalTop .title{
+      font-weight:900;
+      font-size:.9rem;
+      color: rgba(246,247,255,.92);
+      letter-spacing:-.01em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .pill{
+      font-size:.72rem;
+      font-weight:900;
+      color:#050510;
+      padding:6px 10px;
+      border-radius:999px;
+      background: linear-gradient(135deg,#4b8dff,#a74bff);
+    }
+    .closeBtn{
+      appearance:none;
+      border:none;
+      background: rgba(255,255,255,.10);
+      color: rgba(246,247,255,.92);
+      font-weight:900;
+      border-radius:12px;
+      width:40px;
+      height:32px;
+      cursor:pointer;
+    }
+    .modalFrame{
+      width:100%;
+      height: calc(100% - 48px);
+      border:0;
+      background:#0b1020;
+    }
+    .modalHint{
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      color: rgba(255,255,255,.65);
+      font-size:.78rem;
+      background: rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      padding:8px 12px;
+    }
+    .kbd{
+      font-weight:900;
+      padding:2px 8px;
+      border-radius:8px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
+      margin-left:6px;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .aurora, .shots:before, .shots:after, .heroRight:before{ animation: none; }
+      .phoneFrame{ transition: none; }
+    }
   </style>
 </head>
 
 <body>
   <div class="noise"></div>
+  <div class="aurora"></div>
 
   <div class="stickyBeta">
     <a href="#early-access">⚡️ Join Beta</a>
     <div class="tiny">Get early access</div>
   </div>
 
+  <!-- Demo Modal -->
+  <div class="modalOverlay" id="demoOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="GrooveLinx Demo">
+      <div class="modalTop">
+        <div class="title">
+          GrooveLinx Demo <span class="pill">Live</span>
+        </div>
+        <button class="closeBtn" id="demoClose" aria-label="Close demo">✕</button>
+      </div>
+      <iframe
+        class="modalFrame"
+        id="demoFrame"
+        src="about:blank"
+        title="GrooveLinx Demo"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-modals"
+      ></iframe>
+      <div class="modalHint">Press <span class="kbd">Esc</span> to close</div>
+    </div>
+  </div>
+
   <div class="wrap">
 
     <header>
       <div class="brand">
-        <img src="images/groovelinx_clean_logo.png" alt="GrooveLinx logo">
+        <img src="/images/groovelinx_clean_logo.png" alt="GrooveLinx logo">
         <div>
           <div class="name">GrooveLinx</div>
           <div class="tag">Where bands lock in</div>
@@ -495,23 +709,41 @@
         </p>
 
         <div class="ctaRow">
-          <a class="btn primary" href="https://drewmerrill.github.io/deadcetera/" target="_blank" rel="noreferrer">
-            🎸 See the live demo
-          </a>
-          <a class="btn ghost" href="#screens">
-            See screenshots
-          </a>
-          <a class="btn ghost" href="#early-access">
-            Get early access
-          </a>
+          <button class="btn primary" id="openDemo">🎸 Open interactive demo</button>
+          <a class="btn ghost" href="#screens">See screenshots</a>
+          <a class="btn ghost" href="#early-access">Get early access</a>
         </div>
+
+        <!-- Jam-band ticker (duplicated content so it loops seamlessly) -->
+        <div class="ticker" aria-label="Jam scene ticker">
+          <div class="tickerTrack" aria-hidden="true">
+            <div class="tickerItem"><span class="spark"></span> Grateful Dead</div>
+            <div class="tickerItem"><span class="spark"></span> Phish</div>
+            <div class="tickerItem"><span class="spark"></span> Goose</div>
+            <div class="tickerItem"><span class="spark"></span> Widespread Panic</div>
+            <div class="tickerItem"><span class="spark"></span> Allman Brothers</div>
+            <div class="tickerItem"><span class="spark"></span> Setlists • Segues</div>
+            <div class="tickerItem"><span class="spark"></span> Woodshed • Lock In</div>
+            <div class="tickerItem"><span class="spark"></span> “In the pocket”</div>
+
+            <div class="tickerItem"><span class="spark"></span> Grateful Dead</div>
+            <div class="tickerItem"><span class="spark"></span> Phish</div>
+            <div class="tickerItem"><span class="spark"></span> Goose</div>
+            <div class="tickerItem"><span class="spark"></span> Widespread Panic</div>
+            <div class="tickerItem"><span class="spark"></span> Allman Brothers</div>
+            <div class="tickerItem"><span class="spark"></span> Setlists • Segues</div>
+            <div class="tickerItem"><span class="spark"></span> Woodshed • Lock In</div>
+            <div class="tickerItem"><span class="spark"></span> “In the pocket”</div>
+          </div>
+        </div>
+
       </div>
 
       <div class="heroRight">
-        <img class="poster" src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx psychedelic poster">
+        <img class="poster" src="/images/groovelinx_psychedelic_logo.png" alt="GrooveLinx psychedelic poster">
         <div class="chips">
-          <div class="chip"><img src="images/groovelinx_app_icon_dark.png" alt="">Practice-first</div>
-          <div class="chip"><img src="images/groovelinx_badge_logo.png" alt="">Rehearsal intelligence</div>
+          <div class="chip"><img src="/images/groovelinx_app_icon_dark.png" alt="">Practice-first</div>
+          <div class="chip"><img src="/images/groovelinx_badge_logo.png" alt="">Rehearsal intelligence</div>
           <div class="chip">Built for the jam scene</div>
         </div>
       </div>
@@ -528,12 +760,11 @@
         </p>
 
         <div class="grid">
-
           <div class="card">
             <h3>Split Rehearsal Recordings Automatically</h3>
             <p>Detect pauses, name songs, and save clean takes from a messy rehearsal MP3.</p>
             <div class="phoneFrame">
-              <img src="images/groovelinx_screenshot_1.png" alt="Rehearsal Chopper screenshot">
+              <img src="/images/groovelinx_screenshot_1.png" alt="Rehearsal Chopper screenshot">
             </div>
           </div>
 
@@ -541,7 +772,7 @@
             <h3>Charts, Keys & Structure in One Place</h3>
             <p>Stage-ready charts plus the metadata that makes rehearsal efficient.</p>
             <div class="phoneFrame">
-              <img src="images/groovelinx_screenshot_2.png" alt="Chart view screenshot">
+              <img src="/images/groovelinx_screenshot_2.png" alt="Chart view screenshot">
             </div>
           </div>
 
@@ -549,7 +780,7 @@
             <h3>Track Best Shot vs Your North Star</h3>
             <p>Rate sections, track progress, and align the band on what “ready” means.</p>
             <div class="phoneFrame">
-              <img src="images/groovelinx_screenshot_3.png" alt="Best Shot vs North Star screenshot">
+              <img src="/images/groovelinx_screenshot_3.png" alt="Best Shot vs North Star screenshot">
             </div>
           </div>
 
@@ -557,7 +788,7 @@
             <h3>Coordinate Rehearsals and Gigs</h3>
             <p>Availability, scheduling, and upcoming events — without the chaos.</p>
             <div class="phoneFrame">
-              <img src="images/groovelinx_screenshot_4.png" alt="Calendar screenshot">
+              <img src="/images/groovelinx_screenshot_4.png" alt="Calendar screenshot">
             </div>
           </div>
 
@@ -565,7 +796,7 @@
             <h3>Practice Smarter, Faster</h3>
             <p>Keep your band aligned on what to woodshed next and what’s gig-ready.</p>
             <div class="phoneFrame">
-              <img src="images/groovelinx_screenshot_5.png" alt="Home / library screenshot">
+              <img src="/images/groovelinx_screenshot_5.png" alt="Song Library screenshot">
             </div>
           </div>
 
@@ -573,10 +804,9 @@
             <h3>Where Bands Lock In</h3>
             <p>A vibe-forward experience built for bands chasing that “in the pocket” feeling.</p>
             <div class="phoneFrame">
-              <img src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx artwork">
+              <img src="/images/groovelinx_psychedelic_logo.png" alt="GrooveLinx artwork">
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -588,7 +818,7 @@
         Drop your email and I’ll send beta access as spots open up.
       </p>
 
-      <form class="formRow" onsubmit="alert('This is a static site right now. Hook this form to Mailchimp / ConvertKit / Google Forms when ready.'); return false;">
+      <form class="formRow" onsubmit="alert('Static site for now. Hook this to Mailchimp / ConvertKit / Google Forms when ready.'); return false;">
         <input type="email" placeholder="you@yourband.com" required>
         <button type="submit">Join the list</button>
       </form>
@@ -604,7 +834,42 @@
   </div>
 
   <script>
+    // year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Demo Modal (3)
+    const DEMO_URL = "https://drewmerrill.github.io/deadcetera/";
+    const overlay = document.getElementById("demoOverlay");
+    const frame = document.getElementById("demoFrame");
+    const openBtn = document.getElementById("openDemo");
+    const closeBtn = document.getElementById("demoClose");
+
+    function openDemo(){
+      overlay.style.display = "flex";
+      overlay.setAttribute("aria-hidden","false");
+      // set src only when opening (faster initial load)
+      frame.src = DEMO_URL;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeDemo(){
+      overlay.style.display = "none";
+      overlay.setAttribute("aria-hidden","true");
+      frame.src = "about:blank";
+      document.body.style.overflow = "";
+    }
+
+    openBtn.addEventListener("click", openDemo);
+    closeBtn.addEventListener("click", closeDemo);
+
+    overlay.addEventListener("click", (e) => {
+      // click outside modal closes
+      if(e.target === overlay) closeDemo();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && overlay.style.display === "flex") closeDemo();
+    });
   </script>
 </body>
 </html>
