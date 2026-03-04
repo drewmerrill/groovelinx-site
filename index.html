@@ -3,30 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GrooveLinx — Where Jam Bands Lock In</title>
+  <title>GrooveLinx — Where Bands Lock In</title>
 
-  <meta name="description" content="GrooveLinx is the practice-first command center for jam bands — song library, Song DNA, rehearsal workflow, setlists, and gig coordination so bands lock in and jam harder." />
+  <meta name="description" content="GrooveLinx is the practice-first command center for jam bands — organize your song library, lock in Song DNA, compare Best Shot vs North Star, chop rehearsal recordings, and coordinate gigs with less admin and more jams." />
   <meta name="theme-color" content="#050510" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg0:#050510;
-      --bg1:#0b1024;
-      --panel:rgba(7,10,28,.88);
-      --panel2:rgba(8, 10, 34, .78);
-      --border:rgba(255,255,255,.10);
+      --bg0:#04040c;
+      --bg1:#070a1f;
+      --panel: rgba(7,10,28,.78);
+      --panel2: rgba(10,12,40,.72);
+      --border: rgba(255,255,255,.11);
       --text:#f6f7ff;
-      --muted:#a5a7c7;
+      --muted:#a9acd3;
+      --muted2:#8b8fb8;
       --accent:#ff8a3c;
       --accent2:#4b8dff;
       --radius:18px;
       --radius2:26px;
-      --shadow:0 22px 70px rgba(0,0,0,.75);
-      --max:1120px;
+      --shadow: 0 24px 80px rgba(0,0,0,.70);
+      --max: 1120px;
     }
 
     *{box-sizing:border-box}
@@ -35,50 +36,27 @@
       margin:0;
       font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
       color:var(--text);
-      background: linear-gradient(120deg,#050510,#111145,#1c1033,#050510);
-      background-size: 400% 400%;
-      animation: bgflow 18s ease infinite;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(124,58,237,.30), transparent 40%),
+        radial-gradient(circle at 85% 22%, rgba(249,115,22,.26), transparent 42%),
+        radial-gradient(circle at 40% 88%, rgba(34,197,94,.20), transparent 45%),
+        radial-gradient(circle at 70% 75%, rgba(59,130,246,.18), transparent 45%),
+        linear-gradient(180deg, #050510 0%, #050b2a 55%, #020617 100%);
       overflow-x:hidden;
-    }
-
-    @keyframes bgflow{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
     }
 
     /* subtle grain overlay */
     .noise{
       pointer-events:none;
       position:fixed; inset:0;
-      opacity:.16;
+      opacity:.13;
       mix-blend-mode: soft-light;
       background-image:
-        radial-gradient(circle at 0 0, rgba(255,255,255,.14) 0, transparent 55%),
+        radial-gradient(circle at 0 0, rgba(255,255,255,.12) 0, transparent 55%),
         radial-gradient(circle at 100% 0, rgba(255,255,255,.06) 0, transparent 55%),
         radial-gradient(circle at 0 100%, rgba(255,255,255,.05) 0, transparent 55%),
         radial-gradient(circle at 100% 100%, rgba(255,255,255,.10) 0, transparent 55%);
       z-index:0;
-    }
-
-    /* drifting icons */
-    .floaters{
-      pointer-events:none;
-      position:fixed; inset:0;
-      z-index:0;
-      opacity:.35;
-      font-size:1.55rem;
-    }
-    .floaters span{position:absolute; animation:float 28s linear infinite}
-    .floaters span:nth-child(1){top:10%;left:6%;animation-duration:26s}
-    .floaters span:nth-child(2){top:18%;right:8%;animation-duration:34s}
-    .floaters span:nth-child(3){bottom:16%;left:14%;animation-duration:31s}
-    .floaters span:nth-child(4){bottom:20%;right:14%;animation-duration:36s}
-    .floaters span:nth-child(5){top:45%;left:48%;animation-duration:29s}
-    @keyframes float{
-      0%{transform:translateY(0) rotate(0)}
-      50%{transform:translateY(-26px) rotate(2deg)}
-      100%{transform:translateY(0) rotate(0)}
     }
 
     .wrap{
@@ -86,7 +64,7 @@
       z-index:1;
       max-width:var(--max);
       margin:0 auto;
-      padding:28px 16px 64px;
+      padding:28px 16px 72px;
       display:flex;
       flex-direction:column;
       gap:28px;
@@ -105,13 +83,18 @@
       gap:12px;
     }
     .brand img{
-      height:48px; width:auto;
+      height:46px;
+      width:auto;
       border-radius:16px;
-      box-shadow:0 10px 30px rgba(0,0,0,.6);
+      box-shadow:0 10px 30px rgba(0,0,0,.55);
     }
-    .brand .name{font-weight:800; letter-spacing:.02em; font-size:1.2rem}
+    .brand .name{
+      font-weight:900;
+      letter-spacing:-.02em;
+      font-size:1.12rem;
+    }
     .brand .tag{
-      color:var(--muted);
+      color:var(--muted2);
       font-size:.78rem;
       text-transform:uppercase;
       letter-spacing:.18em;
@@ -125,58 +108,43 @@
       padding:8px 14px;
       border-radius:999px;
       border:1px solid var(--border);
-      background:rgba(8,8,36,.88);
-      backdrop-filter:blur(12px);
+      background:rgba(8,8,36,.78);
+      backdrop-filter: blur(12px);
       color:var(--muted);
       font-size:.82rem;
       white-space:nowrap;
     }
     .dot{
       width:8px;height:8px;border-radius:50%;
-      background:linear-gradient(135deg,#ffce3c,#ff5b3c);
-      box-shadow:0 0 12px rgba(255,163,72,.9);
+      background: linear-gradient(135deg,#ffce3c,#ff6a3c);
+      box-shadow: 0 0 12px rgba(255,163,72,.85);
     }
 
     .hero{
       display:grid;
-      grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr);
-      gap:28px;
+      grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr);
+      gap:26px;
       align-items:center;
     }
-    @media(max-width:900px){ .hero{grid-template-columns:1fr} }
+    @media (max-width:900px){ .hero{grid-template-columns:1fr} }
 
     .heroLeft{
       position:relative;
       padding:26px;
       border-radius:var(--radius2);
-      background: radial-gradient(circle at top left, rgba(255,255,255,.12), transparent 60%),
-                  radial-gradient(circle at bottom right, rgba(75,141,255,.30), transparent 55%),
-                  rgba(5,5,20,.92);
+      background:
+        radial-gradient(circle at 18% 22%, rgba(124,58,237,.30), transparent 48%),
+        radial-gradient(circle at 85% 18%, rgba(249,115,22,.24), transparent 48%),
+        rgba(5,5,20,.86);
       border:1px solid var(--border);
-      box-shadow:var(--shadow);
+      box-shadow: var(--shadow);
       overflow:hidden;
     }
 
-    .heroLeft:before{
-      content:"";
-      position:absolute;
-      width:780px;height:780px;
-      top:-240px; left:-260px;
-      background: radial-gradient(circle, rgba(255,140,60,.32), rgba(75,141,255,.22), transparent 70%);
-      filter:blur(80px);
-      animation:pulse 8s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      0%{transform:scale(.92);opacity:.6}
-      50%{transform:scale(1.10);opacity:.95}
-      100%{transform:scale(.92);opacity:.6}
-    }
-    .heroLeft > *{position:relative; z-index:1}
-
     .eyebrow{
       color:var(--accent2);
-      font-weight:700;
-      font-size:.85rem;
+      font-weight:800;
+      font-size:.82rem;
       letter-spacing:.18em;
       text-transform:uppercase;
       margin-bottom:10px;
@@ -184,9 +152,9 @@
 
     h1{
       margin:0;
-      font-size: clamp(2.35rem, 3.3vw + 1.3rem, 3.4rem);
+      font-size: clamp(2.25rem, 3vw + 1.25rem, 3.2rem);
       line-height:1.05;
-      letter-spacing:-.04em;
+      letter-spacing:-.05em;
     }
     .highlight{
       background:linear-gradient(120deg,#ffce3c,#ff8a3c,#ff3c7f);
@@ -197,18 +165,11 @@
     .sub{
       margin-top:14px;
       color:var(--muted);
-      line-height:1.7;
-      font-size:1rem;
-      max-width:44rem;
+      line-height:1.75;
+      font-size:1.02rem;
+      max-width:46rem;
     }
-    .sub strong{color:#fff;font-weight:650}
-
-    .tagline{
-      margin-top:10px;
-      font-style:italic;
-      color:#dbddf6;
-      opacity:.95;
-    }
+    .sub strong{color:#fff;font-weight:700}
 
     .ctaRow{
       display:flex;
@@ -221,36 +182,25 @@
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:12px 20px;
+      padding:12px 18px;
       border-radius:999px;
       text-decoration:none;
-      font-weight:700;
+      font-weight:800;
       font-size:.92rem;
-      letter-spacing:.02em;
-      cursor:pointer;
+      letter-spacing:.01em;
       user-select:none;
     }
-
     .primary{
       color:#050510;
       background:linear-gradient(135deg,#ffce3c,#ff8a3c,#ff3c7f);
-      box-shadow:0 14px 40px rgba(0,0,0,.75);
-      border:none;
+      box-shadow:0 14px 40px rgba(0,0,0,.65);
     }
     .ghost{
-      color:var(--muted);
+      color:var(--text);
       border:1px solid var(--border);
-      background:rgba(8,8,36,.65);
-      backdrop-filter:blur(12px);
+      background:rgba(8,8,36,.55);
+      backdrop-filter: blur(12px);
     }
-
-    .footnote{
-      margin-top:12px;
-      color:var(--muted);
-      font-size:.82rem;
-      line-height:1.5;
-    }
-    .footnote b{color:#fff}
 
     .heroRight{
       display:flex;
@@ -258,14 +208,12 @@
       align-items:center;
       gap:14px;
     }
-
     .poster{
       width:100%;
       max-width:520px;
       border-radius:22px;
-      box-shadow:0 26px 70px rgba(0,0,0,.9);
+      box-shadow:0 26px 70px rgba(0,0,0,.85);
     }
-
     .chips{
       display:flex;
       flex-wrap:wrap;
@@ -281,60 +229,67 @@
       padding:8px 12px;
       border:1px solid var(--border);
       border-radius:999px;
-      background:rgba(5,5,26,.88);
+      background:rgba(5,5,26,.78);
     }
-    .chip img{
-      width:18px;height:18px;border-radius:6px;
-    }
+    .chip img{width:18px;height:18px;border-radius:6px}
 
     .divider{
       border:none;
       height:1px;
       width:60%;
-      margin:26px auto 6px;
+      margin:14px auto 6px;
       background:rgba(255,255,255,.10);
     }
 
-    /* Jam band copy section */
-    .jam{
-      max-width:860px;
-      margin:0 auto;
-      padding:0 6px;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:1rem;
-    }
-    .jam h2{
-      color:#fff;
-      font-size:1.35rem;
-      margin:0 0 10px;
-      letter-spacing:-.01em;
-    }
-
-    /* Screenshot section with psychedelic glow */
+    /* Screenshot feature section */
     .shots{
-      margin-top:14px;
-      padding:80px 18px;
+      margin-top:6px;
+      padding:74px 18px;
       border-radius:28px;
       border:1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(circle at 18% 22%, rgba(124,58,237,.33), transparent 42%),
-        radial-gradient(circle at 82% 28%, rgba(249,115,22,.30), transparent 44%),
+        radial-gradient(circle at 18% 22%, rgba(124,58,237,.35), transparent 42%),
+        radial-gradient(circle at 82% 26%, rgba(249,115,22,.30), transparent 44%),
         radial-gradient(circle at 40% 84%, rgba(34,197,94,.24), transparent 46%),
-        radial-gradient(circle at 70% 78%, rgba(59,130,246,.20), transparent 45%),
-        linear-gradient(180deg, rgba(11,17,32,.88) 0%, rgba(2,6,23,.92) 100%);
+        radial-gradient(circle at 70% 78%, rgba(59,130,246,.22), transparent 45%),
+        linear-gradient(180deg, rgba(11,17,32,.82) 0%, rgba(2,6,23,.92) 100%);
       box-shadow: var(--shadow);
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
     }
 
+    /* animated glow */
     .shots:before{
       content:"";
-      position:absolute; inset:-120px;
-      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.07), transparent 60%);
-      filter:blur(50px);
+      position:absolute;
+      width:900px;height:900px;
+      top:-380px;left:-300px;
+      background: radial-gradient(circle, rgba(255,140,60,.26), rgba(75,141,255,.20), transparent 70%);
+      filter: blur(80px);
+      animation: drift 10s ease-in-out infinite;
+      opacity:.85;
+      pointer-events:none;
+    }
+    .shots:after{
+      content:"";
+      position:absolute;
+      width:900px;height:900px;
+      bottom:-420px;right:-340px;
+      background: radial-gradient(circle, rgba(167,75,255,.22), rgba(34,197,94,.18), transparent 70%);
+      filter: blur(90px);
+      animation: drift2 12s ease-in-out infinite;
       opacity:.75;
       pointer-events:none;
+    }
+    @keyframes drift{
+      0%{transform:translate(0,0) scale(.95)}
+      50%{transform:translate(34px,18px) scale(1.05)}
+      100%{transform:translate(0,0) scale(.95)}
+    }
+    @keyframes drift2{
+      0%{transform:translate(0,0) scale(.95)}
+      50%{transform:translate(-28px,-14px) scale(1.06)}
+      100%{transform:translate(0,0) scale(.95)}
     }
 
     .shotsInner{position:relative; z-index:1}
@@ -344,6 +299,7 @@
       font-size:2rem;
       letter-spacing:-.03em;
       margin:0 0 10px;
+      font-weight:900;
     }
     .shotsSub{
       text-align:center;
@@ -355,20 +311,22 @@
 
     .grid{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap:38px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:34px;
       max-width:1100px;
       margin:0 auto;
     }
+    @media(max-width:980px){ .grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media(max-width:620px){ .grid{grid-template-columns:1fr} }
 
     .card{
       text-align:center;
     }
     .card h3{
-      margin:0 0 14px;
+      margin:0 0 10px;
       font-size:1.02rem;
-      font-weight:700;
-      color:#e9ecff;
+      font-weight:900;
+      color:#eef0ff;
       letter-spacing:-.01em;
     }
     .card p{
@@ -377,155 +335,134 @@
       font-size:.86rem;
       line-height:1.5;
     }
-    .card img{
+
+    /* “iPhone snapshot” look even with raw screenshots */
+    .phoneFrame{
+      display:inline-block;
+      padding:14px;
+      border-radius:38px;
+      background: rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 28px 70px rgba(0,0,0,.60);
+    }
+    .phoneFrame img{
+      display:block;
       width:100%;
       max-width:285px;
-      border-radius:34px;
-      box-shadow: 0 26px 70px rgba(0,0,0,.62);
+      border-radius:28px;
     }
 
-    /* Features panels */
-    .panels{
-      margin-top:22px;
-      display:grid;
-      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
-      gap:22px;
-    }
-    @media(max-width:900px){ .panels{grid-template-columns:1fr} }
-
-    .panel{
-      border:1px solid var(--border);
-      background: var(--panel);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      padding:18px 18px 16px;
-    }
-    .panel h3{
-      margin:0 0 6px;
-      font-size:1.05rem;
-      letter-spacing:-.01em;
-    }
-    .panel .small{
-      color:var(--muted);
-      font-size:.86rem;
-      margin:0 0 14px;
-      line-height:1.6;
-    }
-    .panel ul{
-      list-style:none;
-      padding:0;
-      margin:0;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      color:#e9e9ff;
-      font-size:.9rem;
-      line-height:1.45;
-    }
-    .panel li:before{
-      content:"•";
-      color:var(--accent);
-      margin-right:8px;
-    }
-
-    .miniTitle{
-      margin-top:16px;
-      font-weight:700;
-      font-size:.9rem;
-    }
-    .miniGrid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:8px;
-      margin-top:8px;
-      color:var(--muted);
-      font-size:.8rem;
-    }
-    @media(max-width:550px){ .miniGrid{grid-template-columns:1fr} }
-
-    .pill{
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(5,5,26,.88);
-      border-radius:999px;
-      padding:7px 10px;
-    }
-
-    /* Email capture */
-    .signup{
-      margin-top:14px;
-      padding:16px;
+    /* Early access section */
+    .early{
+      margin-top:18px;
+      padding:18px;
       border-radius:22px;
       border:1px solid rgba(255,255,255,.10);
       background: var(--panel2);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
     }
-    .signup label{
-      display:block;
-      color:#e9ecff;
-      font-weight:700;
-      margin-bottom:10px;
+    .early h2{
+      margin:0 0 6px;
+      font-size:1.2rem;
+      letter-spacing:-.02em;
+      font-weight:900;
     }
-    .signupRow{
+    .early p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.95rem;
+    }
+    .formRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
     }
-    .signup input{
-      flex:1 1 180px;
-      padding:10px 12px;
+    .formRow input{
+      flex:1 1 220px;
+      padding:12px 14px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.22);
       background:rgba(5,5,24,.92);
       color:var(--text);
       outline:none;
-      font-size:.92rem;
+      font-size:.95rem;
     }
-    .signup input::placeholder{color:rgba(165,167,199,.85)}
-    .signup button{
-      padding:10px 16px;
+    .formRow button{
+      padding:12px 16px;
       border-radius:999px;
       border:none;
-      font-weight:800;
+      font-weight:900;
       letter-spacing:.08em;
       text-transform:uppercase;
       font-size:.78rem;
       background:linear-gradient(135deg,#4b8dff,#a74bff);
       color:#050510;
       cursor:pointer;
-      box-shadow:0 12px 30px rgba(0,0,0,.7);
+      box-shadow:0 12px 30px rgba(0,0,0,.65);
       white-space:nowrap;
     }
-    .signup small{
+    .early small{
       display:block;
-      color:var(--muted);
+      color:var(--muted2);
       margin-top:10px;
       line-height:1.4;
     }
 
     footer{
-      margin-top:24px;
-      padding-top:12px;
+      margin-top:18px;
+      padding-top:14px;
       border-top:1px solid rgba(255,255,255,.10);
       display:flex;
       flex-wrap:wrap;
       justify-content:space-between;
       gap:10px;
-      color:var(--muted);
+      color:var(--muted2);
       font-size:.82rem;
     }
-    footer a{color:var(--muted);text-decoration:none}
-    footer a:hover{text-decoration:underline}
+
+    /* Sticky Join Beta button */
+    .stickyBeta{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:99;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .stickyBeta a{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:.86rem;
+      letter-spacing:.02em;
+      color:#050510;
+      background: linear-gradient(135deg,#ffce3c,#ff8a3c,#ff3c7f);
+      box-shadow: 0 18px 50px rgba(0,0,0,.70);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .stickyBeta .tiny{
+      color:var(--muted2);
+      font-size:.72rem;
+      display:none;
+    }
+    @media(min-width:980px){
+      .stickyBeta .tiny{display:block}
+    }
   </style>
 </head>
 
 <body>
   <div class="noise"></div>
 
-  <div class="floaters" aria-hidden="true">
-    <span>🎸</span>
-    <span>🐻</span>
-    <span>⚡️</span>
-    <span>🍩</span>
-    <span>🌈</span>
+  <div class="stickyBeta">
+    <a href="#early-access">⚡️ Join Beta</a>
+    <div class="tiny">Get early access</div>
   </div>
 
   <div class="wrap">
@@ -535,7 +472,7 @@
         <img src="images/groovelinx_clean_logo.png" alt="GrooveLinx logo">
         <div>
           <div class="name">GrooveLinx</div>
-          <div class="tag">Where Jam Bands Lock In</div>
+          <div class="tag">Where bands lock in</div>
         </div>
       </div>
 
@@ -547,69 +484,42 @@
 
     <section class="hero">
       <div class="heroLeft">
-        <div class="eyebrow">Built by a jam-band guitarist</div>
+        <div class="eyebrow">Jam bands • rehearsals • gigs</div>
 
-        <h1>
-          One place to <span class="highlight">learn, rehearse &amp; run</span> your band.
-        </h1>
+        <h1>Less admin. <span class="highlight">More jams.</span></h1>
 
         <p class="sub">
-          GrooveLinx is the <strong>practice-first</strong> command center for jam bands.
-          Song Library, Song DNA, North Star vs Best Shot, Woodshed workflows, setlists, and gig coordination —
-          so your band stays in the pocket instead of drowning in texts and spreadsheets.
+          GrooveLinx is the <strong>practice-first command center</strong> for Dead / Phish / Goose / Panic / ABB-style bands.
+          Track Song DNA, compare <strong>Best Shot vs North Star</strong>, chop rehearsal recordings into clean takes,
+          and keep the band synced up — so you show up tight and play loose.
         </p>
-
-        <div class="tagline">
-          From rehearsal room to second set, keep the details tight so the jams can stay loose.
-        </div>
 
         <div class="ctaRow">
           <a class="btn primary" href="https://drewmerrill.github.io/deadcetera/" target="_blank" rel="noreferrer">
             🎸 See the live demo
           </a>
+          <a class="btn ghost" href="#screens">
+            See screenshots
+          </a>
           <a class="btn ghost" href="#early-access">
             Get early access
           </a>
-        </div>
-
-        <div class="footnote">
-          <b>GrooveLinx</b> is onboarding a small crew of Dead / Phish / Goose / WSP / ABB-style bands to shape the product.
         </div>
       </div>
 
       <div class="heroRight">
         <img class="poster" src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx psychedelic poster">
-
         <div class="chips">
-          <div class="chip">
-            <img src="images/groovelinx_app_icon_dark.png" alt="">
-            Song DNA &amp; readiness
-          </div>
-          <div class="chip">
-            <img src="images/groovelinx_badge_logo.png" alt="">
-            Woodshed + stems
-          </div>
-          <div class="chip">Less admin. More jams.</div>
+          <div class="chip"><img src="images/groovelinx_app_icon_dark.png" alt="">Practice-first</div>
+          <div class="chip"><img src="images/groovelinx_badge_logo.png" alt="">Rehearsal intelligence</div>
+          <div class="chip">Built for the jam scene</div>
         </div>
       </div>
     </section>
 
     <hr class="divider">
 
-    <section class="jam">
-      <h2>Built for the Jam Band Community</h2>
-      <p>
-        GrooveLinx is for bands that live in the space between the notes—where listening, trust,
-        and musical risk-taking matter more than backing tracks.
-      </p>
-      <p>
-        Whether you're covering <strong>Grateful Dead</strong>, <strong>Phish</strong>, <strong>Goose</strong>,
-        <strong>Widespread Panic</strong>, <strong>Allman Brothers</strong> — or building your own jam vehicle —
-        GrooveLinx helps your band stay organized, rehearse smarter, and lock into the groove together.
-      </p>
-    </section>
-
-    <section class="shots">
+    <section class="shots" id="screens">
       <div class="shotsInner">
         <h2 class="shotsTitle">See GrooveLinx in Action</h2>
         <p class="shotsSub">
@@ -618,89 +528,77 @@
         </p>
 
         <div class="grid">
+
           <div class="card">
-            <h3>Organize Your Entire Song Library</h3>
-            <p>Filters, readiness, North Star status, and quick access to what you need.</p>
-            <img src="images/groovelinx_iphone_snapshot_6.png" alt="Song Library screenshot">
+            <h3>Split Rehearsal Recordings Automatically</h3>
+            <p>Detect pauses, name songs, and save clean takes from a messy rehearsal MP3.</p>
+            <div class="phoneFrame">
+              <img src="images/groovelinx_screenshot_1.png" alt="Rehearsal Chopper screenshot">
+            </div>
           </div>
 
           <div class="card">
-            <h3>Charts, Keys &amp; Structure in One Place</h3>
+            <h3>Charts, Keys & Structure in One Place</h3>
             <p>Stage-ready charts plus the metadata that makes rehearsal efficient.</p>
-            <img src="images/groovelinx_iphone_snapshot_2.png" alt="Chart view screenshot">
+            <div class="phoneFrame">
+              <img src="images/groovelinx_screenshot_2.png" alt="Chart view screenshot">
+            </div>
           </div>
 
           <div class="card">
             <h3>Track Best Shot vs Your North Star</h3>
             <p>Rate sections, track progress, and align the band on what “ready” means.</p>
-            <img src="images/groovelinx_iphone_snapshot_3.png" alt="Best Shot vs North Star screenshot">
-          </div>
-
-          <div class="card">
-            <h3>Split Rehearsal Recordings Automatically</h3>
-            <p>Detect pauses, name songs, and save clean takes from a messy rehearsal MP3.</p>
-            <img src="images/groovelinx_iphone_snapshot_1.png" alt="Rehearsal Chopper screenshot">
+            <div class="phoneFrame">
+              <img src="images/groovelinx_screenshot_3.png" alt="Best Shot vs North Star screenshot">
+            </div>
           </div>
 
           <div class="card">
             <h3>Coordinate Rehearsals and Gigs</h3>
             <p>Availability, scheduling, and upcoming events — without the chaos.</p>
-            <img src="images/groovelinx_iphone_snapshot_4.png" alt="Calendar screenshot">
+            <div class="phoneFrame">
+              <img src="images/groovelinx_screenshot_4.png" alt="Calendar screenshot">
+            </div>
           </div>
 
           <div class="card">
-            <h3>Lock In the Brand</h3>
-            <p>A vibe-forward experience that feels like the scene you play in.</p>
-            <img src="images/groovelinx_iphone_snapshot_5.png" alt="GrooveLinx home screenshot">
+            <h3>Practice Smarter, Faster</h3>
+            <p>Keep your band aligned on what to woodshed next and what’s gig-ready.</p>
+            <div class="phoneFrame">
+              <img src="images/groovelinx_screenshot_5.png" alt="Home / library screenshot">
+            </div>
           </div>
+
+          <div class="card">
+            <h3>Where Bands Lock In</h3>
+            <p>A vibe-forward experience built for bands chasing that “in the pocket” feeling.</p>
+            <div class="phoneFrame">
+              <img src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx artwork">
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="panels" id="features">
-      <div class="panel">
-        <h3>Learn songs together, not alone.</h3>
-        <p class="small">Practice-first workflows that make your band tighter — faster.</p>
-        <ul>
-          <li><b>Song DNA:</b> key, tempo, structure, roles, harmonies, and notes.</li>
-          <li><b>North Star:</b> band-voted reference version (Archive / YouTube / Spotify).</li>
-          <li><b>Best Shot:</b> your current best take — compare and improve.</li>
-          <li><b>Woodshed:</b> practice tracks, stems, harmony parts, and rehearsal notes.</li>
-        </ul>
+    <section class="early" id="early-access">
+      <h2>Get early access</h2>
+      <p>
+        GrooveLinx is onboarding a small crew of jam bands to shape the product.
+        Drop your email and I’ll send beta access as spots open up.
+      </p>
 
-        <div class="miniTitle">Practice workflow, dialed:</div>
-        <div class="miniGrid">
-          <div class="pill">Pick the North Star version</div>
-          <div class="pill">Extract stems and loop sections</div>
-          <div class="pill">Rehearse → capture Best Shot</div>
-          <div class="pill">Rate sections + track progress</div>
-        </div>
-      </div>
+      <form class="formRow" onsubmit="alert('This is a static site right now. Hook this form to Mailchimp / ConvertKit / Google Forms when ready.'); return false;">
+        <input type="email" placeholder="you@yourband.com" required>
+        <button type="submit">Join the list</button>
+      </form>
 
-      <div class="panel">
-        <h3>Keep the whole band in sync.</h3>
-        <p class="small">The “boring” coordination stuff that makes the music feel easy.</p>
-        <ul>
-          <li><b>Calendar:</b> rehearsals, gigs, and availability.</li>
-          <li><b>Venues & contacts:</b> keep booking info in one place.</li>
-          <li><b>Setlists:</b> plan first set / second set / encore, plus segues.</li>
-          <li><b>Utilities:</b> quick tools for the rehearsal room.</li>
-        </ul>
-
-        <div class="signup" id="early-access">
-          <label for="email">Want early access when GrooveLinx goes public?</label>
-          <form class="signupRow" onsubmit="alert('This is a static site. Hook this form to Mailchimp / ConvertKit / etc.'); return false;">
-            <input id="email" type="email" placeholder="you@yourband.com" required>
-            <button type="submit">Join the list</button>
-          </form>
-          <small>We’ll only email you about beta access + launch details. No spam, ever.</small>
-        </div>
-      </div>
+      <small>We’ll only email you about beta access + launch details. No spam, ever.</small>
     </section>
 
     <footer>
-      <div>© <span id="year"></span> GrooveLinx. All rights reserved.</div>
-      <div>Questions? <a href="mailto:info@groovelinx.com">info@groovelinx.com</a></div>
+      <div>© <span id="year"></span> GrooveLinx</div>
+      <div>Questions? <a href="mailto:info@groovelinx.com" style="color:inherit;text-decoration:none;">info@groovelinx.com</a></div>
     </footer>
 
   </div>
