@@ -2,588 +2,573 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GrooveLinx — Where bands lock in</title>
-  <meta name="description" content="GrooveLinx helps modern jam bands lock in: shared song DNA, rehearsal intelligence, setlists, calendar, and best-shot progress tracking. Less admin. More jams." />
-  <meta property="og:title" content="GrooveLinx — Where bands lock in" />
-  <meta property="og:description" content="Tight pockets. Clean segues. Shared song DNA. Less admin. More jams." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0b0f1d" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="GrooveLinx — Where bands lock in. Less admin. More jams. The command center for modern jam bands." />
+  <title>GrooveLinx — Where Bands Lock In</title>
 
   <style>
     :root{
-      --bg0:#060912;
-      --bg1:#0b1024;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.085);
-      --stroke:rgba(255,255,255,.14);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.55);
-      --shadow: 0 20px 70px rgba(0,0,0,.45);
+      --bg0:#070816;
+      --glass: rgba(16, 18, 40, .55);
+      --glass2: rgba(16, 18, 40, .35);
+      --stroke: rgba(255,255,255,.14);
+      --stroke2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.55);
+      --shadow: 0 18px 60px rgba(0,0,0,.50);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
       --radius: 22px;
-      --radius2: 30px;
-      --max: 1120px;
-
-      --psy1: #7C3AED; /* violet */
-      --psy2: #06B6D4; /* cyan */
-      --psy3: #F97316; /* orange */
-      --psy4: #22C55E; /* green */
-      --psy5: #EC4899; /* pink */
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
+      color:var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--text);
-      background: radial-gradient(1200px 700px at 15% 10%, rgba(124,58,237,.30), transparent 60%),
-                  radial-gradient(900px 600px at 85% 20%, rgba(249,115,22,.25), transparent 55%),
-                  radial-gradient(900px 700px at 65% 90%, rgba(6,182,212,.22), transparent 60%),
-                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      background: radial-gradient(1400px 700px at 20% 10%, rgba(124,58,237,.35), transparent 60%),
+                  radial-gradient(1200px 700px at 80% 20%, rgba(249,115,22,.28), transparent 55%),
+                  radial-gradient(1200px 700px at 50% 90%, rgba(34,197,94,.22), transparent 60%),
+                  radial-gradient(900px 600px at 85% 85%, rgba(59,130,246,.18), transparent 55%),
+                  linear-gradient(180deg, #050512 0%, #070816 40%, #040414 100%);
       overflow-x:hidden;
     }
 
-    /* Psychedelic animated wash */
-    .psy {
+    /* subtle animated “psychedelic” drift without being tacky */
+    .aura{
       position:fixed;
       inset:-30%;
-      z-index:-3;
       background:
-        radial-gradient(circle at 10% 20%, rgba(236,72,153,.35), transparent 40%),
-        radial-gradient(circle at 35% 70%, rgba(34,197,94,.28), transparent 45%),
-        radial-gradient(circle at 80% 30%, rgba(6,182,212,.30), transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(249,115,22,.26), transparent 45%),
-        radial-gradient(circle at 50% 45%, rgba(124,58,237,.30), transparent 50%);
-      filter: blur(40px) saturate(1.2);
-      transform: translate3d(0,0,0);
+        radial-gradient(closest-side at 20% 20%, rgba(168,85,247,.20), transparent 60%),
+        radial-gradient(closest-side at 80% 30%, rgba(251,146,60,.16), transparent 60%),
+        radial-gradient(closest-side at 55% 80%, rgba(34,197,94,.12), transparent 60%),
+        radial-gradient(closest-side at 25% 75%, rgba(59,130,246,.10), transparent 60%);
+      filter: blur(40px);
       animation: drift 14s ease-in-out infinite alternate;
-      opacity:.95;
+      pointer-events:none;
+      z-index:0;
+      opacity:.85;
     }
     @keyframes drift{
-      0%{ transform: translate(-2%, -2%) scale(1.02) rotate(0deg); }
-      100%{ transform: translate(2%, 2%) scale(1.08) rotate(1.5deg); }
+      from{ transform: translate3d(-2%, -1%, 0) scale(1.02); }
+      to{ transform: translate3d(2%, 1.5%, 0) scale(1.06); }
     }
 
-    /* Subtle grain */
-    .grain{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
-      opacity:.30;
-    }
+    .wrap{ position:relative; z-index:1; }
 
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding: 26px 18px 90px;}
+    /* NAV */
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding: 10px 0 18px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      font-weight:800; letter-spacing:.2px;
-    }
-    .brand .dot{
-      width:12px; height:12px; border-radius:50%;
-      background: linear-gradient(135deg, var(--psy2), var(--psy5), var(--psy3));
-      box-shadow: 0 0 0 6px rgba(255,255,255,.04);
-    }
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
-    .pill{
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
-      padding:10px 12px;
-      border-radius:999px;
-      font-size:13px;
-      color: var(--muted);
-      backdrop-filter: blur(10px);
-    }
-    .pill strong{color:var(--text); font-weight:700}
-    .cta{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:11px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background: linear-gradient(135deg, rgba(124,58,237,.55), rgba(6,182,212,.40));
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-      font-weight:750;
-      text-decoration:none;
-      transition: transform .15s ease, filter .15s ease;
-    }
-    .cta:hover{transform: translateY(-1px); filter:saturate(1.15);}
-
-    .hero{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top:10px;
-    }
-    @media (max-width: 980px){
-      .hero{grid-template-columns:1fr; }
-      .pillrow{justify-content:flex-start;}
-    }
-
-    .card{
-      border:1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
+      position:sticky;
+      top:0;
+      z-index:10;
       backdrop-filter: blur(14px);
-      position:relative;
-      overflow:hidden;
+      background: linear-gradient(180deg, rgba(10,10,28,.72), rgba(10,10,28,.35));
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .card::before{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(800px 220px at 25% 0%, rgba(236,72,153,.12), transparent 60%),
-                  radial-gradient(800px 240px at 85% 35%, rgba(6,182,212,.12), transparent 55%),
-                  radial-gradient(700px 240px at 40% 120%, rgba(249,115,22,.10), transparent 55%);
-      pointer-events:none;
-    }
-
-    .heroMain{ padding: 30px 26px; }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      padding: 7px 10px;
-      border-radius:999px;
-      background: rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.12);
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom:14px;
-    }
-    .kicker .spark{
-      width:8px; height:8px; border-radius:50%;
-      background: linear-gradient(135deg, var(--psy5), var(--psy2));
-      box-shadow: 0 0 18px rgba(236,72,153,.55);
-    }
-
-    h1{
-      margin: 0 0 12px;
-      font-size: clamp(34px, 4.2vw, 54px);
-      line-height:1.02;
-      letter-spacing:-.8px;
-    }
-    .sub{
-      margin:0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height:1.5;
-      max-width: 60ch;
-    }
-
-    .tagline{
-      display:flex; flex-wrap:wrap; gap:10px;
-      margin: 18px 0 22px;
-    }
-    .chip{
-      padding: 9px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.78);
-      font-size: 13px;
-    }
-
-    .actions{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
-    .ghost{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:11px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      text-decoration:none;
-      font-weight:750;
-    }
-    .ghost:hover{background: rgba(255,255,255,.05);}
-
-    .heroSide{ padding: 20px; display:flex; flex-direction:column; gap:12px; }
-    .logoWrap{
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      overflow:hidden;
-      aspect-ratio: 1 / 1;
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 18px;
       display:flex;
       align-items:center;
-      justify-content:center;
+      justify-content:space-between;
+      gap:14px;
     }
-    .logoWrap img{
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:var(--text);
+      min-width: 220px;
+    }
+    .brand-logo{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+    }
+    .brand-logo img{
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      opacity:.98;
     }
-    .heroSide h3{
-      margin: 2px 0 0;
-      font-size: 16px;
-      letter-spacing:-.2px;
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
     }
-    .heroSide p{
-      margin:0;
+    .brand-name{
+      font-weight:800;
+      letter-spacing:.2px;
+      font-size:15px;
+    }
+    .brand-tag{
+      font-size:12px;
+      color:var(--muted2);
+      margin-top:3px;
+      white-space:nowrap;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:650;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:12px;
+      transition: all .15s ease;
+      border: 1px solid transparent;
+    }
+    .nav-links a:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    .cta{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-left:6px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:800;
+      font-size:13px;
+      text-decoration:none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      box-shadow: var(--shadow2);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.09); }
+    .btn-primary{
+      border: none;
+      background: linear-gradient(90deg, rgba(99,102,241,.92), rgba(168,85,247,.92), rgba(249,115,22,.88));
+      box-shadow: 0 14px 34px rgba(0,0,0,.40);
+    }
+    .btn-primary:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+
+    /* MAIN */
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding: 22px 18px 80px;
+    }
+
+    .hero{
+      margin-top:18px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 400px at 10% 10%, rgba(168,85,247,.25), transparent 55%),
+        radial-gradient(900px 500px at 90% 20%, rgba(249,115,22,.22), transparent 55%),
+        radial-gradient(900px 500px at 60% 95%, rgba(34,197,94,.18), transparent 55%),
+        rgba(10,10,28,.35);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-inner{
+      padding: 36px 28px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 22px;
+      align-items:center;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      font-size: 12px;
       color: var(--muted);
-      font-size: 13.5px;
-      line-height:1.45;
+      font-weight: 700;
+      width: fit-content;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -.7px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 58ch;
+    }
+    .bullets{
+      margin: 18px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .bullets li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: rgba(255,255,255,.82);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .dot{
+      width:10px; height:10px; border-radius: 999px;
+      background: linear-gradient(90deg, rgba(99,102,241,.95), rgba(168,85,247,.95), rgba(249,115,22,.90));
+      margin-top:6px;
+      box-shadow: 0 0 0 4px rgba(255,255,255,.05);
+      flex: 0 0 auto;
+    }
+
+    .poster{
+      width:100%;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 18px 48px rgba(0,0,0,.45);
+      position:relative;
+    }
+    .poster img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    /* small “50/50” polish: overlay gradient only, NOT text overlay */
+    .poster::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.30));
+      pointer-events:none;
     }
 
     .section{
-      margin-top: 26px;
-      padding: 24px 0 0;
-    }
-    .sectionTitle{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
-      margin-bottom: 12px;
-    }
-    .sectionTitle h2{
-      margin:0;
-      font-size: 22px;
-      letter-spacing:-.2px;
-    }
-    .sectionTitle .hint{
-      color: var(--muted2);
-      font-size: 13px;
-    }
-
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    @media (max-width: 980px){ .grid3{ grid-template-columns: 1fr; } }
-
-    .mini{
-      padding: 16px 16px 14px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.045);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-      position:relative;
+      margin-top: 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,10,28,.28);
+      box-shadow: var(--shadow2);
       overflow:hidden;
     }
-    .mini::after{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(420px 160px at 20% 0%, rgba(124,58,237,.10), transparent 60%),
-                  radial-gradient(420px 160px at 90% 45%, rgba(6,182,212,.10), transparent 60%);
-      pointer-events:none;
+    .section-h{
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-end;
+      flex-wrap:wrap;
     }
-    .mini h4{ margin:0 0 6px; font-size: 15px; letter-spacing:-.1px;}
-    .mini p{ margin:0; color: var(--muted); font-size: 13.5px; line-height:1.45;}
-    .mini .small{margin-top:10px; color: rgba(255,255,255,.62); font-size:12.8px}
+    .section-h h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing: -.2px;
+    }
+    .section-h p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.45;
+      max-width: 64ch;
+    }
 
-    /* Phone gallery */
-    .phones{
+    .grid{
+      padding: 18px;
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-top: 14px;
     }
-    @media (max-width: 980px){ .phones{ grid-template-columns: 1fr; } }
-
-    .phoneCard{
-      padding: 14px 14px 16px;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
+    .card{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,10,28,.40);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      overflow:hidden;
       position:relative;
-      overflow:hidden;
     }
-    .phoneCard::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(520px 220px at 30% 0%, rgba(236,72,153,.12), transparent 60%),
-                  radial-gradient(520px 220px at 85% 65%, rgba(34,197,94,.10), transparent 60%);
-      pointer-events:none;
+    .card-top{
+      padding: 16px 16px 10px;
     }
-    .phoneCard h3{
-      margin: 2px 0 10px;
+    .card-top h3{
+      margin:0 0 6px;
       font-size: 16px;
-      letter-spacing:-.2px;
+      letter-spacing: -.2px;
     }
-    .phoneCard .caption{
-      margin: -6px 0 12px;
-      color: var(--muted2);
+    .card-top p{
+      margin:0;
+      color: var(--muted);
       font-size: 13px;
-      line-height:1.35;
+      line-height: 1.45;
+      min-height: 36px;
     }
 
-    .frame{
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      padding: 12px;
-      display:flex;
-      justify-content:center;
+    /* screenshot frame */
+    .shot{
+      padding: 12px 14px 16px;
+    }
+    .phone{
+      width:100%;
+      aspect-ratio: 9 / 19.5;
+      border-radius: 26px;
       overflow:hidden;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.28);
+      box-shadow: 0 18px 44px rgba(0,0,0,.45);
+      position:relative;
     }
-    .frame img{
-      width: 100%;
-      max-width: 360px;
-      height: auto;
-      border-radius: 24px;
+    .phone img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
       display:block;
-      box-shadow: 0 14px 40px rgba(0,0,0,.38);
     }
-
-    .wide{
-      margin-top: 18px;
-      padding: 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-    .wide p{ margin:0; color: var(--muted); max-width:70ch; }
-    .emailRow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
-    input[type="email"]{
-      width:min(420px, 100%);
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.20);
-      color: var(--text);
-      outline:none;
-    }
-    input[type="email"]::placeholder{ color: rgba(255,255,255,.45); }
-    button{
-      cursor:pointer;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
-      background: linear-gradient(135deg, rgba(249,115,22,.55), rgba(236,72,153,.42));
-      color: var(--text);
-      font-weight:800;
-    }
-    button:hover{filter:saturate(1.15);}
 
     footer{
-      margin-top: 26px;
-      color: rgba(255,255,255,.45);
-      font-size: 12.5px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
+      padding: 28px 18px 44px;
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
     }
-    .footlinks a{ color: rgba(255,255,255,.55); text-decoration:none; border-bottom:1px dashed rgba(255,255,255,.20); }
-    .footlinks a:hover{ color: rgba(255,255,255,.78); border-bottom-color: rgba(255,255,255,.45); }
+
+    /* responsive */
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      h1{ font-size: 34px; }
+      .brand-tag{ display:none; }
+    }
   </style>
 </head>
 
 <body>
-  <div class="psy" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
+  <div class="aura"></div>
 
   <div class="wrap">
-    <div class="nav">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>GrooveLinx</span>
+    <header class="nav">
+      <div class="nav-inner">
+        <!-- BRAND -->
+        <a class="brand" href="#top">
+          <span class="brand-logo">
+            <!-- IMPORTANT: this path expects your file at /images/groovelinx_psychedelic_logo.png -->
+            <img src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx logo">
+          </span>
+          <span class="brand-text">
+            <span class="brand-name">GrooveLinx</span>
+            <span class="brand-tag">Where bands lock in • Less admin • More jams</span>
+          </span>
+        </a>
+
+        <!-- LINKS -->
+        <nav class="nav-links">
+          <a href="#why">Why GrooveLinx</a>
+          <a href="#features">Features</a>
+          <a href="#screens">Screens</a>
+          <a href="#demo">Demo Reel</a>
+          <span class="cta">
+            <a class="btn" href="#demo">Watch</a>
+            <a class="btn btn-primary" href="#join">Join Beta</a>
+          </span>
+        </nav>
       </div>
-      <div class="pillrow">
-        <div class="pill"><strong>Jam bands</strong> — Dead / Phish / Goose / WSP / ABB</div>
-        <div class="pill">Less admin. <strong>More jams.</strong></div>
-        <a class="cta" href="#join">Join Beta</a>
-      </div>
-    </div>
+    </header>
 
-    <div class="hero">
-      <div class="card heroMain">
-        <div class="kicker"><span class="spark"></span>Where bands lock in</div>
-        <h1>Tight pockets.<br/>Clean segues.<br/>Shared song DNA.</h1>
-        <p class="sub">
-          GrooveLinx is the command center for modern jam bands — built to remove the friction that keeps bands from leveling up:
-          unclear rehearsal priorities, scattered charts/notes, inconsistent practice, and scheduling chaos.
-        </p>
+    <main id="top" class="container">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-inner">
+          <div>
+            <div class="kicker">🎸 Jam bands, but organized</div>
+            <h1>Where bands lock in.<br/>Less admin. More jams.</h1>
+            <p class="sub">
+              GrooveLinx removes the friction that keeps bands from reaching their full potential:
+              practice accountability, rehearsal flow, capturing ideas, and scheduling — without killing the vibe.
+            </p>
 
-        <div class="tagline">
-          <span class="chip">Practice → bite-sized progress</span>
-          <span class="chip">Rehearsal → capture + remember</span>
-          <span class="chip">Gig mode → simplified & ready</span>
-          <span class="chip">One source of truth → charts, refs, notes</span>
-        </div>
+            <ul id="why" class="bullets">
+              <li><span class="dot"></span><span><b>No more “what do you want to play?”</b> Walk in with a plan, focus on the hard parts, and get better faster.</span></li>
+              <li><span class="dot"></span><span><b>Define what “the bomb” looks like.</b> Align on a North Star reference and rate each section until you’re truly locked in.</span></li>
+              <li><span class="dot"></span><span><b>Capture the magic.</b> Notes + rehearsal recordings + reminders so creative moments don’t evaporate.</span></li>
+              <li><span class="dot"></span><span><b>One place for availability & gigs.</b> Stop the 40-text scheduling thread. Just sync and go.</span></li>
+            </ul>
 
-        <div class="actions">
-          <a class="cta" href="#screens">See it in action</a>
-          <a class="ghost" href="#features">Why it works</a>
-          <a class="ghost" href="#join">Get early access</a>
-        </div>
-      </div>
+            <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="#join">⚡ Join Beta</a>
+              <a class="btn" href="#screens">📱 See Screens</a>
+              <a class="btn" href="#demo">🎞️ Demo Reel</a>
+            </div>
+          </div>
 
-      <div class="card heroSide">
-        <div class="logoWrap">
-          <!-- IMPORTANT: per your note, use psychedelic_logo going forward -->
-          <img src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx psychedelic logo" />
+          <!-- Psychedelic hero image -->
+          <div class="poster" aria-label="GrooveLinx logo art">
+            <!-- Per your instruction: use groovelinx_psychedelic_logo (NOT poster) -->
+            <img src="images/groovelinx_psychedelic_logo.png" alt="GrooveLinx psychedelic logo">
+          </div>
         </div>
-        <h3>50/50 vibe: psychedelic heart, clean control.</h3>
-        <p>
-          The app is built for musicians who care about feel — but want the structure that turns “pretty good” into “the bomb.”
-        </p>
-        <p style="color:rgba(255,255,255,.62)">
-          Pro tip: keep the poster for socials / merch later. Use this logo for the site + app identity.
-        </p>
-      </div>
-    </div>
+      </section>
 
-    <div id="features" class="section">
-      <div class="sectionTitle">
-        <h2>The friction GrooveLinx removes</h2>
-        <div class="hint">So rehearsal time becomes music time.</div>
-      </div>
-
-      <div class="grid3">
-        <div class="mini">
-          <h4>No more “What song do you want to do?”</h4>
-          <p>Set rehearsal priorities and focus sections ahead of time so everyone shows up locked in.</p>
-          <div class="small">Result: tighter grooves, less wandering, faster growth.</div>
-        </div>
-        <div class="mini">
-          <h4>Capture the magic (and the mistakes)</h4>
-          <p>When you discover something mid-jam, save notes instantly — and tag the section that needs work.</p>
-          <div class="small">Result: you don’t “lose” the breakthrough by next week.</div>
-        </div>
-        <div class="mini">
-          <h4>Agree on what “the bomb” means</h4>
-          <p>Define a band “North Star” take, then track Best Shot vs North Star so the goal stays shared.</p>
-          <div class="small">Result: less ambiguity, more alignment.</div>
-        </div>
-      </div>
-
-      <div class="grid3" style="margin-top:14px">
-        <div class="mini">
-          <h4>One home for every version of a song</h4>
-          <p>Curate references into playlists in any order — always have the right version ready.</p>
-          <div class="small">Result: better listening, smarter interpretation, cleaner segues.</div>
-        </div>
-        <div class="mini">
-          <h4>Practice that doesn’t feel insurmountable</h4>
-          <p>Break learning into bite-size chunks and track progress like a gym plan — motivating and measurable.</p>
-          <div class="small">Result: maximum impact for minimum time.</div>
-        </div>
-        <div class="mini">
-          <h4>Scheduling without the group-text misery</h4>
-          <p>Put availability + gigs + rehearsals in one place so someone isn’t herding cats every week.</p>
-          <div class="small">Result: less admin, fewer flakes, better attendance.</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="screens" class="section">
-      <div class="sectionTitle">
-        <h2>See GrooveLinx in action</h2>
-        <div class="hint">These are the exact iPhone snapshots your page should display.</div>
-      </div>
-
-      <div class="phones">
-        <div class="phoneCard">
-          <h3>Rehearsal Chopper</h3>
-          <div class="caption">Load a rehearsal MP3 → auto-detect pauses → name segments → save clean takes.</div>
-          <div class="frame">
-            <img src="images/groovelinx_iphone_snapshot_1.png" alt="Rehearsal Chopper screenshot" loading="lazy" />
+      <!-- FEATURES / SCREENS -->
+      <section id="features" class="section">
+        <div class="section-h">
+          <div>
+            <h2>Built for the real friction in a band</h2>
+            <p>
+              Go deep when you want (song DNA, sections, scorecards) — or flip into Practice / Rehearsal / Gig mode for a simplified overlay.
+              Modern structure, psychedelic soul.
+            </p>
           </div>
         </div>
 
-        <div class="phoneCard">
-          <h3>Charts that don’t suck</h3>
-          <div class="caption">Lyrics + chords + structure, with the tools you actually need at your fingertips.</div>
-          <div class="frame">
-            <img src="images/groovelinx_iphone_snapshot_2.png" alt="Song chart screenshot" loading="lazy" />
+        <div id="screens" class="grid">
+          <!-- You told me titles were wrong before — these are matched to what your screenshots show -->
+
+          <!-- 1: Rehearsal Chopper (waveform + detect pauses) -->
+          <article class="card">
+            <div class="card-top">
+              <h3>Rehearsal Chopper</h3>
+              <p>Load a rehearsal MP3, detect pauses, adjust boundaries, name songs, save takes.</p>
+            </div>
+            <div class="shot">
+              <div class="phone">
+                <img src="images/groovelinx_screenshot_1.png" alt="Rehearsal Chopper screenshot">
+              </div>
+            </div>
+          </article>
+
+          <!-- 2: Chart view (lyrics/chords) -->
+          <article class="card">
+            <div class="card-top">
+              <h3>Charts, Keys & Structure</h3>
+              <p>Stage-ready charts and metadata that make rehearsal efficient.</p>
+            </div>
+            <div class="shot">
+              <div class="phone">
+                <img src="images/groovelinx_screenshot_2.png" alt="Charts screenshot">
+              </div>
+            </div>
+          </article>
+
+          <!-- 3: Best Shot vs North Star (scorecard + reference) -->
+          <article class="card">
+            <div class="card-top">
+              <h3>Best Shot vs North Star</h3>
+              <p>Compare your best take to the reference — rate each section and track progress.</p>
+            </div>
+            <div class="shot">
+              <div class="phone">
+                <img src="images/groovelinx_screenshot_3.png" alt="Best Shot vs North Star screenshot">
+              </div>
+            </div>
+          </article>
+
+          <!-- 4: Calendar -->
+          <article class="card">
+            <div class="card-top">
+              <h3>Calendar & Availability</h3>
+              <p>Stop the scheduling chaos. Get everyone’s availability in one place.</p>
+            </div>
+            <div class="shot">
+              <div class="phone">
+                <img src="images/groovelinx_screenshot_4.png" alt="Calendar screenshot">
+              </div>
+            </div>
+          </article>
+
+          <!-- 5: Home / Sign-in -->
+          <article class="card">
+            <div class="card-top">
+              <h3>Home & Modes</h3>
+              <p>Practice / Rehearsal / Gig overlays so you always have what you need — fast.</p>
+            </div>
+            <div class="shot">
+              <div class="phone">
+                <img src="images/groovelinx_screenshot_5.png" alt="GrooveLinx home screenshot">
+              </div>
+            </div>
+          </article>
+
+          <!-- 6: Song library list -->
+          <article class="card">
+            <div class="card-top">
+              <h3>Song Library</h3>
+              <p>Filters, readiness, North Star status, harmonies — instant access to what matters.</p>
+            </div>
+            <div class="shot">
+              <div class="phone">
+                <img src="images/groovelinx_screenshot_6.png" alt="Song Library screenshot">
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- DEMO -->
+      <section id="demo" class="section" style="margin-top:18px;">
+        <div class="section-h">
+          <div>
+            <h2>10–15 second demo reel</h2>
+            <p>
+              Coming next: quick-cut walkthrough showing Chopper → Charts → Scorecard → Calendar → Library.
+              (We’ll wire this up to a video file or animated GIF once you drop it in /images.)
+            </p>
           </div>
         </div>
-
-        <div class="phoneCard">
-          <h3>Best Shot vs North Star</h3>
-          <div class="caption">Rate sections, track progress, align the band on what “ready” means.</div>
-          <div class="frame">
-            <img src="images/groovelinx_iphone_snapshot_3.png" alt="Best Shot vs North Star screenshot" loading="lazy" />
+        <div style="padding:18px;">
+          <div style="border-radius:22px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.25); padding:18px;">
+            <div style="color:rgba(255,255,255,.75); font-weight:800; margin-bottom:8px;">Placeholder</div>
+            <div style="color:rgba(255,255,255,.60); font-size:13px; line-height:1.5;">
+              When you’re ready, upload a video named <b>groovelinx_demo.mp4</b> into <b>/images</b> and I’ll update this
+              to a clean autoplay loop (muted + inline) with a tasteful gradient frame.
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="phoneCard">
-          <h3>Calendar + Availability</h3>
-          <div class="caption">Stop the scheduling chaos — keep rehearsal and gig logistics in one place.</div>
-          <div class="frame">
-            <img src="images/groovelinx_iphone_snapshot_4.png" alt="Calendar screenshot" loading="lazy" />
+      <!-- JOIN -->
+      <section id="join" class="section" style="margin-top:18px;">
+        <div class="section-h">
+          <div>
+            <h2>Join the beta</h2>
+            <p>Early access for bands who want to tighten up without killing the vibe.</p>
           </div>
         </div>
-
-        <div class="phoneCard">
-          <h3>Home / Sign In</h3>
-          <div class="caption">Quick entry point so you can sync with bandmates and get moving fast.</div>
-          <div class="frame">
-            <img src="images/groovelinx_iphone_snapshot_5.png" alt="Home screenshot" loading="lazy" />
-          </div>
+        <div style="padding:18px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn-primary" href="mailto:hello@groovelinx.com?subject=GrooveLinx%20Beta%20Access">⚡ Request access</a>
+          <a class="btn" href="#screens">📱 Re-watch screens</a>
         </div>
+      </section>
 
-        <div class="phoneCard">
-          <h3>Song Library</h3>
-          <div class="caption">Filters, readiness, and “Gig Ready” focus so you know exactly what to woodshed.</div>
-          <div class="frame">
-            <img src="images/groovelinx_iphone_snapshot_6.png" alt="Song library screenshot" loading="lazy" />
-          </div>
-        </div>
-      </div>
-
-      <div class="card wide" style="margin-top:16px">
-        <p>
-          <strong>Discoverability:</strong> GrooveLinx is built for jam bands and cover bands
-          (Grateful Dead, Phish, Goose, Widespread Panic, Allman Brothers) who want to tighten up without killing the vibe.
-        </p>
-        <a class="cta" href="#join">Join the Beta</a>
-      </div>
-    </div>
-
-    <div id="join" class="section">
-      <div class="sectionTitle">
-        <h2>Get early access</h2>
-        <div class="hint">Be first in line when the beta opens.</div>
-      </div>
-
-      <div class="card wide">
-        <p>
-          Drop your email and I’ll send the beta invite. No spam — just launch updates and early access.
-        </p>
-
-        <!-- Simple mailto submit: no backend required -->
-        <form class="emailRow" onsubmit="return handleJoin(event)">
-          <input id="email" type="email" placeholder="you@band.com" required />
-          <button type="submit">Join Beta</button>
-        </form>
-      </div>
-    </div>
-
-    <footer>
-      <div>© 2025–2026 Drew Merrill. GrooveLinx — Where Bands Lock In 🤘</div>
-      <div class="footlinks">
-        <a href="#screens">Screens</a> ·
-        <a href="#features">Friction points</a> ·
-        <a href="#join">Beta</a>
-      </div>
-    </footer>
+      <footer>
+        GrooveLinx — Where bands lock in 🤘<br/>
+        © 2025–2026 Drew Merrill. All rights reserved.
+      </footer>
+    </main>
   </div>
-
-  <script>
-    function handleJoin(e){
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const subject = encodeURIComponent("GrooveLinx Beta — Early Access");
-      const body = encodeURIComponent(
-        `Hey GrooveLinx,\n\nPlease add me to the beta list.\n\nEmail: ${email}\n\n(If you want, tell me your band name + what you’re trying to improve.)\n`
-      );
-      window.location.href = `mailto:hello@groovelinx.com?subject=${subject}&body=${body}`;
-      return false;
-    }
-  </script>
 </body>
 </html>
