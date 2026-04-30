@@ -479,6 +479,78 @@
 
     /* Tiny utility */
     .spacer{ height: 6px; }
+
+    /* Section showcase (pillar screenshot) */
+    .showcase{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap: 22px;
+      align-items:center;
+      margin-bottom: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+    }
+    .showcase .phoneCard{
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+    .showcase .showcaseCopy h3{
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .showcase .showcaseCopy p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    @media (max-width: 720px){
+      .showcase{ grid-template-columns: 1fr; gap: 14px; padding: 14px; }
+      .showcase .phoneCard{ max-width: 220px; }
+    }
+
+    /* Scroll-reveal */
+    .reveal{
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible{
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .reveal{ opacity:1; transform:none; transition:none; }
+    }
+
+    /* Changelog strip */
+    .changelogStrip{
+      display:flex; flex-wrap:wrap; gap: 10px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+    }
+    .changelogPill{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .changelogPill .cl-date{
+      color: var(--muted2);
+      font-weight: 600;
+      font-size: 12px;
+    }
   </style>
 </head>
 
@@ -537,9 +609,9 @@
         <div class="heroGrid">
           <div class="glass heroLeft">
             <div class="pill"><span class="dot"></span> Band Operating System</div>
-            <h1>Run your band like a band &mdash; not a group chat.</h1>
+            <h1>Run better rehearsals.<br/>Play tighter shows.</h1>
             <p class="lead">
-              GrooveLinx is the operating system for working bands. Plan your songs and setlists, rehearse with intent, perform with stage-ready charts, learn parts faster with stems and harmony tools, and see exactly what's improving over time.
+              GrooveLinx is the operating system for working bands. Plan your songs and setlists, rehearse with intent, perform with stage-ready charts, learn parts faster with stems and harmony tools, and see exactly what's improving &mdash; week over week.
             </p>
 
             <div class="heroBtns">
@@ -569,7 +641,7 @@
     <!-- FIVE SYSTEMS OVERVIEW -->
     <section id="systems">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker">🔄 Five Systems</div>
           <h2>One platform. Five systems. Built around how bands actually work.</h2>
           <p class="sub">Not a chat app with a calendar bolted on. A connected operating system for bands &mdash; from first idea to last encore.</p>
@@ -588,13 +660,23 @@
     <!-- 1. PLAN -->
     <section id="plan">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker" style="color:#86efac">1️⃣ Plan</div>
           <h2>Songs, setlists, and schedules &mdash; in one place the whole band can see.</h2>
           <p class="sub">Stop hunting through Slack threads, group chats, and shared docs. Plan once, in a place built for it.</p>
         </div>
 
-        <div class="grid2">
+        <div class="showcase reveal">
+          <div class="phoneCard">
+            <div class="phoneFrame"><img src="/images/groovelinx_iphone_snapshot_1.png" alt="Songs catalog and setlist building" loading="lazy" /></div>
+          </div>
+          <div class="showcaseCopy">
+            <h3>One source of truth for the whole band</h3>
+            <p>Active songs, library songs, structure, key, BPM, references &mdash; all band-shared, all searchable, all current. Replace your spreadsheet, your Drive folder, and your "where's the chart?" Slack thread with one place.</p>
+          </div>
+        </div>
+
+        <div class="grid2 reveal">
           <div class="card"><div class="pad">
             <div class="tag" style="color:#86efac">🎵 Songs</div>
             <h3>Your band's catalog &mdash; structured, searchable, shared</h3>
@@ -625,13 +707,23 @@
     <!-- 2. REHEARSE -->
     <section id="rehearse">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker" style="color:#818cf8">2️⃣ Rehearse</div>
           <h2>Walk into rehearsal knowing what to work on.</h2>
           <p class="sub">No more "what should we play tonight?" Rehearsal becomes intentional &mdash; with a plan that adapts to what your band actually needs.</p>
         </div>
 
-        <div class="grid2">
+        <div class="showcase reveal">
+          <div class="phoneCard">
+            <div class="phoneFrame"><img src="/images/groovelinx_iphone_snapshot_3.png" alt="Rehearsal mode and walkthrough" loading="lazy" /></div>
+          </div>
+          <div class="showcaseCopy">
+            <h3>Walkthroughs that capture what happened</h3>
+            <p>Run a song, take notes mid-walkthrough, jump sections, log readiness per member. Every rehearsal feeds the next one's agenda &mdash; and the next one's gig prep.</p>
+          </div>
+        </div>
+
+        <div class="grid2 reveal">
           <div class="card"><div class="pad">
             <div class="tag" style="color:#818cf8">📝 Rehearsal plans</div>
             <h3>An agenda built from your band's data</h3>
@@ -662,13 +754,23 @@
     <!-- 3. PERFORM -->
     <section id="perform">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker" style="color:#fbbf24">3️⃣ Perform</div>
           <h2>Stage-ready surfaces designed for the gig, not the rehearsal room.</h2>
           <p class="sub">Big text. Glance-readable. One-tap navigation. Built for a tablet on a stand under stage lights.</p>
         </div>
 
-        <div class="grid2">
+        <div class="showcase reveal">
+          <div class="phoneCard">
+            <div class="phoneFrame"><img src="/images/groovelinx_iphone_snapshot_2.png" alt="Live Gig charts" loading="lazy" /></div>
+          </div>
+          <div class="showcaseCopy">
+            <h3>The chart you actually need, the way you need it</h3>
+            <p>Per-song charts with auto-scroll, swipe or keyboard nav between songs, member assignments at the top so everyone knows their job, and a sub-second SLA &mdash; no spinner between you and the next song.</p>
+          </div>
+        </div>
+
+        <div class="grid2 reveal">
           <div class="card"><div class="pad">
             <div class="tag" style="color:#fbbf24">🎤 Setlist Stage View</div>
             <h3>Your setlist in one glance</h3>
@@ -699,13 +801,23 @@
     <!-- 4. LEARN -->
     <section id="learn">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker" style="color:#f87171">4️⃣ Learn</div>
           <h2>Learn parts faster &mdash; without burning hours on YouTube.</h2>
           <p class="sub">Tools that speed the part-learning process. Honest framing: drafts you clean up, not magic transcription.</p>
         </div>
 
-        <div class="grid2">
+        <div class="showcase reveal">
+          <div class="phoneCard">
+            <div class="phoneFrame"><img src="/images/groovelinx_iphone_snapshot_6.png" alt="Stems mixer and Harmony Lab" loading="lazy" /></div>
+          </div>
+          <div class="showcaseCopy">
+            <h3>Stems mixer + Harmony Lab in one app</h3>
+            <p>Pull a recording in, separate drums/bass/vocals/keys/guitar, mute and solo per part. Split lead vs. backing vocals, pan each into its own ear, loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
+          </div>
+        </div>
+
+        <div class="grid2 reveal">
           <div class="card"><div class="pad">
             <div class="tag" style="color:#f87171">🎚 Stems lens</div>
             <h3>Isolate drums, bass, vocals, keys, guitar &mdash; from any recording</h3>
@@ -737,13 +849,23 @@
     <!-- 5. IMPROVE -->
     <section id="improve">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker" style="color:#c084fc">5️⃣ Improve</div>
           <h2>What changed. What's working. What's next.</h2>
           <p class="sub">Every rehearsal teaches the next one. Every gig feeds the dashboard. The band gets sharper over time &mdash; on purpose.</p>
         </div>
 
-        <div class="grid2">
+        <div class="showcase reveal">
+          <div class="phoneCard">
+            <div class="phoneFrame"><img src="/images/groovelinx_iphone_snapshot_4.png" alt="Post-rehearsal insights and band feed" loading="lazy" /></div>
+          </div>
+          <div class="showcaseCopy">
+            <h3>"What's happening with my band?" &mdash; one screen, every morning</h3>
+            <p>Open the app and see the pulse: what changed across songs, takes, calendar, polls, ideas, gig prep. Cross-session insights show what tightened, what slipped, and what to do next. Real data, not "good job."</p>
+          </div>
+        </div>
+
+        <div class="grid2 reveal">
           <div class="card"><div class="pad">
             <div class="tag" style="color:#c084fc">📊 Post-rehearsal insights</div>
             <h3>"This rehearsal vs last rehearsal" &mdash; for each song</h3>
@@ -774,7 +896,7 @@
     <!-- GROOVEMATE — the assistant -->
     <section id="groovemate">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker">🤖 GrooveMate</div>
           <h2>The AI assistant that helps you operate the system.</h2>
           <p class="sub">GrooveMate is part of GrooveLinx, not the whole thing. It's the voice/text shortcut that turns natural language into band-OS actions.</p>
@@ -823,7 +945,7 @@
     <!-- DIFFERENTIATION -->
     <section id="compare">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker">🆚 Why GrooveLinx</div>
           <h2>Not a group chat with a calendar. An operating system.</h2>
           <p class="sub">Most bands run on a Frankenstein of Slack, Google Docs, paper, and three apps that don't talk to each other. GrooveLinx replaces all of it &mdash; in one connected system.</p>
@@ -876,7 +998,7 @@
     <!-- BAND TYPES -->
     <section id="bands">
       <div class="wrap">
-        <div class="sectionHead">
+        <div class="sectionHead reveal">
           <div class="kicker">🎸 For Every Band</div>
           <h2>Built for any band that rehearses and performs.</h2>
           <p class="sub">Jam bands, cover bands, tribute acts, church and worship teams, wedding/event bands, original projects.</p>
@@ -895,10 +1017,30 @@
       </div>
     </section>
 
+    <!-- WHAT SHIPPED THIS MONTH -->
+    <section id="changelog">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div class="kicker">📦 Active development</div>
+          <h2>What shipped this month</h2>
+          <p class="sub">GrooveLinx is in active beta. New surfaces ship weekly. Here's what landed recently.</p>
+        </div>
+
+        <div class="changelogStrip reveal">
+          <div class="changelogPill">🎤 LALAL Auto-Split harmonies <span class="cl-date">Apr 30</span></div>
+          <div class="changelogPill">🎚 Stems lens pan knob <span class="cl-date">Apr 30</span></div>
+          <div class="changelogPill">🎼 Harmony Lab Split Mixer + abcjs notation <span class="cl-date">Apr 30</span></div>
+          <div class="changelogPill">🎵 Self-hosted Demucs stems pipeline <span class="cl-date">Apr 29</span></div>
+          <div class="changelogPill">📅 Calendar sync hardening <span class="cl-date">Apr 28</span></div>
+          <div class="changelogPill">🔔 3-layer notifications (in-app + push + SMS) <span class="cl-date">Apr 26</span></div>
+        </div>
+      </div>
+    </section>
+
     <!-- 10-MINUTE PROMISE -->
     <section>
       <div class="wrap">
-        <div class="card">
+        <div class="card reveal">
           <div class="pad" style="text-align:center;padding:40px 24px">
             <div style="font-size:2.5em;margin-bottom:12px">⏱️</div>
             <h2 style="margin-top:0;font-size:1.6em">The 10-minute promise.</h2>
@@ -999,6 +1141,22 @@
 
     document.addEventListener("keydown", (e) => { if(e.key === "Escape"){ closeOverlay("beta"); closePanel(); } });
     document.querySelectorAll('[data-close="menu"]').forEach(a => a.addEventListener("click", () => closePanel()));
+
+    // Scroll-reveal — fade-up on enter viewport, single-shot
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    } else {
+      // Fallback — show everything immediately
+      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+    }
   </script>
 </body>
 </html>
