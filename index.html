@@ -4,8 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b0f1e" />
-  <title>GrooveLinx — Band Operating System</title>
-  <meta name="description" content="GrooveLinx is the operating system for working bands — plan, rehearse, perform, learn, and improve together. Songs, setlists, shared calendar, rehearsal intel, stage view, stems and harmony tools, and an AI assistant that helps you operate the system." />
+  <title>GrooveLinx — Band Rehearsal, Setlist &amp; Management App</title>
+  <meta name="description" content="GrooveLinx is the operating system for working bands: practice, rehearse, play, review, and improve — songs, setlists, and shared schedule in one place." />
+  <link rel="canonical" href="https://groovelinx.com/" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GrooveLinx" />
+  <meta property="og:title" content="GrooveLinx — The Operating System for Working Bands" />
+  <meta property="og:description" content="Practice, rehearse, play, review, and improve — songs, setlists, and shared schedule in one place the whole band can see." />
+  <meta property="og:url" content="https://groovelinx.com/" />
+  <meta property="og:image" content="https://groovelinx.com/images/groovelinx_psychedelic_poster.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GrooveLinx — The Operating System for Working Bands" />
+  <meta name="twitter:description" content="Practice, rehearse, play, review, and improve — all built around your songs." />
+  <meta name="twitter:image" content="https://groovelinx.com/images/groovelinx_psychedelic_poster.png" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"GrooveLinx","applicationCategory":"MusicApplication","operatingSystem":"Web, iOS (PWA)","description":"GrooveLinx is the operating system for working bands — practice, rehearse, play, review, and improve, with songs, setlists, a shared calendar, rehearsal intelligence, and stage-ready charts.","url":"https://groovelinx.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Invite-only beta"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"GrooveLinx","url":"https://groovelinx.com/","logo":"https://groovelinx.com/images/groovelinx_clean_logo.png"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"What is GrooveLinx?","acceptedAnswer":{"@type":"Answer","text":"GrooveLinx is the operating system for working bands: one web app to practice, rehearse, play, review, and improve, built around your songs, setlists, and shared schedule."}},
+    {"@type":"Question","name":"Is GrooveLinx a setlist app?","acceptedAnswer":{"@type":"Answer","text":"It includes a full setlist manager — build once, reuse across gigs, and print stage-ready setlists — but it's broader: setlists are one of five connected systems."}},
+    {"@type":"Question","name":"How does GrooveLinx help with rehearsals?","acceptedAnswer":{"@type":"Answer","text":"It builds a rehearsal plan from your band's data, tracks per-song and per-member readiness, and points you at the one thing to work on next."}},
+    {"@type":"Question","name":"How is it different from a group chat with a shared calendar?","acceptedAnswer":{"@type":"Answer","text":"Group chats lose context every week. GrooveLinx keeps your band's operational memory — songs, readiness, setlists, and history — in one place that carries over."}},
+    {"@type":"Question","name":"Can the whole band use it together?","acceptedAnswer":{"@type":"Answer","text":"Yes — songs, setlists, schedule, and readiness are shared, so everyone sees one source of truth, with RSVP so you know your lineup."}},
+    {"@type":"Question","name":"What kinds of bands is it for?","acceptedAnswer":{"@type":"Answer","text":"Working bands that rehearse and perform — jam bands, cover bands, tributes, and church or worship teams."}},
+    {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"GrooveLinx is in invite-only beta. Join the list for the next bands we onboard."}},
+    {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"No — it runs in the browser and installs as a phone or tablet app (PWA); no app store needed."}}
+  ]}
+  </script>
 
   <style>
     :root{
@@ -569,12 +607,11 @@
         </a>
 
         <nav class="navlinks" aria-label="Site links">
-          <a href="#plan">Plan</a>
+          <a href="#plan">Practice</a>
           <a href="#rehearse">Rehearse</a>
-          <a href="#perform">Perform</a>
-          <a href="#learn">Learn</a>
+          <a href="#perform">Play</a>
+          <a href="#learn">Review</a>
           <a href="#improve">Improve</a>
-          <a href="#groovemate">GrooveMate</a>
         </nav>
 
         <div class="actions">
@@ -588,12 +625,11 @@
 
       <div class="mobilepanel" id="mobilepanel" aria-label="Mobile menu">
         <div class="card">
-          <a href="#plan" data-close="menu">Plan</a>
+          <a href="#plan" data-close="menu">Practice</a>
           <a href="#rehearse" data-close="menu">Rehearse</a>
-          <a href="#perform" data-close="menu">Perform</a>
-          <a href="#learn" data-close="menu">Learn</a>
+          <a href="#perform" data-close="menu">Play</a>
+          <a href="#learn" data-close="menu">Review</a>
           <a href="#improve" data-close="menu">Improve</a>
-          <a href="#groovemate" data-close="menu">GrooveMate</a>
           <div class="spacer"></div>
           <a class="btn secondary" style="width:100%" href="https://app.groovelinx.com" target="_blank">Open App</a>
           <button class="btn primary" style="width:100%; margin-top:10px" type="button" data-open="beta">Start Free</button>
@@ -611,7 +647,7 @@
             <div class="pill"><span class="dot"></span> Band Operating System</div>
             <h1>Run better rehearsals.<br/>Play tighter shows.</h1>
             <p class="lead">
-              GrooveLinx is the operating system for working bands. Plan your songs and setlists, rehearse with intent, perform with stage-ready charts, learn parts faster with stems and harmony tools, and see exactly what's improving &mdash; week over week.
+              GrooveLinx is the operating system for working bands. Practice your songs, rehearse with intent, play with stage-ready charts, review what changed since last time, and improve &mdash; week over week.
             </p>
 
             <div class="heroBtns">
@@ -620,7 +656,7 @@
             </div>
 
             <div class="mini">
-              <span><strong>Plan &middot; Rehearse &middot; Perform &middot; Learn &middot; Improve.</strong> Five connected systems your whole band shares &mdash; with an AI assistant that helps you operate them.</span>
+              <span><strong>Practice &middot; Rehearse &middot; Play &middot; Review &middot; Improve.</strong> Five connected systems your whole band shares &mdash; one source of truth, built around your songs.</span>
             </div>
           </div>
 
@@ -648,11 +684,11 @@
         </div>
 
         <div class="grid2" style="grid-template-columns:repeat(5,1fr);gap:10px">
-          <a href="#plan" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#86efac;margin:0 0 4px">Plan</h3><p style="font-size:12px;line-height:1.4">Songs, setlists, schedules, calendar</p></div></a>
-          <a href="#rehearse" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#818cf8;margin:0 0 4px">Rehearse</h3><p style="font-size:12px;line-height:1.4">Plans, readiness, practice actions</p></div></a>
-          <a href="#perform" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#fbbf24;margin:0 0 4px">Perform</h3><p style="font-size:12px;line-height:1.4">Stage View, live charts, setlists</p></div></a>
-          <a href="#learn" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#f87171;margin:0 0 4px">Learn</h3><p style="font-size:12px;line-height:1.4">Stems, Harmony Lab, song intel</p></div></a>
-          <a href="#improve" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#c084fc;margin:0 0 4px">Improve</h3><p style="font-size:12px;line-height:1.4">Insights, feed, band pulse</p></div></a>
+          <a href="#plan" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#86efac;margin:0 0 4px">Practice</h3><p style="font-size:12px;line-height:1.4">Songs, setlists &amp; shared schedule</p></div></a>
+          <a href="#rehearse" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#818cf8;margin:0 0 4px">Rehearse</h3><p style="font-size:12px;line-height:1.4">Plans, readiness &amp; what to work on</p></div></a>
+          <a href="#perform" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#fbbf24;margin:0 0 4px">Play</h3><p style="font-size:12px;line-height:1.4">Stage view, live charts &amp; setlists</p></div></a>
+          <a href="#learn" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#f87171;margin:0 0 4px">Review</h3><p style="font-size:12px;line-height:1.4">Listen back, isolate parts &amp; study takes</p></div></a>
+          <a href="#improve" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#c084fc;margin:0 0 4px">Improve</h3><p style="font-size:12px;line-height:1.4">Trends, readiness &amp; your next step</p></div></a>
         </div>
       </div>
     </section>
@@ -779,7 +815,7 @@
 
           <div class="card"><div class="pad">
             <div class="tag" style="color:#fbbf24">📜 Live Gig charts</div>
-            <h3>The chart you actually need, the way you need it</h3>
+            <h3>Auto-scroll, swipe between songs, assignments up top</h3>
             <p>Per-song charts with auto-scroll (tunable px/sec), swipe or keyboard navigation between songs, and member assignments at the top so everyone knows their job.</p>
           </div></div>
 
@@ -820,7 +856,7 @@
         <div class="grid2 reveal">
           <div class="card"><div class="pad">
             <div class="tag" style="color:#f87171">🎚 Stems lens</div>
-            <h3>Isolate drums, bass, vocals, keys, guitar &mdash; from any recording</h3>
+            <h3>Isolate drums, bass, vocals, keys, guitar &mdash; from your recordings</h3>
             <p>Self-hosted Demucs separation gives you 4 or 6 stems per song. Mute, solo, volume, pan, and tempo controls let you practice your part with the rest of the band still in the mix &mdash; or by itself.</p>
           </div></div>
 
@@ -874,7 +910,7 @@
 
           <div class="card"><div class="pad">
             <div class="tag" style="color:#c084fc">📰 Activity feed</div>
-            <h3>"What's happening with my band?" &mdash; one screen, every morning</h3>
+            <h3>Everything that changed, in one feed</h3>
             <p>The Home feed shows what changed across the band: new takes, status changes, calendar events, polls, ideas, gig prep. Open the app, see the pulse.</p>
           </div></div>
 
@@ -893,54 +929,7 @@
       </div>
     </section>
 
-    <!-- GROOVEMATE — the assistant -->
-    <section id="groovemate">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">🤖 GrooveMate</div>
-          <h2>The AI assistant that helps you operate the system.</h2>
-          <p class="sub">GrooveMate is part of GrooveLinx, not the whole thing. It's the voice/text shortcut that turns natural language into band-OS actions.</p>
-        </div>
 
-        <div class="grid2" style="grid-template-columns:repeat(3,1fr)">
-          <div class="card"><div class="pad">
-            <div class="tag">🎤 Talk or type</div>
-            <h3>"Build a setlist for Saturday"</h3>
-            <p>Voice or text. GrooveMate creates the setlist using your active songs, gig length, and what the band's been rehearsing.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag">🎵 Import song packs</div>
-            <h3>"Import Billy Joel"</h3>
-            <p>Curated packs land as Active songs in your catalog &mdash; with structure, key, BPM, and reference links pre-populated. You edit. The band sees it instantly.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag">📝 Capture chart notes</div>
-            <h3>"Watch the stop before the last chorus"</h3>
-            <p>Saved to the right song, tagged by type, surfaced in rehearsal. Your band's collective memory.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag">🐛 Capture issues</div>
-            <h3>"This is confusing"</h3>
-            <p>Drop feedback in plain English. GrooveMate captures full context &mdash; no forms, no tickets. The product improves from your words.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag">🔗 Source links</div>
-            <h3>Attach any chart link</h3>
-            <p>Ultimate Guitar, Chordify, YouTube, Google Drive. GrooveLinx is the annotation layer over your sources, not a chart copier.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag">📈 Adapts over time</div>
-            <h3>Smarter as your data grows</h3>
-            <p>The more rehearsals, gigs, and notes the band logs, the more useful GrooveMate's suggestions become. Compounding, not magic.</p>
-          </div></div>
-        </div>
-      </div>
-    </section>
 
     <!-- DIFFERENTIATION -->
     <section id="compare">
@@ -985,10 +974,6 @@
               <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Band visibility</div>
               <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Group chat scrollback</div>
               <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">"What's happening with my band?" feed on the Home screen.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Assistant</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">None</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">GrooveMate &mdash; voice/text shortcut to band-OS actions.</div>
             </div>
           </div>
         </div>
@@ -1076,12 +1061,11 @@
         <div class="footRow">
           <div>&copy; <span id="year"></span> GrooveLinx &mdash; Band Operating System</div>
           <div class="footLinks">
-            <a href="#plan">Plan</a>
+            <a href="#plan">Practice</a>
             <a href="#rehearse">Rehearse</a>
-            <a href="#perform">Perform</a>
-            <a href="#learn">Learn</a>
+            <a href="#perform">Play</a>
+            <a href="#learn">Review</a>
             <a href="#improve">Improve</a>
-            <a href="#groovemate">GrooveMate</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
           </div>
