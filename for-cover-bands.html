@@ -298,16 +298,22 @@
             const dy = (e.clientY / window.innerHeight - 0.5) * -30;
             aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
           }
-          if (phone && stage) {
-            const s = stage.getBoundingClientRect();
-            const px = clamp((e.clientX - (s.left + s.width / 2)) / (s.width / 2));
-            const py = clamp((e.clientY - (s.top + s.height / 2)) / (s.height / 2));
-            phone.style.setProperty("--ry", (px * 14 - 4).toFixed(2) + "deg");
-            phone.style.setProperty("--rx", (py * -11).toFixed(2) + "deg");
+          if (phone) {
+            const r = phone.getBoundingClientRect();
+            const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+            const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+            const px = clamp(nx), py = clamp(ny);
+            phone.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
+            phone.style.setProperty("--rx", (py * -13).toFixed(2) + "deg");
+            phone.style.setProperty("--sc", "1.04");
+            const inside = nx > -1 && nx < 1 && ny > -1 && ny < 1;
+            phone.style.setProperty("--gl", inside ? "1" : "0");
+            phone.style.setProperty("--gx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
+            phone.style.setProperty("--gy", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
           }
         }, { passive: true });
         document.addEventListener("mouseleave", () => {
-          if (phone) { phone.style.setProperty("--ry", "-7deg"); phone.style.setProperty("--rx", "3deg"); }
+          if (phone) { phone.style.setProperty("--ry", "-8deg"); phone.style.setProperty("--rx", "4deg"); phone.style.setProperty("--sc", "1"); phone.style.setProperty("--gl", "0"); }
         });
       }
       const ghosts = document.querySelectorAll(".ghostnum");

@@ -232,8 +232,12 @@ background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
 border:1px solid var(--line2); box-shadow:var(--shadow), var(--halo);
 transform:rotate(-3deg); transition:transform .5s cubic-bezier(.2,.8,.2,1); }
 /* hero phone tilts in 3D toward the cursor (vars set by JS) */
-.heroStage .phoneCard{ transform-style:preserve-3d;
-transform:rotateX(var(--rx,3deg)) rotateY(var(--ry,-7deg)); transition:transform .15s ease-out; }
+.heroStage .phoneCard{ position:relative; transform-style:preserve-3d; will-change:transform;
+transform:rotateX(var(--rx,4deg)) rotateY(var(--ry,-8deg)) scale(var(--sc,1)); transition:transform .12s ease-out; }
+/* moving glare sheen — appears when the cursor is over the screencap */
+.heroStage .phoneCard::after{ content:""; position:absolute; inset:0; border-radius:30px; pointer-events:none;
+mix-blend-mode:overlay; opacity:var(--gl,0); transition:opacity .25s ease;
+background:radial-gradient(280px 280px at var(--gx,50%) var(--gy,0%), rgba(255,255,255,.35), transparent 60%); }
 .phoneFrame{ border-radius:20px; overflow:hidden; border:1px solid var(--line2); background:#05030a; }
 .phoneFrame img{ width:100%; height:auto; display:block; }
 .floatchip{ position:absolute; padding:9px 13px; border-radius:14px; font-family:var(--mono); font-size:12px;
