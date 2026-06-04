@@ -38,7 +38,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/styles.css?v=20260604-2" />
+  <link rel="stylesheet" href="/styles.css?v=20260604-3" />
 </head>
 
 <body>
@@ -270,11 +270,25 @@
     });
     document.addEventListener("keydown", (e) => { if(e.key === "Escape"){ closeOverlay("beta"); closePanel(); } });
     document.querySelectorAll('[data-close="menu"]').forEach(a => a.addEventListener("click", () => closePanel()));
+    // Reveal with failsafe — content must never be stuck invisible (Safari
+    // anchor-jump can skip sections before the observer fires).
+    const _reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+    const _revealVisible = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      for (let i = _reveals.length - 1; i >= 0; i--) {
+        if (_reveals[i].getBoundingClientRect().top < vh * 0.92) { _reveals[i].classList.add("is-visible"); _reveals.splice(i, 1); }
+      }
+    };
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); } });
-      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      }, { threshold: 0.01, rootMargin: "0px 0px 0px 0px" });
+      _reveals.forEach((el) => io.observe(el));
+      _revealVisible();
+      window.addEventListener("scroll", _revealVisible, { passive: true });
+      window.addEventListener("hashchange", () => setTimeout(_revealVisible, 50));
+      window.addEventListener("resize", _revealVisible, { passive: true });
+      setTimeout(() => document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) => el.classList.add("is-visible")), 1200);
     } else {
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
