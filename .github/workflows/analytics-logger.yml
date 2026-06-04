@@ -1,0 +1,39 @@
+name: Analytics history logger
+
+# Captures Cloudflare Web Analytics forward into analytics-history.csv so we keep
+# unlimited history (the free tier only retains ~30 days). Runs on GitHub's
+# servers daily — no dependency on any laptop being on.
+
+on:
+  schedule:
+    - cron: '17 9 * * *'   # daily ~09:17 UTC
+  workflow_dispatch: {}     # allow manual runs
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analytics-logger
+  cancel-in-progress: false
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull Cloudflare analytics + merge into CSV
+        env:
+          CF_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CF_ACCOUNT_ID }}
+        run: python3 scripts/log_analytics.py
+      - name: Commit if changed
+        run: |
+          git config user.name "groovelinx-analytics-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add analytics-history.csv
+          if git diff --staged --quiet; then
+            echo "No analytics changes today."
+          else
+            git commit -m "chore(analytics): daily traffic snapshot [skip ci]"
+            git push
+          fi
