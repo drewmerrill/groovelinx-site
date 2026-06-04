@@ -281,12 +281,14 @@
     @keyframes eq{ 0%,100%{ transform:scaleY(.4); } 50%{ transform:scaleY(1); } }
 
     /* hero phone, floated + tilted, with orbiting data chips */
-    .heroStage{ position:relative; display:flex; align-items:center; justify-content:center; padding:8px; }
+    .heroStage{ position:relative; display:flex; align-items:center; justify-content:center; padding:8px; perspective:1100px; }
     .phoneCard{ width:min(340px,82%); border-radius:30px; padding:14px;
       background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
       border:1px solid var(--line2); box-shadow:var(--shadow), var(--halo);
       transform:rotate(-3deg); transition:transform .5s cubic-bezier(.2,.8,.2,1); }
-    .heroStage:hover .phoneCard{ transform:rotate(0deg) translateY(-4px); }
+    /* hero phone tilts in 3D toward the cursor (vars set by JS) */
+    .heroStage .phoneCard{ transform-style:preserve-3d;
+      transform:rotateX(var(--rx,3deg)) rotateY(var(--ry,-7deg)); transition:transform .15s ease-out; }
     .phoneFrame{ border-radius:20px; overflow:hidden; border:1px solid var(--line2); background:#05030a; }
     .phoneFrame img{ width:100%; height:auto; display:block; }
     .floatchip{ position:absolute; padding:9px 13px; border-radius:14px; font-family:var(--mono); font-size:12px;
@@ -423,8 +425,8 @@
     @keyframes flow{ 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
 
     /* cursor-tracked stage light behind the hero */
-    .spotlight{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.8;
-      background:radial-gradient(440px 440px at var(--mx,28%) var(--my,32%), rgba(176,107,255,.18), rgba(255,77,157,.05) 40%, transparent 62%); }
+    .spotlight{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.95;
+      background:radial-gradient(520px 520px at var(--mx,70%) var(--my,28%), rgba(196,140,255,.32), rgba(255,120,180,.12) 38%, transparent 60%); }
     .hero .wrap{ position:relative; z-index:1; }
 
     /* staged hero entrance */
@@ -442,7 +444,7 @@
     @media (prefers-reduced-motion:reduce){
       *{ animation:none !important; }
       .reveal{ opacity:1; transform:none; transition:none; }
-      .phoneCard, .showcase .phoneCard{ transform:none; }
+      .phoneCard, .showcase .phoneCard, .heroStage .phoneCard{ transform:none; }
       .heroCopy > *, .heroStage{ opacity:1; transform:none; }
       .aurora, .ghostnum{ transition:none; }
       html{ scroll-behavior:auto; }
@@ -1026,8 +1028,11 @@
       const hero = document.querySelector(".hero");
       const spot = document.querySelector(".spotlight");
       const aurora = document.querySelector(".aurora");
+      const stage = document.querySelector(".heroStage");
+      const phone = document.querySelector(".heroStage .phoneCard");
+      const clamp = (v) => Math.max(-1, Math.min(1, v));
 
-      // Pointer-driven stage light (fine pointers only — skip touch)
+      // Pointer-driven stage light + 3D phone tilt (fine pointers only — skip touch)
       if (window.matchMedia("(pointer: fine)").matches) {
         window.addEventListener("pointermove", (e) => {
           if (spot && hero) {
@@ -1038,11 +1043,23 @@
             spot.style.setProperty("--my", y + "%");
           }
           if (aurora) {
-            const dx = (e.clientX / window.innerWidth - 0.5) * -24;
-            const dy = (e.clientY / window.innerHeight - 0.5) * -24;
+            const dx = (e.clientX / window.innerWidth - 0.5) * -30;
+            const dy = (e.clientY / window.innerHeight - 0.5) * -30;
             aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
           }
+          if (phone && stage) {
+            const s = stage.getBoundingClientRect();
+            const px = clamp((e.clientX - (s.left + s.width / 2)) / (s.width / 2));
+            const py = clamp((e.clientY - (s.top + s.height / 2)) / (s.height / 2));
+            phone.style.setProperty("--ry", (px * 14 - 4).toFixed(2) + "deg");
+            phone.style.setProperty("--rx", (py * -11).toFixed(2) + "deg");
+          }
         }, { passive: true });
+
+        // ease the phone back to its resting tilt when the cursor leaves
+        document.addEventListener("mouseleave", () => {
+          if (phone) { phone.style.setProperty("--ry", "-7deg"); phone.style.setProperty("--rx", "3deg"); }
+        });
       }
 
       // Ghost section-numeral scroll parallax
