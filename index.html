@@ -8,6 +8,8 @@
   <meta name="description" content="GrooveLinx is the operating system for working bands: practice, rehearse, play, review, and improve — songs, setlists, and shared schedule in one place." />
   <link rel="canonical" href="https://groovelinx.com/" />
   <meta name="robots" content="index,follow" />
+  <link rel="icon" type="image/png" href="/groovelinx_app_icon.png" />
+  <link rel="apple-touch-icon" href="/images/groovelinx_app_icon_dark.png" />
 
   <!-- OpenGraph -->
   <meta property="og:type" content="website" />
@@ -415,10 +417,34 @@
     .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); will-change:opacity,transform; }
     .reveal.is-visible{ opacity:1; transform:none; }
 
+    /* ── v2: living motion ──────────────────────────────────────────── */
+    /* flowing gradient on the hero accent line */
+    .grad{ background-size:220% auto; animation:flow 9s ease-in-out infinite; }
+    @keyframes flow{ 0%,100%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } }
+
+    /* cursor-tracked stage light behind the hero */
+    .spotlight{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.8;
+      background:radial-gradient(440px 440px at var(--mx,28%) var(--my,32%), rgba(176,107,255,.18), rgba(255,77,157,.05) 40%, transparent 62%); }
+    .hero .wrap{ position:relative; z-index:1; }
+
+    /* staged hero entrance */
+    .heroCopy > *{ opacity:0; transform:translateY(20px); animation:riseIn .85s cubic-bezier(.2,.7,.2,1) forwards; }
+    .heroCopy > *:nth-child(1){ animation-delay:.06s; }
+    .heroCopy > *:nth-child(2){ animation-delay:.16s; }
+    .heroCopy > *:nth-child(3){ animation-delay:.26s; }
+    .heroCopy > *:nth-child(4){ animation-delay:.36s; }
+    .heroCopy > *:nth-child(5){ animation-delay:.46s; }
+    .heroStage{ opacity:0; animation:riseIn 1.05s cubic-bezier(.2,.7,.2,1) .32s forwards; }
+    @keyframes riseIn{ to{ opacity:1; transform:none; } }
+    .aurora{ transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+    .ghostnum{ transition:transform .12s linear; }
+
     @media (prefers-reduced-motion:reduce){
       *{ animation:none !important; }
       .reveal{ opacity:1; transform:none; transition:none; }
       .phoneCard, .showcase .phoneCard{ transform:none; }
+      .heroCopy > *, .heroStage{ opacity:1; transform:none; }
+      .aurora, .ghostnum{ transition:none; }
       html{ scroll-behavior:auto; }
     }
   </style>
@@ -488,6 +514,7 @@
     <main id="top">
       <!-- HERO -->
       <section class="hero">
+        <div class="spotlight" aria-hidden="true"></div>
         <div class="wrap">
           <div class="heroGrid">
             <div class="heroCopy">
@@ -991,6 +1018,50 @@
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     } else {
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+    }
+
+    // ── Living motion: cursor stage-light + aurora parallax + ghost drift ──
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion) {
+      const hero = document.querySelector(".hero");
+      const spot = document.querySelector(".spotlight");
+      const aurora = document.querySelector(".aurora");
+
+      // Pointer-driven stage light (fine pointers only — skip touch)
+      if (window.matchMedia("(pointer: fine)").matches) {
+        window.addEventListener("pointermove", (e) => {
+          if (spot && hero) {
+            const r = hero.getBoundingClientRect();
+            const x = ((e.clientX - r.left) / r.width) * 100;
+            const y = ((e.clientY - r.top) / r.height) * 100;
+            spot.style.setProperty("--mx", x + "%");
+            spot.style.setProperty("--my", y + "%");
+          }
+          if (aurora) {
+            const dx = (e.clientX / window.innerWidth - 0.5) * -24;
+            const dy = (e.clientY / window.innerHeight - 0.5) * -24;
+            aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
+          }
+        }, { passive: true });
+      }
+
+      // Ghost section-numeral scroll parallax
+      const ghosts = document.querySelectorAll(".ghostnum");
+      if (ghosts.length) {
+        let ticking = false;
+        const update = () => {
+          ghosts.forEach((g) => {
+            const r = g.getBoundingClientRect();
+            const off = (r.top - window.innerHeight / 2) * -0.06;
+            g.style.transform = "translateY(" + off.toFixed(1) + "px)";
+          });
+          ticking = false;
+        };
+        window.addEventListener("scroll", () => {
+          if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        update();
+      }
     }
   </script>
 </body>

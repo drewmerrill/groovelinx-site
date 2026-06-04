@@ -2,81 +2,69 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Hanken+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ width:1200px; height:630px; }
   body{
-    width:1200px; height:630px; overflow:hidden;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: rgba(255,255,255,.92);
-    background:
-      radial-gradient(1200px 600px at 12% 28%, rgba(160,80,255,.50), rgba(0,0,0,0) 60%),
-      radial-gradient(900px 520px at 80% 18%, rgba(0,255,208,.22), rgba(0,0,0,0) 55%),
-      radial-gradient(1000px 720px at 78% 92%, rgba(255,120,120,.24), rgba(0,0,0,0) 60%),
-      linear-gradient(180deg, #050713, #0b1026);
-    position:relative;
+    width:1200px; height:630px; overflow:hidden; position:relative;
+    font-family:"Hanken Grotesk", system-ui, sans-serif;
+    color:#efeaf9;
+    background:linear-gradient(180deg,#0f0820 0%,#07040e 60%,#05030a 100%);
   }
-  .frame{
-    position:absolute; inset:0;
-    padding:72px 80px;
-    display:flex; flex-direction:column; justify-content:space-between;
-  }
-  /* top brand row */
-  .brand{ display:flex; align-items:center; gap:22px; }
-  .brand img{
-    width:84px; height:84px; border-radius:20px; display:block;
-    box-shadow: 0 14px 40px rgba(0,0,0,.45);
-    border:1px solid rgba(255,255,255,.12);
-  }
-  .brand .wm{ display:flex; flex-direction:column; line-height:1.05; }
-  .brand .wm .name{ font-size:40px; font-weight:800; letter-spacing:.3px; }
-  .brand .wm .sub{ font-size:20px; color:rgba(255,255,255,.66); margin-top:6px; letter-spacing:.4px; }
+  /* aurora light-show */
+  .aurora{ position:absolute; inset:-15%; filter:blur(70px); opacity:.62; }
+  .aurora b{ position:absolute; display:block; border-radius:50%; mix-blend-mode:screen; }
+  .b1{ width:620px; height:620px; left:-120px; top:-160px; background:radial-gradient(circle,rgba(139,92,246,.95),transparent 62%); }
+  .b2{ width:560px; height:560px; right:-120px; top:-120px; background:radial-gradient(circle,rgba(77,216,230,.6),transparent 62%); }
+  .b3{ width:600px; height:600px; left:38%; top:46%; background:radial-gradient(circle,rgba(255,77,157,.7),transparent 62%); }
+  .b4{ width:520px; height:520px; right:6%; bottom:-200px; background:radial-gradient(circle,rgba(255,194,75,.45),transparent 62%); }
+  .grain{ position:absolute; inset:0; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
-  .pill{
-    display:inline-flex; align-items:center; gap:10px; align-self:flex-start;
-    padding:8px 16px; border-radius:999px; font-size:17px; font-weight:600;
-    color:rgba(255,255,255,.85);
-    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
-    margin-bottom:22px;
-  }
-  .pill .dot{ width:9px; height:9px; border-radius:50%;
-    background:linear-gradient(135deg, #78ffd6, #667eea); box-shadow:0 0 12px rgba(120,255,214,.7); }
+  .frame{ position:absolute; inset:0; z-index:2; padding:64px 76px; display:flex; flex-direction:column; justify-content:space-between; }
 
-  h1{
-    font-size:74px; line-height:1.04; font-weight:800; letter-spacing:-.5px;
-    max-width:980px;
-  }
-  h1 .grad{
-    background:linear-gradient(135deg, #c8a8ff, #78ffd6 60%, #ff9bb8);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .lead{ font-size:24px; color:rgba(255,255,255,.70); margin-top:20px; max-width:880px; line-height:1.4; }
+  .brand{ display:flex; align-items:center; gap:20px; }
+  .brand img{ width:80px; height:80px; border-radius:20px; border:1px solid rgba(176,140,255,.4); box-shadow:0 12px 36px rgba(124,92,255,.5); }
+  .brand .nm{ display:flex; flex-direction:column; line-height:1.05; }
+  .brand .name{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:38px; letter-spacing:-.01em; }
+  .brand .sub{ font-family:"Space Mono",monospace; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:rgba(239,234,249,.6); margin-top:7px; }
 
-  /* bottom row */
+  .kick{ display:inline-flex; align-items:center; gap:10px; align-self:flex-start; margin-bottom:22px;
+    font-family:"Space Mono",monospace; font-size:14px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:rgba(239,234,249,.82); padding:8px 16px; border-radius:999px;
+    background:rgba(255,255,255,.05); border:1px solid rgba(176,140,255,.22); }
+  .kick .sq{ width:9px; height:9px; border-radius:3px; background:#6ee7a8; box-shadow:0 0 14px #6ee7a8; }
+
+  h1{ font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:78px; line-height:.98; letter-spacing:-.025em; max-width:1000px; }
+  h1 .grad{ background:linear-gradient(105deg,#c9a8ff 0%,#6ee7a8 50%,#ff86bf 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lead{ font-size:25px; color:rgba(239,234,249,.74); margin-top:20px; max-width:900px; line-height:1.42; }
+
   .footer{ display:flex; align-items:center; justify-content:space-between; }
-  .verbs{ display:flex; gap:14px; flex-wrap:wrap; }
-  .verb{
-    font-size:20px; font-weight:700; padding:10px 20px; border-radius:14px;
-    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
-    color:rgba(255,255,255,.90);
-  }
-  .url{ font-size:24px; font-weight:700; color:rgba(255,255,255,.92);
-    background:linear-gradient(135deg, rgba(102,126,234,1), rgba(255,90,175,1));
-    padding:12px 26px; border-radius:14px; }
+  .verbs{ display:flex; gap:12px; }
+  .verb{ font-family:"Space Mono",monospace; font-size:17px; font-weight:700; padding:10px 18px; border-radius:12px;
+    background:rgba(255,255,255,.05); border:1px solid rgba(176,140,255,.2); color:rgba(239,234,249,.92); letter-spacing:.02em; }
+  .url{ font-family:"Hanken Grotesk",sans-serif; font-size:23px; font-weight:800; color:#fff;
+    background:linear-gradient(120deg,#7c5cff,#b06bff 45%,#ff4d9d); padding:13px 26px; border-radius:14px;
+    box-shadow:0 16px 44px rgba(124,92,255,.4); }
 </style>
 </head>
 <body>
+  <div class="aurora"><b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b></div>
+  <div class="grain"></div>
   <div class="frame">
     <div class="brand">
       <img src="../images/groovelinx_psychedelic_logo.png" alt="" />
-      <div class="wm">
+      <div class="nm">
         <span class="name">GrooveLinx</span>
         <span class="sub">Band Operating System</span>
       </div>
     </div>
 
     <div>
-      <div class="pill"><span class="dot"></span> The operating system for working bands</div>
+      <div class="kick"><span class="sq"></span> // The operating system for working bands</div>
       <h1>Run better rehearsals.<br/><span class="grad">Play tighter shows.</span></h1>
       <p class="lead">Songs, setlists, and a shared schedule the whole band sees — one source of truth, built around your music.</p>
     </div>
