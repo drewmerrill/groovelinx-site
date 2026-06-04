@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:1200px; height:630px; }
+  body{
+    width:1200px; height:630px; overflow:hidden;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: rgba(255,255,255,.92);
+    background:
+      radial-gradient(1200px 600px at 12% 28%, rgba(160,80,255,.50), rgba(0,0,0,0) 60%),
+      radial-gradient(900px 520px at 80% 18%, rgba(0,255,208,.22), rgba(0,0,0,0) 55%),
+      radial-gradient(1000px 720px at 78% 92%, rgba(255,120,120,.24), rgba(0,0,0,0) 60%),
+      linear-gradient(180deg, #050713, #0b1026);
+    position:relative;
+  }
+  .frame{
+    position:absolute; inset:0;
+    padding:72px 80px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  /* top brand row */
+  .brand{ display:flex; align-items:center; gap:22px; }
+  .brand img{
+    width:84px; height:84px; border-radius:20px; display:block;
+    box-shadow: 0 14px 40px rgba(0,0,0,.45);
+    border:1px solid rgba(255,255,255,.12);
+  }
+  .brand .wm{ display:flex; flex-direction:column; line-height:1.05; }
+  .brand .wm .name{ font-size:40px; font-weight:800; letter-spacing:.3px; }
+  .brand .wm .sub{ font-size:20px; color:rgba(255,255,255,.66); margin-top:6px; letter-spacing:.4px; }
+
+  .pill{
+    display:inline-flex; align-items:center; gap:10px; align-self:flex-start;
+    padding:8px 16px; border-radius:999px; font-size:17px; font-weight:600;
+    color:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+    margin-bottom:22px;
+  }
+  .pill .dot{ width:9px; height:9px; border-radius:50%;
+    background:linear-gradient(135deg, #78ffd6, #667eea); box-shadow:0 0 12px rgba(120,255,214,.7); }
+
+  h1{
+    font-size:74px; line-height:1.04; font-weight:800; letter-spacing:-.5px;
+    max-width:980px;
+  }
+  h1 .grad{
+    background:linear-gradient(135deg, #c8a8ff, #78ffd6 60%, #ff9bb8);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lead{ font-size:24px; color:rgba(255,255,255,.70); margin-top:20px; max-width:880px; line-height:1.4; }
+
+  /* bottom row */
+  .footer{ display:flex; align-items:center; justify-content:space-between; }
+  .verbs{ display:flex; gap:14px; flex-wrap:wrap; }
+  .verb{
+    font-size:20px; font-weight:700; padding:10px 20px; border-radius:14px;
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+    color:rgba(255,255,255,.90);
+  }
+  .url{ font-size:24px; font-weight:700; color:rgba(255,255,255,.92);
+    background:linear-gradient(135deg, rgba(102,126,234,1), rgba(255,90,175,1));
+    padding:12px 26px; border-radius:14px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="brand">
+      <img src="../images/groovelinx_psychedelic_logo.png" alt="" />
+      <div class="wm">
+        <span class="name">GrooveLinx</span>
+        <span class="sub">Band Operating System</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="pill"><span class="dot"></span> The operating system for working bands</div>
+      <h1>Run better rehearsals.<br/><span class="grad">Play tighter shows.</span></h1>
+      <p class="lead">Songs, setlists, and a shared schedule the whole band sees — one source of truth, built around your music.</p>
+    </div>
+
+    <div class="footer">
+      <div class="verbs">
+        <span class="verb">Practice</span>
+        <span class="verb">Rehearse</span>
+        <span class="verb">Play</span>
+        <span class="verb">Review</span>
+        <span class="verb">Improve</span>
+      </div>
+      <span class="url">groovelinx.com</span>
+    </div>
+  </div>
+</body>
+</html>
