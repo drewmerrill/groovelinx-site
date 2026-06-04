@@ -208,44 +208,47 @@ const script = `  <script>
     } else {
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
+    // Cursor-driven tilt + stage-light respond to the user's own pointer, so
+    // they run even under prefers-reduced-motion (interaction feedback, not
+    // autoplay). Autonomous effects (aurora parallax, ghost scroll drift) stay
+    // gated behind reduce-motion.
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hero = document.querySelector(".hero");
+    const spot = document.querySelector(".spotlight");
+    const aurora = document.querySelector(".aurora");
+    const phone = document.querySelector(".heroStage .phoneCard");
+    const clamp = (v) => Math.max(-1, Math.min(1, v));
+    if (window.matchMedia("(pointer: fine)").matches && (spot || phone)) {
+      window.addEventListener("pointermove", (e) => {
+        if (spot && hero) {
+          const r = hero.getBoundingClientRect();
+          spot.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
+          spot.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+        }
+        if (phone) {
+          const r = phone.getBoundingClientRect();
+          const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+          const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+          const px = clamp(nx), py = clamp(ny);
+          phone.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
+          phone.style.setProperty("--rx", (py * -13).toFixed(2) + "deg");
+          phone.style.setProperty("--sc", "1.04");
+          const inside = nx > -1 && nx < 1 && ny > -1 && ny < 1;
+          phone.style.setProperty("--gl", inside ? "1" : "0");
+          phone.style.setProperty("--gx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
+          phone.style.setProperty("--gy", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
+        }
+        if (aurora && !reduceMotion) {
+          const dx = (e.clientX / window.innerWidth - 0.5) * -30;
+          const dy = (e.clientY / window.innerHeight - 0.5) * -30;
+          aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
+        }
+      }, { passive: true });
+      document.addEventListener("mouseleave", () => {
+        if (phone) { phone.style.setProperty("--ry", "-8deg"); phone.style.setProperty("--rx", "4deg"); phone.style.setProperty("--sc", "1"); phone.style.setProperty("--gl", "0"); }
+      });
+    }
     if (!reduceMotion) {
-      const hero = document.querySelector(".hero");
-      const spot = document.querySelector(".spotlight");
-      const aurora = document.querySelector(".aurora");
-      const stage = document.querySelector(".heroStage");
-      const phone = document.querySelector(".heroStage .phoneCard");
-      const clamp = (v) => Math.max(-1, Math.min(1, v));
-      if (window.matchMedia("(pointer: fine)").matches) {
-        window.addEventListener("pointermove", (e) => {
-          if (spot && hero) {
-            const r = hero.getBoundingClientRect();
-            spot.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-            spot.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
-          }
-          if (aurora) {
-            const dx = (e.clientX / window.innerWidth - 0.5) * -30;
-            const dy = (e.clientY / window.innerHeight - 0.5) * -30;
-            aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
-          }
-          if (phone) {
-            const r = phone.getBoundingClientRect();
-            const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-            const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-            const px = clamp(nx), py = clamp(ny);
-            phone.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
-            phone.style.setProperty("--rx", (py * -13).toFixed(2) + "deg");
-            phone.style.setProperty("--sc", "1.04");
-            const inside = nx > -1 && nx < 1 && ny > -1 && ny < 1;
-            phone.style.setProperty("--gl", inside ? "1" : "0");
-            phone.style.setProperty("--gx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
-            phone.style.setProperty("--gy", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
-          }
-        }, { passive: true });
-        document.addEventListener("mouseleave", () => {
-          if (phone) { phone.style.setProperty("--ry", "-8deg"); phone.style.setProperty("--rx", "4deg"); phone.style.setProperty("--sc", "1"); phone.style.setProperty("--gl", "0"); }
-        });
-      }
       const ghosts = document.querySelectorAll(".ghostnum");
       if (ghosts.length) {
         let ticking = false;

@@ -394,7 +394,10 @@ background:radial-gradient(520px 520px at var(--mx,70%) var(--my,28%), rgba(196,
 @media (prefers-reduced-motion:reduce){
 *{ animation:none !important; }
 .reveal{ opacity:1; transform:none; transition:none; }
-.phoneCard, .showcase .phoneCard, .heroStage .phoneCard{ transform:none; }
+.phoneCard, .showcase .phoneCard{ transform:none; }
+/* NOTE: .heroStage .phoneCard is intentionally NOT flattened here — its tilt is
+   driven by the user's own cursor (interaction feedback), which is the accepted
+   exception to prefers-reduced-motion. Autonomous motion stays disabled above. */
 .heroCopy > *, .heroStage{ opacity:1; transform:none; }
 .aurora, .ghostnum{ transition:none; }
 html{ scroll-behavior:auto; }

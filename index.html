@@ -635,69 +635,69 @@
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
 
-    // ── Living motion: cursor stage-light + aurora parallax + ghost drift ──
+    // ── Hero interaction ──
+    // The cursor-driven tilt + stage-light respond to the user's OWN pointer
+    // (interaction feedback), so they run even under prefers-reduced-motion —
+    // that setting targets autoplay/scroll motion, not direct manipulation.
+    // The AUTONOMOUS effects (aurora parallax, ghost-numeral scroll drift) stay
+    // gated behind reduce-motion.
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hero = document.querySelector(".hero");
+    const spot = document.querySelector(".spotlight");
+    const aurora = document.querySelector(".aurora");
+    const phone = document.querySelector(".heroStage .phoneCard");
+    const clamp = (v) => Math.max(-1, Math.min(1, v));
+
+    if (window.matchMedia("(pointer: fine)").matches && (spot || phone)) {
+      window.addEventListener("pointermove", (e) => {
+        // stage light — user-initiated, always on
+        if (spot && hero) {
+          const r = hero.getBoundingClientRect();
+          spot.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
+          spot.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+        }
+        // 3D phone tilt — user-initiated, always on. Anchored to the phone so
+        // moving across the screencap leans it strongly toward the cursor.
+        if (phone) {
+          const r = phone.getBoundingClientRect();
+          const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+          const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+          const px = clamp(nx), py = clamp(ny);
+          phone.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
+          phone.style.setProperty("--rx", (py * -13).toFixed(2) + "deg");
+          phone.style.setProperty("--sc", "1.04");
+          const inside = nx > -1 && nx < 1 && ny > -1 && ny < 1; // over the screencap
+          phone.style.setProperty("--gl", inside ? "1" : "0");
+          phone.style.setProperty("--gx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
+          phone.style.setProperty("--gy", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
+        }
+        // aurora parallax — autonomous background motion, only when motion allowed
+        if (aurora && !reduceMotion) {
+          const dx = (e.clientX / window.innerWidth - 0.5) * -30;
+          const dy = (e.clientY / window.innerHeight - 0.5) * -30;
+          aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
+        }
+      }, { passive: true });
+
+      // ease the phone back to its resting tilt when the cursor leaves the window
+      document.addEventListener("mouseleave", () => {
+        if (phone) { phone.style.setProperty("--ry", "-8deg"); phone.style.setProperty("--rx", "4deg"); phone.style.setProperty("--sc", "1"); phone.style.setProperty("--gl", "0"); }
+      });
+    }
+
+    // Ghost section-numeral scroll parallax — scroll-driven, gated behind reduce-motion
     if (!reduceMotion) {
-      const hero = document.querySelector(".hero");
-      const spot = document.querySelector(".spotlight");
-      const aurora = document.querySelector(".aurora");
-      const stage = document.querySelector(".heroStage");
-      const phone = document.querySelector(".heroStage .phoneCard");
-      const clamp = (v) => Math.max(-1, Math.min(1, v));
-
-      // Pointer-driven stage light + 3D phone tilt (fine pointers only — skip touch)
-      if (window.matchMedia("(pointer: fine)").matches) {
-        window.addEventListener("pointermove", (e) => {
-          if (spot && hero) {
-            const r = hero.getBoundingClientRect();
-            const x = ((e.clientX - r.left) / r.width) * 100;
-            const y = ((e.clientY - r.top) / r.height) * 100;
-            spot.style.setProperty("--mx", x + "%");
-            spot.style.setProperty("--my", y + "%");
-          }
-          if (aurora) {
-            const dx = (e.clientX / window.innerWidth - 0.5) * -30;
-            const dy = (e.clientY / window.innerHeight - 0.5) * -30;
-            aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
-          }
-          if (phone) {
-            // anchor the tilt to the PHONE itself, so moving across the
-            // screencap leans it strongly toward the cursor (3D tilt-card).
-            const r = phone.getBoundingClientRect();
-            const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-            const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-            const px = clamp(nx), py = clamp(ny);
-            phone.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
-            phone.style.setProperty("--rx", (py * -13).toFixed(2) + "deg");
-            phone.style.setProperty("--sc", "1.04");
-            const inside = nx > -1 && nx < 1 && ny > -1 && ny < 1; // over the screencap
-            phone.style.setProperty("--gl", inside ? "1" : "0");
-            phone.style.setProperty("--gx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
-            phone.style.setProperty("--gy", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
-          }
-        }, { passive: true });
-
-        // ease the phone back to its resting tilt when the cursor leaves the window
-        document.addEventListener("mouseleave", () => {
-          if (phone) { phone.style.setProperty("--ry", "-8deg"); phone.style.setProperty("--rx", "4deg"); phone.style.setProperty("--sc", "1"); phone.style.setProperty("--gl", "0"); }
-        });
-      }
-
-      // Ghost section-numeral scroll parallax
       const ghosts = document.querySelectorAll(".ghostnum");
       if (ghosts.length) {
         let ticking = false;
         const update = () => {
           ghosts.forEach((g) => {
             const r = g.getBoundingClientRect();
-            const off = (r.top - window.innerHeight / 2) * -0.06;
-            g.style.transform = "translateY(" + off.toFixed(1) + "px)";
+            g.style.transform = "translateY(" + ((r.top - window.innerHeight / 2) * -0.06).toFixed(1) + "px)";
           });
           ticking = false;
         };
-        window.addEventListener("scroll", () => {
-          if (!ticking) { ticking = true; requestAnimationFrame(update); }
-        }, { passive: true });
+        window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
         update();
       }
     }
