@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0f1e" />
+  <meta name="theme-color" content="#07040e" />
   <title>GrooveLinx — Band Rehearsal, Setlist &amp; Management App</title>
   <meta name="description" content="GrooveLinx is the operating system for working bands: practice, rehearse, play, review, and improve — songs, setlists, and shared schedule in one place." />
   <link rel="canonical" href="https://groovelinx.com/" />
@@ -45,1106 +45,915 @@
   ]}
   </script>
 
+  <!-- Type: distinctive display + grotesk body + mono data -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     :root{
-      --bg0:#050713;
-      --bg1:#0b1026;
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.08);
-      --border: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
-      --shadow2: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 22px;
-      --radius2: 16px;
+      --bg-0:#07040e;
+      --bg-1:#0f0820;
+      --bg-2:#160c2c;
 
-      --gradA: radial-gradient(1200px 600px at 15% 30%, rgba(160,80,255,.45), rgba(0,0,0,0) 60%),
-               radial-gradient(900px 500px at 75% 20%, rgba(0,255,208,.22), rgba(0,0,0,0) 55%),
-               radial-gradient(1000px 700px at 70% 85%, rgba(255,120,120,.22), rgba(0,0,0,0) 60%);
+      --ink:#efeaf9;
+      --muted:rgba(239,234,249,.72);
+      --muted2:rgba(239,234,249,.52);
+      --line:rgba(170,140,255,.16);
+      --line2:rgba(170,140,255,.28);
 
-      --cta: linear-gradient(135deg, rgba(102,126,234,1), rgba(255,90,175,1));
-      --cta2: linear-gradient(135deg, rgba(120,255,214,1), rgba(102,126,234,1));
+      --violet:#8b5cf6;
+      --grape:#b06bff;
+      --magenta:#ff4d9d;
+      --green:#6ee7a8;
+      --amber:#ffc24b;
+      --cyan:#4dd8e6;
+      --red:#ff6b6b;
 
-      --focus: rgba(120,170,255,.45);
-      --max: 1120px;
+      --glass:rgba(255,255,255,.045);
+      --glass2:rgba(255,255,255,.07);
+
+      --cta:linear-gradient(120deg,#7c5cff 0%,#b06bff 45%,#ff4d9d 100%);
+      --halo:0 18px 50px rgba(124,92,255,.32), 0 8px 26px rgba(255,77,157,.22);
+      --shadow:0 30px 80px rgba(0,0,0,.6);
+      --shadow2:0 14px 40px rgba(0,0,0,.4);
+
+      --disp:"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+      --body:"Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --mono:"Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+      --max:1180px;
+      --radius:22px;
+      --radius2:16px;
     }
 
     *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
+    html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; overflow-x:hidden; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background: var(--gradA), linear-gradient(180deg, var(--bg0), var(--bg1));
+      font-family:var(--body);
+      color:var(--ink);
+      background:var(--bg-0);
       min-height:100vh;
       overflow-x:hidden;
+      position:relative;
+      letter-spacing:.1px;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
     a{ color:inherit; text-decoration:none; }
     img{ max-width:100%; display:block; }
+    ::selection{ background:rgba(255,77,157,.32); color:#fff; }
 
-    /* Container + spacing */
-    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
-    @media (max-width:520px){
-      .wrap{ width: calc(100% - 28px); }
+    /* ── Living background: aurora light-show + grain ───────────────── */
+    .bg{
+      position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+      background:
+        radial-gradient(120% 90% at 50% -10%, rgba(176,107,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 38%, #05030a 100%);
     }
+    .aurora{ position:absolute; inset:-25vh -15vw; filter:blur(70px); opacity:.55; }
+    .aurora b{ position:absolute; display:block; border-radius:50%; mix-blend-mode:screen;
+      animation:drift 30s ease-in-out infinite; }
+    .aurora .b1{ width:52vw; height:52vw; left:-6vw; top:-8vh;
+      background:radial-gradient(circle, rgba(139,92,246,.9), transparent 62%); }
+    .aurora .b2{ width:46vw; height:46vw; right:-8vw; top:-4vh; animation-delay:-7s; animation-duration:36s;
+      background:radial-gradient(circle, rgba(77,216,230,.55), transparent 62%); }
+    .aurora .b3{ width:50vw; height:50vw; left:18vw; top:30vh; animation-delay:-14s; animation-duration:42s;
+      background:radial-gradient(circle, rgba(255,77,157,.6), transparent 62%); }
+    .aurora .b4{ width:42vw; height:42vw; right:6vw; bottom:-12vh; animation-delay:-20s; animation-duration:34s;
+      background:radial-gradient(circle, rgba(255,194,75,.4), transparent 62%); }
+    @keyframes drift{
+      0%,100%{ transform:translate(0,0) scale(1); }
+      33%{ transform:translate(5vw,4vh) scale(1.14); }
+      66%{ transform:translate(-4vw,6vh) scale(.9); }
+    }
+    .grain{
+      position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.045; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .skin{ position:relative; z-index:2; }
 
-    /* Announcement bar */
-    .announce{ display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap;
-      padding:9px 14px; font-size:13.5px; line-height:1.3; text-align:center; color:#fff;
-      background:linear-gradient(90deg,#4f46e5,#7c3aed); }
-    .announce strong{ color:#fff; }
-    .announce .announce-cta{ background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.55);
-      color:#fff; font-weight:700; font-size:12.5px; padding:4px 13px; border-radius:999px; cursor:pointer;
-      transition:background .15s; }
-    .announce .announce-cta:hover{ background:rgba(255,255,255,.30); }
+    /* ── Layout primitives ──────────────────────────────────────────── */
+    .wrap{ width:min(var(--max), calc(100% - 44px)); margin:0 auto; }
+    @media (max-width:520px){ .wrap{ width:calc(100% - 28px); } }
+    section{ padding:64px 0; position:relative; }
+    @media (max-width:720px){ section{ padding:46px 0; } }
 
-    /* Top nav */
-    .topbar{
-      position:sticky; top:0; z-index:1000;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(10,14,36,.85), rgba(10,14,36,.55));
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 0;
-      gap:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      min-width: 210px;
-    }
-    .brand img{
-      width:38px; height:38px; border-radius:12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-    .brand .name{
-      display:flex; flex-direction:column; line-height:1.1;
-    }
-    .brand .name strong{ font-size:16px; letter-spacing:.2px; }
-    .brand .name span{ font-size:13px; color:var(--muted); }
+    .mono{ font-family:var(--mono); letter-spacing:.04em; }
 
-    .navlinks{
-      display:flex; align-items:center; gap:18px;
-      color: var(--muted);
-      font-weight:600;
-      font-size:14px;
-      white-space:nowrap;
+    /* ── Eyebrow / kicker (console label) ───────────────────────────── */
+    .kick{
+      display:inline-flex; align-items:center; gap:9px;
+      font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+      color:var(--muted); padding:7px 12px; border-radius:999px;
+      background:var(--glass); border:1px solid var(--line);
     }
-    .navlinks a{
-      padding:10px 10px;
-      border-radius: 12px;
-      transition: background .15s ease, color .15s ease;
-    }
-    .navlinks a:hover{ background: rgba(255,255,255,.06); color: var(--text); }
+    .kick .sq{ width:7px; height:7px; border-radius:2px; background:var(--green); box-shadow:0 0 12px var(--green); }
 
-    .actions{
-      display:flex; align-items:center; gap:10px;
-      min-width: 260px;
-      justify-content:flex-end;
+    /* ── Headings ───────────────────────────────────────────────────── */
+    h1,h2,h3{ font-family:var(--disp); font-weight:700; }
+    h1{ margin:18px 0 14px; font-size:clamp(44px,6.4vw,86px); line-height:.98; letter-spacing:-.025em; font-weight:800; }
+    h2{ margin:14px 0 10px; font-size:clamp(30px,3.6vw,50px); line-height:1.02; letter-spacing:-.02em; font-weight:700; }
+    h3{ margin:0 0 8px; font-size:21px; line-height:1.12; letter-spacing:-.01em; font-weight:700; }
+    .grad{ background:linear-gradient(105deg,#c9a8ff 0%,#6ee7a8 48%,#ff86bf 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .sub{ margin:0; color:var(--muted); font-size:clamp(16px,1.5vw,18px); line-height:1.6; max-width:64ch; }
+    .sectionHead{ margin-bottom:28px; max-width:760px; }
+
+    /* oversized ghost numeral behind section heads */
+    .ghostnum{
+      position:absolute; right:0; top:-18px; z-index:0;
+      font-family:var(--disp); font-weight:800; font-size:clamp(120px,18vw,260px);
+      line-height:1; letter-spacing:-.04em; pointer-events:none; user-select:none;
+      color:transparent; -webkit-text-stroke:1.5px rgba(176,107,255,.10);
+      opacity:.8;
     }
+    @media (max-width:720px){ .ghostnum{ font-size:120px; top:-6px; opacity:.5; } }
+
+    /* ── Buttons ────────────────────────────────────────────────────── */
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      height:40px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      font-weight:700;
-      font-size:14px;
-      box-shadow: 0 10px 24px rgba(0,0,0,.20);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      cursor:pointer;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-      white-space:nowrap;
+      display:inline-flex; align-items:center; justify-content:center; gap:9px;
+      height:46px; padding:0 20px; border-radius:999px;
+      font-family:var(--body); font-weight:800; font-size:15px; letter-spacing:.01em;
+      border:1px solid var(--line2); background:var(--glass2); color:var(--ink);
+      cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; white-space:nowrap;
+      transition:transform .14s ease, box-shadow .2s ease, background .15s ease, border-color .15s ease;
     }
-    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08); }
-    .btn:active{ transform: translateY(0px) scale(.99); }
-    .btn.primary{
-      border: 0;
-      background: var(--cta);
-      box-shadow: 0 18px 42px rgba(120,80,255,.22), 0 14px 36px rgba(255,90,175,.18);
+    .btn:hover{ transform:translateY(-2px); border-color:var(--line2); background:rgba(255,255,255,.1); }
+    .btn:active{ transform:translateY(0) scale(.99); }
+    .btn.primary{ border:0; background:var(--cta); color:#fff; box-shadow:var(--halo); }
+    .btn.primary:hover{ filter:brightness(1.06); box-shadow:0 22px 60px rgba(124,92,255,.45), 0 10px 30px rgba(255,77,157,.3); }
+    .btn.ghost{ background:transparent; border:1px solid var(--line2); }
+    .btn:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(176,107,255,.55); }
+
+    /* ── Announcement marquee bar ───────────────────────────────────── */
+    .announce{
+      position:relative; z-index:3; overflow:hidden;
+      background:linear-gradient(90deg,#5b21b6,#7c3aed 50%,#db2777);
+      border-bottom:1px solid rgba(255,255,255,.12);
+      font-family:var(--mono); font-size:12.5px; letter-spacing:.06em;
     }
-    .btn.primary:hover{ filter: brightness(1.03); }
-    .btn.secondary{
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.07);
+    .announce .row{ display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:9px 14px; color:#fff; }
+    .announce strong{ color:#fff; }
+    .announce .announce-cta{
+      font-family:var(--body); font-weight:800; font-size:12.5px; letter-spacing:0;
+      background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.6); color:#fff;
+      padding:4px 13px; border-radius:999px; cursor:pointer; transition:background .15s; }
+    .announce .announce-cta:hover{ background:rgba(255,255,255,.34); }
+
+    /* ── Top nav ────────────────────────────────────────────────────── */
+    .topbar{ position:sticky; top:0; z-index:1000;
+      backdrop-filter:blur(16px) saturate(1.2); -webkit-backdrop-filter:blur(16px) saturate(1.2);
+      background:linear-gradient(180deg, rgba(10,6,20,.82), rgba(10,6,20,.5));
+      border-bottom:1px solid var(--line);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:13px 0; gap:12px; }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:200px; }
+    .brand img{ width:40px; height:40px; border-radius:12px; border:1px solid var(--line2);
+      box-shadow:0 8px 24px rgba(124,92,255,.4); }
+    .brand .nm{ display:flex; flex-direction:column; line-height:1.05; }
+    .brand .nm strong{ font-family:var(--disp); font-weight:800; font-size:18px; letter-spacing:-.01em; }
+    .brand .nm span{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted2); }
+
+    .navlinks{ display:flex; align-items:center; gap:4px; font-family:var(--mono); font-size:12.5px; letter-spacing:.04em; white-space:nowrap; }
+    .navlinks a{ padding:9px 12px; border-radius:10px; color:var(--muted); transition:background .15s, color .15s; text-transform:uppercase; }
+    .navlinks a:hover{ background:var(--glass2); color:var(--ink); }
+
+    .actions{ display:flex; align-items:center; gap:10px; min-width:250px; justify-content:flex-end; }
+    .actions .btn{ height:42px; }
+
+    .hamburger{ display:none; width:44px; height:42px; border-radius:12px; border:1px solid var(--line2);
+      background:var(--glass2); cursor:pointer; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; }
+    .hamburger span, .hamburger span:before, .hamburger span:after{ content:""; width:18px; height:2px; background:var(--ink); border-radius:2px; position:relative; display:block; }
+    .hamburger span:before{ position:absolute; top:-6px; left:0; }
+    .hamburger span:after{ position:absolute; top:6px; left:0; }
+    .mobilepanel{ display:none; padding:0 0 14px; }
+    .mobilepanel .pcard{ background:var(--glass2); border:1px solid var(--line); border-radius:16px; padding:10px; }
+    .mobilepanel a{ display:block; padding:12px; border-radius:12px; color:var(--ink); font-weight:700; font-family:var(--mono); font-size:13px; letter-spacing:.04em; }
+    .mobilepanel a+a{ margin-top:2px; }
+    .mobilepanel a:hover{ background:var(--glass2); }
+    .spacer{ height:8px; }
+
+    @media (max-width:900px){ .navlinks{ display:none; } .hamburger{ display:flex; } .actions{ min-width:auto; } .brand{ min-width:auto; } }
+    @media (max-width:430px){ .actions .btn.ghost{ display:none; } .brand .nm span{ display:none; } }
+
+    /* ── Cards / glass ──────────────────────────────────────────────── */
+    .glass{ background:linear-gradient(180deg, var(--glass2), var(--glass)); border:1px solid var(--line);
+      border-radius:var(--radius); box-shadow:var(--shadow2); position:relative; overflow:hidden; }
+    .card{ background:var(--glass); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow2);
+      overflow:hidden; transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease; position:relative; }
+    .card .pad{ padding:20px; }
+    .card.lift:hover{ transform:translateY(-4px); border-color:var(--line2); box-shadow:var(--shadow); }
+    .card.lift:hover:after{ opacity:1; }
+    .card.lift:after{ content:""; position:absolute; left:0; right:0; top:0; height:2px; opacity:0; transition:opacity .2s ease;
+      background:linear-gradient(90deg, transparent, var(--accent,var(--grape)), transparent); }
+
+    .tag{ display:inline-flex; align-items:center; gap:8px; padding:7px 11px; border-radius:999px;
+      font-family:var(--mono); font-size:11.5px; font-weight:700; letter-spacing:.04em;
+      background:var(--glass2); border:1px solid var(--line); color:var(--muted); }
+    .card h3{ margin-top:12px; }
+    .card p{ margin:0; color:var(--muted); line-height:1.6; font-size:14.5px; }
+
+    /* ── Hero ───────────────────────────────────────────────────────── */
+    .hero{ padding:56px 0 30px; }
+    .heroGrid{ display:grid; grid-template-columns:1.08fr .92fr; gap:34px; align-items:center; }
+    @media (max-width:940px){ .heroGrid{ grid-template-columns:1fr; gap:30px; } }
+    .heroLead{ font-size:clamp(17px,1.7vw,20px); line-height:1.6; color:var(--muted); max-width:54ch; margin:0 0 22px; }
+    .heroBtns{ display:flex; flex-wrap:wrap; gap:12px; }
+    .heroMeta{ display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+    .chip{ display:inline-flex; align-items:center; gap:8px; padding:8px 13px; border-radius:999px;
+      font-family:var(--mono); font-size:12px; letter-spacing:.03em; color:var(--muted);
+      background:var(--glass); border:1px solid var(--line); }
+    .chip b{ color:var(--ink); font-weight:700; }
+    .chip .d{ width:7px; height:7px; border-radius:50%; }
+
+    /* equalizer motif */
+    .eq{ display:inline-flex; align-items:flex-end; gap:2.5px; height:14px; }
+    .eq i{ width:3px; background:var(--green); border-radius:2px; animation:eq 1s ease-in-out infinite; }
+    .eq i:nth-child(1){ height:40%; animation-delay:-.1s; }
+    .eq i:nth-child(2){ height:90%; animation-delay:-.35s; }
+    .eq i:nth-child(3){ height:60%; animation-delay:-.6s; }
+    .eq i:nth-child(4){ height:100%; animation-delay:-.2s; }
+    .eq i:nth-child(5){ height:50%; animation-delay:-.5s; }
+    @keyframes eq{ 0%,100%{ transform:scaleY(.4); } 50%{ transform:scaleY(1); } }
+
+    /* hero phone, floated + tilted, with orbiting data chips */
+    .heroStage{ position:relative; display:flex; align-items:center; justify-content:center; padding:8px; }
+    .phoneCard{ width:min(340px,82%); border-radius:30px; padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+      border:1px solid var(--line2); box-shadow:var(--shadow), var(--halo);
+      transform:rotate(-3deg); transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+    .heroStage:hover .phoneCard{ transform:rotate(0deg) translateY(-4px); }
+    .phoneFrame{ border-radius:20px; overflow:hidden; border:1px solid var(--line2); background:#05030a; }
+    .phoneFrame img{ width:100%; height:auto; display:block; }
+    .floatchip{ position:absolute; padding:9px 13px; border-radius:14px; font-family:var(--mono); font-size:12px;
+      background:rgba(14,8,32,.78); border:1px solid var(--line2); box-shadow:var(--shadow2);
+      backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); animation:bob 6s ease-in-out infinite; }
+    .floatchip b{ color:var(--ink); }
+    .fc1{ top:6%; left:-2%; color:var(--green); animation-delay:-1s; }
+    .fc2{ top:40%; right:-5%; color:var(--amber); animation-delay:-3s; }
+    .fc3{ bottom:8%; left:2%; color:var(--cyan); animation-delay:-2s; }
+    @keyframes bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+    @media (max-width:430px){ .floatchip{ font-size:11px; padding:7px 10px; } .fc1{ left:0; } .fc2{ right:0; } .fc3{ left:0; } }
+
+    /* ── Five systems console strip ─────────────────────────────────── */
+    .console{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    @media (max-width:820px){ .console{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:430px){ .console{ grid-template-columns:1fr; } }
+    .consoleItem{ display:block; padding:18px 16px; border-radius:18px; background:var(--glass);
+      border:1px solid var(--line); transition:transform .18s ease, border-color .18s, background .18s; position:relative; overflow:hidden; }
+    .consoleItem:hover{ transform:translateY(-4px); border-color:var(--line2); background:var(--glass2); }
+    .consoleItem .ix{ font-family:var(--mono); font-size:12px; color:var(--muted2); letter-spacing:.1em; }
+    .consoleItem h3{ font-size:19px; margin:10px 0 6px; }
+    .consoleItem p{ margin:0; font-size:12.5px; color:var(--muted2); line-height:1.45; }
+    .consoleItem .bar{ position:absolute; left:0; bottom:0; height:3px; width:100%; opacity:.85;
+      background:linear-gradient(90deg, var(--accent), transparent); }
+
+    /* ── Pillar sections ────────────────────────────────────────────── */
+    .showcase{ display:grid; grid-template-columns:300px 1fr; gap:30px; align-items:center; margin-bottom:24px;
+      padding:24px; background:var(--glass); border:1px solid var(--line); border-radius:var(--radius); position:relative; overflow:hidden; }
+    .showcase:before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+      background:radial-gradient(420px 200px at 12% 0%, var(--glow,rgba(176,107,255,.16)), transparent 70%); }
+    .showcase .phoneCard{ width:100%; max-width:260px; margin:0 auto; transform:rotate(-2deg); }
+    .showcase .copy h3{ font-size:23px; margin-bottom:8px; }
+    .showcase .copy p{ margin:0; color:var(--muted); line-height:1.6; font-size:15.5px; }
+    @media (max-width:760px){ .showcase{ grid-template-columns:1fr; gap:18px; padding:18px; } .showcase .phoneCard{ max-width:210px; } }
+
+    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media (max-width:880px){ .grid2{ grid-template-columns:1fr; } }
+
+    /* ── Comparison table ───────────────────────────────────────────── */
+    .cmp{ width:100%; border-collapse:collapse; font-size:14.5px; overflow:hidden; border-radius:var(--radius); }
+    .cmp th, .cmp td{ text-align:left; padding:14px 16px; vertical-align:top; border-top:1px solid var(--line); }
+    .cmp thead th{ border-top:0; font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+    .cmp .rowlabel{ font-weight:800; color:var(--muted2); width:22%; }
+    .cmp .old{ color:var(--muted2); }
+    .cmp .new{ color:#eafff3; }
+    .cmp thead .h-old{ color:var(--muted); }
+    .cmp thead .h-new{ color:var(--green); }
+    .cmp tbody tr:hover td{ background:rgba(255,255,255,.025); }
+    @media (max-width:680px){
+      .cmp thead{ display:none; }
+      .cmp tr{ display:grid; grid-template-columns:1fr; gap:2px; padding:12px 4px; border-top:1px solid var(--line); }
+      .cmp td{ border:0; padding:5px 12px; }
+      .cmp .rowlabel{ width:auto; color:var(--grape); font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
+      .cmp .old:before{ content:"Typical: "; color:var(--muted2); font-family:var(--mono); font-size:11px; }
+      .cmp .new:before{ content:"GrooveLinx: "; color:var(--green); font-family:var(--mono); font-size:11px; }
     }
 
-    /* Mobile menu */
-    .hamburger{
-      display:none;
-      width:42px; height:40px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      cursor:pointer;
-      align-items:center; justify-content:center;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .hamburger span{
-      width:18px; height:2px; background: rgba(255,255,255,.85);
-      position:relative; display:block; border-radius: 2px;
-    }
-    .hamburger span:before, .hamburger span:after{
-      content:""; position:absolute; left:0; width:18px; height:2px;
-      background: rgba(255,255,255,.85); border-radius:2px;
-    }
-    .hamburger span:before{ top:-6px; }
-    .hamburger span:after{ top:6px; }
+    /* ── Band types ─────────────────────────────────────────────────── */
+    .bandgrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    @media (max-width:820px){ .bandgrid{ grid-template-columns:repeat(2,1fr); } }
+    .bandcard{ text-align:center; padding:22px 14px; border-radius:18px; background:var(--glass); border:1px solid var(--line);
+      transition:transform .18s ease, border-color .18s; }
+    .bandcard:hover{ transform:translateY(-4px); border-color:var(--line2); }
+    .bandcard .emo{ font-size:30px; }
+    .bandcard h3{ margin:10px 0 4px; font-size:15px; }
+    .bandcard p{ margin:0; font-size:12.5px; color:var(--muted2); }
 
-    .mobilepanel{
-      display:none;
-      padding: 0 0 14px 0;
-    }
-    .mobilepanel .card{
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      padding: 10px;
-    }
-    .mobilepanel a{
-      display:block;
-      padding: 12px 12px;
-      border-radius: 12px;
-      color: var(--text);
-      font-weight:700;
-    }
-    .mobilepanel a + a{ margin-top:4px; }
-    .mobilepanel a:hover{ background: rgba(255,255,255,.06); }
+    /* ── Ticker (shipping log) ──────────────────────────────────────── */
+    .ticker{ position:relative; overflow:hidden; border:1px solid var(--line); border-radius:16px;
+      background:var(--glass); padding:14px 0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+      mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+    .tickerTrack{ display:flex; gap:12px; width:max-content; animation:scrollx 36s linear infinite; }
+    .ticker:hover .tickerTrack{ animation-play-state:paused; }
+    .shipPill{ display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border-radius:999px;
+      background:var(--glass2); border:1px solid var(--line); white-space:nowrap; font-size:13.5px; font-weight:600; }
+    .shipPill .d{ font-family:var(--mono); font-size:11px; color:var(--muted2); }
+    @keyframes scrollx{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-    @media (max-width: 860px){
-      .navlinks{ display:none; }
-      .hamburger{ display:flex; }
-      .actions{ min-width: auto; }
-      .brand{ min-width:auto; }
-      .btn{ height:38px; padding: 0 12px; }
-    }
-    @media (max-width: 420px){
-      .actions .btn.secondary{ display:none; } /* keep header clean on small phones */
-      .brand .name span{ display:none; }
-      .brand img{ width:34px; height:34px; border-radius: 10px; }
-    }
+    /* ── Big promise / CTA panels ───────────────────────────────────── */
+    .panel{ text-align:center; padding:52px 26px; border-radius:var(--radius); position:relative; overflow:hidden;
+      background:var(--glass); border:1px solid var(--line2); box-shadow:var(--shadow2); }
+    .panel:before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.7;
+      background:radial-gradient(600px 260px at 50% -20%, rgba(176,107,255,.22), transparent 70%); }
+    .panel .inner{ position:relative; z-index:1; }
+    .bigemo{ font-size:42px; margin-bottom:10px; }
 
-    /* Hero */
-    .hero{
-      padding: 36px 0 18px 0;
-    }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 18px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .heroGrid{ grid-template-columns: 1fr; }
-    }
+    /* ── FAQ ────────────────────────────────────────────────────────── */
+    .faq details{ border-top:1px solid var(--line); padding:16px 4px; }
+    .faq details:first-child{ border-top:0; }
+    .faq summary{ cursor:pointer; font-family:var(--disp); font-weight:700; font-size:17px; color:var(--ink);
+      list-style:none; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq summary:after{ content:"+"; font-family:var(--mono); color:var(--grape); font-size:20px; transition:transform .2s; }
+    .faq details[open] summary:after{ transform:rotate(45deg); }
+    .faq p{ margin:12px 0 0; color:var(--muted); line-height:1.65; font-size:15px; }
 
-    .glass{
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .glass:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(600px 200px at 10% 10%, rgba(255,255,255,.10), rgba(0,0,0,0) 60%);
-      pointer-events:none;
-    }
-    .heroLeft{
-      padding: 26px 22px;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 13px;
-      width: fit-content;
-    }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: var(--cta2);
-      box-shadow: 0 0 0 3px rgba(120,255,214,.12);
-    }
-    h1{
-      margin: 14px 0 10px;
-      font-size: clamp(40px, 5vw, 62px);
-      line-height: 1.02;
-      letter-spacing: -1.3px;
-    }
-    .lead{
-      margin: 0 0 18px;
-      font-size: 18px;
-      line-height: 1.55;
-      color: var(--muted);
-      max-width: 56ch;
-    }
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer{ padding:36px 0 48px; color:var(--muted2); font-size:13px; }
+    .footRow{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
+      border-top:1px solid var(--line); padding-top:22px; }
+    .footRow .copy{ font-family:var(--mono); letter-spacing:.04em; }
+    .footLinks{ display:flex; gap:8px; flex-wrap:wrap; }
+    .footLinks a{ padding:7px 11px; border-radius:10px; background:var(--glass); border:1px solid var(--line);
+      font-family:var(--mono); font-size:12px; letter-spacing:.03em; transition:background .15s; }
+    .footLinks a:hover{ background:var(--glass2); }
 
-    .heroBtns{
-      display:flex; flex-wrap:wrap; gap:10px;
-      margin-top: 12px;
-    }
-    .mini{
-      display:flex; gap:10px; margin-top: 16px;
-      color: var(--muted2);
-      font-weight:700;
-      font-size: 14px;
-    }
-    .mini strong{ color: var(--text); }
-    .heroRight{
-      padding: 18px;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .phoneCard{
-      width: min(420px, 100%);
-      border-radius: 26px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow2);
-      padding: 14px;
-    }
-    .phoneFrame{
-      border-radius: 22px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.22);
-    }
-    .phoneFrame img{
-      width:100%;
-      height:auto;
-      display:block;
-    }
-    .caption{
-      margin-top: 10px;
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--muted2);
-      font-weight: 700;
-    }
+    /* ── Modal ──────────────────────────────────────────────────────── */
+    .modalOverlay{ position:fixed; inset:0; background:rgba(4,2,10,.74); backdrop-filter:blur(6px);
+      display:none; align-items:center; justify-content:center; padding:20px; z-index:2000; }
+    .modal{ width:min(620px,100%); border-radius:22px; overflow:hidden; position:relative;
+      background:linear-gradient(180deg, rgba(22,12,44,.96), rgba(8,5,18,.97)); border:1px solid var(--line2); box-shadow:var(--shadow); }
+    .modal:before{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.6;
+      background:radial-gradient(400px 180px at 80% -10%, rgba(255,77,157,.2), transparent 70%); }
+    .modalHead{ display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--line); position:relative; z-index:1; }
+    .modalHead strong{ font-family:var(--disp); font-size:17px; }
+    .x{ width:40px; height:36px; border-radius:12px; border:1px solid var(--line2); background:var(--glass2);
+      cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--ink); font-weight:900; font-size:18px; }
+    .modalBody{ padding:18px; position:relative; z-index:1; }
+    form{ display:grid; gap:11px; margin-top:8px; }
+    label{ font-family:var(--mono); font-weight:700; font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+    input{ width:100%; padding:13px; border-radius:14px; border:1px solid var(--line2); background:var(--glass2); color:var(--ink); outline:none; font-size:15px; font-family:var(--body); }
+    input:focus{ border-color:var(--grape); box-shadow:0 0 0 4px rgba(176,107,255,.2); }
+    .formRow{ display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+    @media (max-width:640px){ .formRow{ grid-template-columns:1fr; } }
+    .fineprint{ color:var(--muted2); font-size:13px; line-height:1.5; margin:0 0 4px; }
 
-    /* Sections */
-    section{
-      padding: 22px 0;
-    }
-    .sectionHead{
-      margin-bottom: 14px;
-    }
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
-      font-weight:800;
-      font-size: 13px;
-      width: fit-content;
-    }
-    h2{
-      margin: 12px 0 8px;
-      font-size: clamp(26px, 3vw, 40px);
-      letter-spacing: -.6px;
-      line-height: 1.08;
-    }
-    .sub{
-      margin:0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 70ch;
-    }
+    /* ── Scroll-reveal ──────────────────────────────────────────────── */
+    .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); will-change:opacity,transform; }
+    .reveal.is-visible{ opacity:1; transform:none; }
 
-    .grid2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 920px){
-      .grid2{ grid-template-columns: 1fr; }
-    }
-
-    .card{
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    .card .pad{ padding: 18px; }
-    .tag{
-      display:inline-flex; align-items:center; gap:10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .card h3{
-      margin: 12px 0 8px;
-      font-size: 22px;
-      letter-spacing: -.3px;
-    }
-    .card p{
-      margin:0;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 15px;
-    }
-
-    .shot{
-      margin-top: 14px;
-      border-radius: 18px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.25);
-    }
-    .shot img{ width:100%; height:auto; }
-    .meta{
-      display:flex; flex-wrap:wrap;
-      gap: 10px 16px;
-      padding: 12px 14px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: var(--muted2);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .meta b{ color: var(--text); }
-
-    /* Footer */
-    footer{
-      padding: 26px 0 36px;
-      color: var(--muted2);
-      font-weight: 700;
-      font-size: 13px;
-    }
-    .footRow{
-      display:flex; flex-wrap:wrap; gap:10px;
-      align-items:center; justify-content:space-between;
-      border-top: 1px solid rgba(255,255,255,.08);
-      padding-top: 16px;
-    }
-    .footLinks{
-      display:flex; gap:14px; flex-wrap:wrap;
-    }
-    .footLinks a{
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    /* Modal (Join Beta + Demo) */
-    .modalOverlay{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.62);
-      display:none;
-      align-items:center; justify-content:center;
-      padding: 20px;
-      z-index: 2000;
-    }
-    .modal{
-      width: min(620px, 100%);
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(15,18,45,.92), rgba(8,10,22,.92));
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .modalHead{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .modalHead strong{ font-size: 14px; letter-spacing:.2px; }
-    .x{
-      width:40px; height:36px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-      color: rgba(255,255,255,.85);
-      font-weight: 900;
-    }
-    .modalBody{ padding: 16px; }
-
-    form{
-      display:grid;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    label{ font-weight:800; font-size: 13px; color: var(--muted); }
-    input, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      outline:none;
-      font-size: 15px;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(120,170,255,.45);
-      box-shadow: 0 0 0 4px rgba(120,170,255,.16);
-    }
-    textarea{ min-height: 96px; resize: vertical; }
-
-    .formRow{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    @media (max-width: 640px){
-      .formRow{ grid-template-columns: 1fr; }
-    }
-    .fineprint{
-      color: var(--muted2);
-      font-size: 13px;
-      line-height: 1.45;
-      margin-top: 6px;
-      font-weight: 700;
-    }
-
-    /* Tiny utility */
-    .spacer{ height: 6px; }
-
-    /* Section showcase (pillar screenshot) */
-    .showcase{
-      display:grid;
-      grid-template-columns: 280px 1fr;
-      gap: 22px;
-      align-items:center;
-      margin-bottom: 18px;
-      padding: 18px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: var(--radius);
-    }
-    .showcase .phoneCard{
-      width: 100%;
-      max-width: 260px;
-      margin: 0 auto;
-    }
-    .showcase .showcaseCopy h3{
-      margin: 0 0 6px;
-      font-size: 18px;
-      letter-spacing: -.2px;
-    }
-    .showcase .showcaseCopy p{
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 14px;
-    }
-    @media (max-width: 720px){
-      .showcase{ grid-template-columns: 1fr; gap: 14px; padding: 14px; }
-      .showcase .phoneCard{ max-width: 220px; }
-    }
-
-    /* Scroll-reveal */
-    .reveal{
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .6s ease, transform .6s ease;
-      will-change: opacity, transform;
-    }
-    .reveal.is-visible{
-      opacity: 1;
-      transform: none;
-    }
-    @media (prefers-reduced-motion: reduce){
+    @media (prefers-reduced-motion:reduce){
+      *{ animation:none !important; }
       .reveal{ opacity:1; transform:none; transition:none; }
-    }
-
-    /* Changelog strip */
-    .changelogStrip{
-      display:flex; flex-wrap:wrap; gap: 10px;
-      padding: 14px 16px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-    }
-    .changelogPill{
-      display:inline-flex; align-items:center; gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .changelogPill .cl-date{
-      color: var(--muted2);
-      font-weight: 600;
-      font-size: 12px;
+      .phoneCard, .showcase .phoneCard{ transform:none; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Invite-only beta announcement bar -->
-  <div class="announce">
-    <span>🎸 GrooveLinx is in <strong>invite-only beta</strong> — get your band on the list.</span>
-    <button type="button" class="announce-cta" data-open="beta">Join the list &rarr;</button>
+  <!-- Living background -->
+  <div class="bg" aria-hidden="true">
+    <div class="aurora"><b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b></div>
   </div>
-  <!-- Top navigation -->
-  <header class="topbar" role="banner">
-    <div class="wrap">
-      <div class="nav" aria-label="Primary">
-        <a class="brand" href="#top" aria-label="GrooveLinx home">
-          <img src="/images/groovelinx_psychedelic_logo.png" width="1024" height="1024" alt="GrooveLinx logo"
-               onerror="this.onerror=null;this.src='/images/groovelinx_clean_logo.png';" />
-          <div class="name">
-            <strong>GrooveLinx</strong>
-            <span>Band Operating System</span>
-          </div>
-        </a>
+  <div class="grain" aria-hidden="true"></div>
 
-        <nav class="navlinks" aria-label="Site links">
-          <a href="#plan">Practice</a>
-          <a href="#rehearse">Rehearse</a>
-          <a href="#perform">Play</a>
-          <a href="#learn">Review</a>
-          <a href="#improve">Improve</a>
-        </nav>
-
-        <div class="actions">
-          <a class="btn secondary" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
-          <button class="btn primary" type="button" data-open="beta">Join the list</button>
-          <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" data-open="menu">
-            <span></span>
-          </button>
-        </div>
-      </div>
-
-      <div class="mobilepanel" id="mobilepanel" aria-label="Mobile menu">
-        <div class="card">
-          <a href="#plan" data-close="menu">Practice</a>
-          <a href="#rehearse" data-close="menu">Rehearse</a>
-          <a href="#perform" data-close="menu">Play</a>
-          <a href="#learn" data-close="menu">Review</a>
-          <a href="#improve" data-close="menu">Improve</a>
-          <div class="spacer"></div>
-          <a class="btn secondary" style="width:100%" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
-          <button class="btn primary" style="width:100%; margin-top:10px" type="button" data-open="beta">Join the list</button>
-        </div>
+  <div class="skin">
+    <!-- Invite-only beta announcement bar -->
+    <div class="announce">
+      <div class="row">
+        <span>🎸 GrooveLinx is in <strong>invite-only beta</strong> — get your band on the list.</span>
+        <button type="button" class="announce-cta" data-open="beta">Join the list &rarr;</button>
       </div>
     </div>
-  </header>
 
-  <main id="top">
-    <!-- HERO -->
-    <section class="hero">
+    <!-- Top navigation -->
+    <header class="topbar" role="banner">
       <div class="wrap">
-        <div class="heroGrid">
-          <div class="glass heroLeft">
-            <div class="pill"><span class="dot"></span> Band Operating System</div>
-            <h1>Run better rehearsals.<br/>Play tighter shows.</h1>
-            <p class="lead">
-              GrooveLinx is the operating system for working bands. Practice your songs, rehearse with intent, play with stage-ready charts, review what changed since last time, and improve &mdash; week over week.
-            </p>
-
-            <div class="heroBtns">
-              <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
-              <a class="btn secondary" href="#plan">See What's Inside</a>
+        <div class="nav" aria-label="Primary">
+          <a class="brand" href="#top" aria-label="GrooveLinx home">
+            <img src="/images/groovelinx_psychedelic_logo.png" width="1024" height="1024" alt="GrooveLinx logo"
+                 onerror="this.onerror=null;this.src='/images/groovelinx_clean_logo.png';" />
+            <div class="nm">
+              <strong>GrooveLinx</strong>
+              <span>Band Operating System</span>
             </div>
+          </a>
 
-            <div class="mini">
-              <span><strong>Practice &middot; Rehearse &middot; Play &middot; Review &middot; Improve.</strong> Five connected systems your whole band shares &mdash; one source of truth, built around your songs.</span>
-            </div>
-          </div>
-
-          <div class="glass heroRight">
-            <div class="phoneCard">
-              <div class="phoneFrame">
-                <img src="/images/gl-home.png" width="402" height="874" alt="GrooveLinx home screen — what matters most for the band right now" loading="lazy" />
-              </div>
-              <div class="caption">
-                <span>One platform. Five systems. The whole band.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FIVE SYSTEMS OVERVIEW -->
-    <section id="systems">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">🔄 Five Systems</div>
-          <h2>One platform. Five systems. Built around how bands actually work.</h2>
-          <p class="sub">Not a chat app with a calendar bolted on. A connected operating system for bands &mdash; from first idea to last encore.</p>
-        </div>
-
-        <div class="grid2" style="grid-template-columns:repeat(5,1fr);gap:10px">
-          <a href="#plan" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#86efac;margin:0 0 4px">Practice</h3><p style="font-size:12px;line-height:1.4">Songs, setlists &amp; shared schedule</p></div></a>
-          <a href="#rehearse" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#818cf8;margin:0 0 4px">Rehearse</h3><p style="font-size:12px;line-height:1.4">Plans, readiness &amp; what to work on</p></div></a>
-          <a href="#perform" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#fbbf24;margin:0 0 4px">Play</h3><p style="font-size:12px;line-height:1.4">Stage view, live charts &amp; setlists</p></div></a>
-          <a href="#learn" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#f87171;margin:0 0 4px">Review</h3><p style="font-size:12px;line-height:1.4">Listen back, isolate parts &amp; study takes</p></div></a>
-          <a href="#improve" class="card" style="text-decoration:none"><div class="pad" style="text-align:center;padding:14px"><h3 style="font-size:15px;color:#c084fc;margin:0 0 4px">Improve</h3><p style="font-size:12px;line-height:1.4">Trends, readiness &amp; your next step</p></div></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 1. PLAN -->
-    <section id="plan">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker" style="color:#86efac">1️⃣ Plan</div>
-          <h2>Songs, setlists, and schedules &mdash; in one place the whole band can see.</h2>
-          <p class="sub">Stop hunting through Slack threads, group chats, and shared docs. Plan once, in a place built for it.</p>
-        </div>
-
-        <div class="showcase reveal">
-          <div class="phoneCard">
-            <div class="phoneFrame"><img src="/images/gl-songs.png" width="402" height="874" alt="GrooveLinx song library with per-song readiness scores" loading="lazy" /></div>
-          </div>
-          <div class="showcaseCopy">
-            <h3>One source of truth for the whole band</h3>
-            <p>Active songs, library songs, structure, key, BPM, references &mdash; all band-shared, all searchable, all current. Replace your spreadsheet, your Drive folder, and your "where's the chart?" Slack thread with one place.</p>
-          </div>
-        </div>
-
-        <div class="grid2 reveal">
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#86efac">🎵 Songs</div>
-            <h3>Your band's catalog &mdash; structured, searchable, shared</h3>
-            <p>Active vs library status. Per-song key, BPM, structure, lyrics, chord charts, and reference recordings. One source of truth instead of five.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#86efac">📋 Setlists</div>
-            <h3>Build, share, and reuse setlists across gigs</h3>
-            <p>Drag-and-drop reorder. Tied to specific gigs in your calendar. Versioned so last weekend's set doesn't overwrite next weekend's.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#86efac">📆 Shared Google Calendar mode</div>
-            <h3>One calendar, syncing both ways</h3>
-            <p>Sync rehearsals and gigs to a Google Calendar everyone in the band can subscribe to. Pick which calendars to import. Time-aware classification keeps personal events from blocking rehearsal availability.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#86efac">🗓 Gigs queue</div>
-            <h3>What's next, and what to prepare for</h3>
-            <p>Upcoming gigs surface what to rehearse, what setlist needs building, and which songs aren't ready yet. The calendar drives the work.</p>
-          </div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. REHEARSE -->
-    <section id="rehearse">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker" style="color:#818cf8">2️⃣ Rehearse</div>
-          <h2>Walk into rehearsal knowing what to work on.</h2>
-          <p class="sub">No more "what should we play tonight?" Rehearsal becomes intentional &mdash; with a plan that adapts to what your band actually needs.</p>
-        </div>
-
-        <div class="showcase reveal">
-          <div class="phoneCard">
-            <div class="phoneFrame"><img src="/images/gl-rehearsal.png" width="402" height="874" alt="GrooveLinx rehearsal plan with focus songs and readiness" loading="lazy" /></div>
-          </div>
-          <div class="showcaseCopy">
-            <h3>Walkthroughs that capture what happened</h3>
-            <p>Run a song, take notes mid-walkthrough, jump sections, log readiness per member. Every rehearsal feeds the next one's agenda &mdash; and the next one's gig prep.</p>
-          </div>
-        </div>
-
-        <div class="grid2 reveal">
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#818cf8">📝 Rehearsal plans</div>
-            <h3>An agenda built from your band's data</h3>
-            <p>Suggests which songs to walk through based on readiness, recent rehearsal coverage, and what's coming up on the gig calendar. Edit it, ignore it, or hand it to the band.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#818cf8">📊 Readiness</div>
-            <h3>Per-song, per-member readiness</h3>
-            <p>See which songs are stage-ready, which are still woodshedding, and which haven't been touched in a month. Weak links surface automatically.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#818cf8">▶️ Walkthrough mode</div>
-            <h3>Run through a song with notes flowing</h3>
-            <p>Timed walkthroughs capture what was rehearsed and how it went. Take notes mid-song. Stop, restart, jump sections.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#818cf8">🎯 Practice actions</div>
-            <h3>One specific thing to work on next</h3>
-            <p>After every rehearsal: "Focus on the bridge of Estimated Prophet" &mdash; not generic encouragement. Action-sized, song-specific.</p>
-          </div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. PERFORM -->
-    <section id="perform">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker" style="color:#fbbf24">3️⃣ Perform</div>
-          <h2>Stage-ready surfaces designed for the gig, not the rehearsal room.</h2>
-          <p class="sub">Big text. Glance-readable. One-tap navigation. Built for a tablet on a stand under stage lights.</p>
-        </div>
-
-        <div class="showcase reveal">
-          <div class="phoneCard">
-            <div class="phoneFrame"><img src="/images/gl-stageplot.png" width="402" height="874" alt="GrooveLinx stage plot with band positions, mics and monitors" loading="lazy" /></div>
-          </div>
-          <div class="showcaseCopy">
-            <h3>The chart you actually need, the way you need it</h3>
-            <p>Per-song charts with auto-scroll, swipe or keyboard nav between songs, member assignments at the top so everyone knows their job, and a sub-second SLA &mdash; no spinner between you and the next song.</p>
-          </div>
-        </div>
-
-        <div class="grid2 reveal">
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#fbbf24">🎤 Setlist Stage View</div>
-            <h3>Your setlist in one glance</h3>
-            <p>The full set in stage-friendly type. Tap any song to jump there. Key and BPM visible without squinting. No nav chrome stealing the screen.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#fbbf24">📜 Live Gig charts</div>
-            <h3>Auto-scroll, swipe between songs, assignments up top</h3>
-            <p>Per-song charts with auto-scroll (tunable px/sec), swipe or keyboard navigation between songs, and member assignments at the top so everyone knows their job.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#fbbf24">🗺️ Stage Plot</div>
-            <h3>Member positions, mic and instrument layout</h3>
-            <p>Drag members onto a stage diagram. Save layouts per venue. Reference at sound check.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#fbbf24">⚡ Built for the room</div>
-            <h3>Sub-second load. Headphone-friendly. Tablet-first.</h3>
-            <p>Performance surfaces are built to a strict "instant" SLA &mdash; no spinner between you and the next song.</p>
-          </div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. LEARN -->
-    <section id="learn">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker" style="color:#f87171">4️⃣ Learn</div>
-          <h2>Learn parts faster &mdash; without burning hours on YouTube.</h2>
-          <p class="sub">Tools that speed the part-learning process. Honest framing: drafts you clean up, not magic transcription.</p>
-        </div>
-
-        <div class="showcase reveal">
-          <div class="phoneCard">
-            <div class="phoneFrame"><img src="/images/gl-stems.png" width="402" height="874" alt="GrooveLinx stems mixer separating drums, bass, guitar, keys and vocals with per-part waveforms" loading="lazy" /></div>
-          </div>
-          <div class="showcaseCopy">
-            <h3>Stems mixer + Harmony Lab in one app</h3>
-            <p>Pull a recording in, separate drums/bass/vocals/keys/guitar, mute and solo per part. Split lead vs. backing vocals, pan each into its own ear, loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
-          </div>
-        </div>
-
-        <div class="grid2 reveal">
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#f87171">🎚 Stems lens</div>
-            <h3>Isolate drums, bass, vocals, keys, guitar &mdash; from your recordings</h3>
-            <p>Self-hosted Demucs separation gives you 4 or 6 stems per song. Mute, solo, volume, pan, and tempo controls let you practice your part with the rest of the band still in the mix &mdash; or by itself.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#f87171">🎤 Harmony Lab</div>
-            <h3>Split lead vs. backing vocals. Loop a phrase. Sing along.</h3>
-            <p>LALAL.AI separates a recording into lead and backing tracks, lets you pan each into its own ear, and loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
-            <p style="margin-top:8px;font-size:13px;color:var(--muted2)"><em>We don't claim perfect harmony separation or perfect transcription. We claim faster part-learning than YouTube + paper.</em></p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#f87171">🎼 BPM &amp; key auto-detect</div>
-            <h3>Tempo and key, populated from the audio</h3>
-            <p>Drop a reference recording in &mdash; BPM and key get detected and saved to the song. Metronome auto-tunes. Manual override always available.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#f87171">🧠 Song intelligence</div>
-            <h3>What we know about your songs grows over time</h3>
-            <p>Sections, chords, lyrics, structure, tempo &mdash; populated as you use the app, not as a one-shot import. The catalog gets sharper rehearsal by rehearsal.</p>
-          </div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. IMPROVE -->
-    <section id="improve">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker" style="color:#c084fc">5️⃣ Improve</div>
-          <h2>What changed. What's working. What's next.</h2>
-          <p class="sub">Every rehearsal teaches the next one. Every gig feeds the dashboard. The band gets sharper over time &mdash; on purpose.</p>
-        </div>
-
-        <div class="showcase reveal">
-          <div class="phoneCard">
-            <div class="phoneFrame"><img src="/images/gl-setlists.png" width="402" height="874" alt="GrooveLinx setlists with upcoming gigs, songs and sets" loading="lazy" /></div>
-          </div>
-          <div class="showcaseCopy">
-            <h3>"What's happening with my band?" &mdash; one screen, every morning</h3>
-            <p>Open the app and see the pulse: what changed across songs, takes, calendar, polls, ideas, gig prep. Cross-session insights show what tightened, what slipped, and what to do next. Real data, not "good job."</p>
-          </div>
-        </div>
-
-        <div class="grid2 reveal">
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#c084fc">📊 Post-rehearsal insights</div>
-            <h3>"This rehearsal vs last rehearsal" &mdash; for each song</h3>
-            <p>Cross-session attribution. Which songs improved. Which transitions tightened. Which sections need work. Real data, not "good job."</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#c084fc">📰 Activity feed</div>
-            <h3>Everything that changed, in one feed</h3>
-            <p>The Home feed shows what changed across the band: new takes, status changes, calendar events, polls, ideas, gig prep. Open the app, see the pulse.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#c084fc">💓 Band pulse</div>
-            <h3>Readiness across songs, members, and weeks</h3>
-            <p>A glanceable view of how prepared the band is for what's next. Not a vanity metric &mdash; a way to spot the song that's quietly slipping before the gig.</p>
-          </div></div>
-
-          <div class="card"><div class="pad">
-            <div class="tag" style="color:#c084fc">🔔 Notifications</div>
-            <h3>Three layers, one band</h3>
-            <p>In-app banners for active users, browser/OS push for backgrounded tabs, SMS for the bandmate who never opens the app. Keep everyone aligned without anyone getting buried.</p>
-          </div></div>
-        </div>
-      </div>
-    </section>
-
-
-
-    <!-- DIFFERENTIATION -->
-    <section id="compare">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">🆚 Why GrooveLinx</div>
-          <h2>Not a group chat with a calendar. An operating system.</h2>
-          <p class="sub">Most bands run on a Frankenstein of Slack, Google Docs, paper, and three apps that don't talk to each other. GrooveLinx replaces all of it &mdash; in one connected system.</p>
-        </div>
-
-        <div class="card">
-          <div class="pad">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;font-size:0.82em">
-              <div style="padding:12px;font-weight:800;color:var(--muted2)"></div>
-              <div style="padding:12px;font-weight:800;color:var(--muted)">Typical band stack</div>
-              <div style="padding:12px;font-weight:800;color:#86efac">GrooveLinx</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Songs &amp; charts</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Spreadsheet + paper + Drive folder</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">Structured catalog with key, BPM, structure, references &mdash; band-shared.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Setlists</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Notes app or last-minute paper</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">Versioned, shared, drag-to-reorder, feeds Stage View directly.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Calendar</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Google Calendar in a separate tab</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">Two-way Google sync, time-aware classification, drives rehearsal planning.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Stage / live</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">PDFs on a phone screen</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">Stage View + Live Gig charts with auto-scroll, swipe nav, big text.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Part-learning</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">YouTube on loop + paper transcribing</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">Stems mixer + Harmony Lab + auto-draft notation. Drafts you finish.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Post-rehearsal insight</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">"That was good, right?"</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">What stood out, what changed, what to do next &mdash; per song.</div>
-
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Band visibility</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:var(--muted2)">Group chat scrollback</div>
-              <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.06);color:#e2e8f0">"What's happening with my band?" feed on the Home screen.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- BAND TYPES -->
-    <section id="bands">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">🎸 For Every Band</div>
-          <h2>Built for any band that rehearses and performs.</h2>
-          <p class="sub">Jam bands, cover bands, tribute acts, church and worship teams, wedding/event bands, original projects.</p>
-        </div>
-
-        <div class="grid2" style="grid-template-columns:repeat(4,1fr)">
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">🎸</div><h3 style="margin-top:6px;font-size:14px">Jam Band</h3><p style="font-size:13px;color:var(--muted2)">Dead, Phish, WSP, Goose</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">🎤</div><h3 style="margin-top:6px;font-size:14px">Cover Band</h3><p style="font-size:13px;color:var(--muted2)">60s through today</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">🌟</div><h3 style="margin-top:6px;font-size:14px">Tribute</h3><p style="font-size:13px;color:var(--muted2)">Beatles, Billy Joel, Fleetwood</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">⛪</div><h3 style="margin-top:6px;font-size:14px">Church / Worship</h3><p style="font-size:13px;color:var(--muted2)">Contemporary, gospel, hymns</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">💒</div><h3 style="margin-top:6px;font-size:14px">Wedding / Event</h3><p style="font-size:13px;color:var(--muted2)">Dance floor to cocktail hour</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">🔥</div><h3 style="margin-top:6px;font-size:14px">Acoustic / Campfire</h3><p style="font-size:13px;color:var(--muted2)">Singalongs, easy guitar</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">🎹</div><h3 style="margin-top:6px;font-size:14px">Piano Songbook</h3><p style="font-size:13px;color:var(--muted2)">Billy Joel, Elton, standards</p></div></div>
-          <div class="card"><div class="pad" style="text-align:center"><div style="font-size:1.8em">✍️</div><h3 style="margin-top:6px;font-size:14px">Original Band</h3><p style="font-size:13px;color:var(--muted2)">Your own music</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHAT SHIPPED THIS MONTH -->
-    <section id="changelog">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">📦 Active development</div>
-          <h2>What shipped this month</h2>
-          <p class="sub">GrooveLinx is in active beta. New surfaces ship weekly. Here's what landed recently.</p>
-        </div>
-
-        <div class="changelogStrip reveal">
-          <div class="changelogPill">🎤 LALAL Auto-Split harmonies <span class="cl-date">Apr 30</span></div>
-          <div class="changelogPill">🎚 Stems lens pan knob <span class="cl-date">Apr 30</span></div>
-          <div class="changelogPill">🎼 Harmony Lab Split Mixer + abcjs notation <span class="cl-date">Apr 30</span></div>
-          <div class="changelogPill">🎵 Self-hosted Demucs stems pipeline <span class="cl-date">Apr 29</span></div>
-          <div class="changelogPill">📅 Calendar sync hardening <span class="cl-date">Apr 28</span></div>
-          <div class="changelogPill">🔔 3-layer notifications (in-app + push + SMS) <span class="cl-date">Apr 26</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 10-MINUTE PROMISE -->
-    <section>
-      <div class="wrap">
-        <div class="card reveal">
-          <div class="pad" style="text-align:center;padding:40px 24px">
-            <div style="font-size:2.5em;margin-bottom:12px">⏱️</div>
-            <h2 style="margin-top:0;font-size:1.6em">The 10-minute promise.</h2>
-            <p class="sub" style="max-width:560px;margin:0 auto 20px;line-height:1.6">
-              Create your band. Get songs seeded. Build your first setlist. Run a rehearsal. See what happened.
-              <strong>All in under 10 minutes once you&rsquo;re in. No setup wizard.</strong>
-            </p>
-            <button class="btn primary" type="button" data-open="beta" style="font-size:16px;height:48px;padding:0 28px">Join the list &rarr;</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROOF -->
-    <section id="proof">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">🤘 Built with a band</div>
-          <h2>Built with a real band that gigs every month.</h2>
-          <p class="sub">GrooveLinx isn&rsquo;t a prototype &mdash; it&rsquo;s the operating system DeadCetera actually runs on, rehearsal to stage. The shipping log above is the receipts: real features, real dates, driven by real gigs.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="wrap">
-        <div class="sectionHead reveal">
-          <div class="kicker">❓ FAQ</div>
-          <h2>Questions bands ask.</h2>
-        </div>
-        <div class="card reveal"><div class="pad" style="padding:8px 20px 16px">
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">What is GrooveLinx?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">GrooveLinx is the operating system for working bands: one web app to practice, rehearse, play, review, and improve, built around your songs, setlists, and shared schedule.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">Is GrooveLinx a setlist app?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">It includes a full setlist manager &mdash; build once, reuse across gigs, and print stage-ready setlists &mdash; but it&rsquo;s broader: setlists are one of five connected systems.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">How does GrooveLinx help with rehearsals?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">It builds a rehearsal plan from your band&rsquo;s data, tracks per-song and per-member readiness, and points you at the one thing to work on next.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">How is it different from a group chat with a shared calendar?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">Group chats lose context every week. GrooveLinx keeps your band&rsquo;s operational memory &mdash; songs, readiness, setlists, and history &mdash; in one place that carries over.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">Can the whole band use it together?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">Yes &mdash; songs, setlists, schedule, and readiness are shared, so everyone sees one source of truth, with RSVP so you know your lineup.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">What kinds of bands is it for?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">Working bands that rehearse and perform &mdash; jam bands, cover bands, tributes, and church or worship teams.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">What does it cost?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">GrooveLinx is in invite-only beta. Join the list for the next bands we onboard.</p></details>
-          <details style="border-top:1px solid rgba(255,255,255,0.08);padding:14px 2px"><summary style="cursor:pointer;font-weight:600;color:#e2e8f0;list-style:none">Do I need to install anything?</summary><p style="margin:10px 0 0;color:var(--muted2,#9aa7bf);line-height:1.6">No &mdash; it runs in the browser and installs as a phone or tablet app (PWA); no app store needed.</p></details>
-        </div></div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section>
-      <div class="wrap">
-        <div class="card">
-          <div class="pad" style="text-align:center;padding:48px 24px">
-            <h2 style="margin-top:0">Run your band like an operating system.</h2>
-            <p class="sub" style="max-width:520px;margin:0 auto 24px">GrooveLinx is in invite-only beta. Join the list for the next bands we onboard &mdash; and help shape what gets built.</p>
-            <div class="heroBtns" style="justify-content:center">
-              <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
-              <a class="btn secondary" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <div class="wrap">
-        <div class="footRow">
-          <div>&copy; <span id="year"></span> GrooveLinx &mdash; Band Operating System</div>
-          <div class="footLinks">
+          <nav class="navlinks" aria-label="Site links">
             <a href="#plan">Practice</a>
             <a href="#rehearse">Rehearse</a>
             <a href="#perform">Play</a>
             <a href="#learn">Review</a>
             <a href="#improve">Improve</a>
-            <a href="/privacy.html">Privacy</a>
-            <a href="/terms.html">Terms</a>
+          </nav>
+
+          <div class="actions">
+            <a class="btn ghost" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
+            <button class="btn primary" type="button" data-open="beta">Join the list</button>
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" data-open="menu">
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mobilepanel" id="mobilepanel" aria-label="Mobile menu">
+          <div class="pcard">
+            <a href="#plan" data-close="menu">Practice</a>
+            <a href="#rehearse" data-close="menu">Rehearse</a>
+            <a href="#perform" data-close="menu">Play</a>
+            <a href="#learn" data-close="menu">Review</a>
+            <a href="#improve" data-close="menu">Improve</a>
+            <div class="spacer"></div>
+            <a class="btn ghost" style="width:100%" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
+            <button class="btn primary" style="width:100%; margin-top:10px" type="button" data-open="beta">Join the list &rarr;</button>
           </div>
         </div>
       </div>
-    </footer>
-  </main>
+    </header>
 
-  <!-- Join Beta Modal -->
-  <div class="modalOverlay" id="betaOverlay" role="dialog" aria-modal="true" aria-label="Join Beta form">
-    <div class="modal" role="document">
-      <div class="modalHead">
-        <strong>Join the GrooveLinx beta</strong>
-        <button class="x" type="button" data-close="beta">&times;</button>
-      </div>
-      <div class="modalBody">
-        <p class="fineprint">Invite-only beta &mdash; get on the list for the next bands we onboard.</p>
-        <form action="https://formspree.io/f/xdkovpvv" method="POST">
-          <div class="formRow">
-            <div><label>Name</label><input name="name" required placeholder="Your name" /></div>
-            <div><label>Email</label><input type="email" name="email" required placeholder="you@band.com" /></div>
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="wrap">
+          <div class="heroGrid">
+            <div class="heroCopy">
+              <div class="kick"><span class="sq"></span> // Band Operating System</div>
+              <h1>Run better<br/>rehearsals.<br/><span class="grad">Play tighter shows.</span></h1>
+              <p class="heroLead">
+                GrooveLinx is the operating system for working bands. Practice your songs, rehearse with intent, play with stage-ready charts, review what changed since last time, and improve &mdash; week over week.
+              </p>
+              <div class="heroBtns">
+                <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
+                <a class="btn ghost" href="#plan">See what's inside</a>
+              </div>
+              <div class="heroMeta">
+                <span class="chip"><span class="eq"><i></i><i></i><i></i><i></i><i></i></span> <b>Practice · Rehearse · Play · Review · Improve</b></span>
+                <span class="chip"><span class="d" style="background:var(--green);box-shadow:0 0 10px var(--green)"></span> One source of truth</span>
+                <span class="chip"><span class="d" style="background:var(--cyan);box-shadow:0 0 10px var(--cyan)"></span> The whole band</span>
+              </div>
+            </div>
+
+            <div class="heroStage">
+              <div class="phoneCard">
+                <div class="phoneFrame">
+                  <img src="/images/gl-home.png" width="402" height="874" alt="GrooveLinx home screen — what matters most for the band right now" loading="lazy" />
+                </div>
+              </div>
+              <div class="floatchip fc1"><b>Readiness</b> 4.8/5 ▲</div>
+              <div class="floatchip fc2">Key <b>A</b> · <b>124</b> BPM</div>
+              <div class="floatchip fc3"><b>LIVE</b> · Fri 6/5</div>
+            </div>
           </div>
-          <div class="formRow">
-            <div><label>Band / Project</label><input name="band" placeholder="Band name" /></div>
-            <div><label>City</label><input name="city" placeholder="City, State" /></div>
+        </div>
+      </section>
+
+      <!-- FIVE SYSTEMS OVERVIEW -->
+      <section id="systems">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Five Systems</div>
+            <h2>One platform. Five systems. Built around how bands&nbsp;actually&nbsp;work.</h2>
+            <p class="sub">Not a chat app with a calendar bolted on. A connected operating system for bands &mdash; from first idea to last encore.</p>
           </div>
-          <label>What kind of band?</label>
-          <input name="band_type" placeholder="Jam, Cover, Tribute, Church, Wedding, Acoustic, Original..." />
-          <button class="btn primary" type="submit" style="width:100%;margin-top:8px">Join the list &rarr;</button>
-        </form>
+
+          <div class="console reveal">
+            <a href="#plan" class="consoleItem" style="--accent:var(--green)"><div class="ix">01</div><h3 style="color:var(--green)">Practice</h3><p>Songs, setlists &amp; shared schedule</p><span class="bar"></span></a>
+            <a href="#rehearse" class="consoleItem" style="--accent:var(--violet)"><div class="ix">02</div><h3 style="color:#a9b1ff">Rehearse</h3><p>Plans, readiness &amp; what to work on</p><span class="bar"></span></a>
+            <a href="#perform" class="consoleItem" style="--accent:var(--amber)"><div class="ix">03</div><h3 style="color:var(--amber)">Play</h3><p>Stage view, live charts &amp; setlists</p><span class="bar"></span></a>
+            <a href="#learn" class="consoleItem" style="--accent:var(--red)"><div class="ix">04</div><h3 style="color:var(--red)">Review</h3><p>Listen back, isolate parts &amp; study takes</p><span class="bar"></span></a>
+            <a href="#improve" class="consoleItem" style="--accent:var(--grape)"><div class="ix">05</div><h3 style="color:#d3a8ff">Improve</h3><p>Trends, readiness &amp; your next step</p><span class="bar"></span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. PLAN -->
+      <section id="plan">
+        <div class="wrap">
+          <div class="sectionHead reveal" style="position:relative">
+            <span class="ghostnum" aria-hidden="true">01</span>
+            <div class="kick" style="color:var(--green)"><span class="sq"></span> Plan</div>
+            <h2>Songs, setlists, and schedules &mdash; in one place the whole band can see.</h2>
+            <p class="sub">Stop hunting through Slack threads, group chats, and shared docs. Plan once, in a place built for it.</p>
+          </div>
+
+          <div class="showcase reveal" style="--glow:rgba(110,231,168,.16)">
+            <div class="phoneCard">
+              <div class="phoneFrame"><img src="/images/gl-songs.png" width="402" height="874" alt="GrooveLinx song library with per-song readiness scores" loading="lazy" /></div>
+            </div>
+            <div class="copy">
+              <h3>One source of truth for the whole band</h3>
+              <p>Active songs, library songs, structure, key, BPM, references &mdash; all band-shared, all searchable, all current. Replace your spreadsheet, your Drive folder, and your "where's the chart?" Slack thread with one place.</p>
+            </div>
+          </div>
+
+          <div class="grid2 reveal">
+            <div class="card lift" style="--accent:var(--green)"><div class="pad">
+              <div class="tag" style="color:var(--green)">🎵 Songs</div>
+              <h3>Your band's catalog &mdash; structured, searchable, shared</h3>
+              <p>Active vs library status. Per-song key, BPM, structure, lyrics, chord charts, and reference recordings. One source of truth instead of five.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--green)"><div class="pad">
+              <div class="tag" style="color:var(--green)">📋 Setlists</div>
+              <h3>Build, share, and reuse setlists across gigs</h3>
+              <p>Drag-and-drop reorder. Tied to specific gigs in your calendar. Versioned so last weekend's set doesn't overwrite next weekend's.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--green)"><div class="pad">
+              <div class="tag" style="color:var(--green)">📆 Shared Google Calendar mode</div>
+              <h3>One calendar, syncing both ways</h3>
+              <p>Sync rehearsals and gigs to a Google Calendar everyone in the band can subscribe to. Pick which calendars to import. Time-aware classification keeps personal events from blocking rehearsal availability.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--green)"><div class="pad">
+              <div class="tag" style="color:var(--green)">🗓 Gigs queue</div>
+              <h3>What's next, and what to prepare for</h3>
+              <p>Upcoming gigs surface what to rehearse, what setlist needs building, and which songs aren't ready yet. The calendar drives the work.</p>
+            </div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. REHEARSE -->
+      <section id="rehearse">
+        <div class="wrap">
+          <div class="sectionHead reveal" style="position:relative">
+            <span class="ghostnum" aria-hidden="true">02</span>
+            <div class="kick" style="color:#a9b1ff"><span class="sq" style="background:var(--violet);box-shadow:0 0 12px var(--violet)"></span> Rehearse</div>
+            <h2>Walk into rehearsal knowing what to work on.</h2>
+            <p class="sub">No more "what should we play tonight?" Rehearsal becomes intentional &mdash; with a plan that adapts to what your band actually needs.</p>
+          </div>
+
+          <div class="showcase reveal" style="--glow:rgba(139,92,246,.18)">
+            <div class="phoneCard">
+              <div class="phoneFrame"><img src="/images/gl-rehearsal.png" width="402" height="874" alt="GrooveLinx rehearsal plan with focus songs and readiness" loading="lazy" /></div>
+            </div>
+            <div class="copy">
+              <h3>Walkthroughs that capture what happened</h3>
+              <p>Run a song, take notes mid-walkthrough, jump sections, log readiness per member. Every rehearsal feeds the next one's agenda &mdash; and the next one's gig prep.</p>
+            </div>
+          </div>
+
+          <div class="grid2 reveal">
+            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
+              <div class="tag" style="color:#a9b1ff">📝 Rehearsal plans</div>
+              <h3>An agenda built from your band's data</h3>
+              <p>Suggests which songs to walk through based on readiness, recent rehearsal coverage, and what's coming up on the gig calendar. Edit it, ignore it, or hand it to the band.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
+              <div class="tag" style="color:#a9b1ff">📊 Readiness</div>
+              <h3>Per-song, per-member readiness</h3>
+              <p>See which songs are stage-ready, which are still woodshedding, and which haven't been touched in a month. Weak links surface automatically.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
+              <div class="tag" style="color:#a9b1ff">▶️ Walkthrough mode</div>
+              <h3>Run through a song with notes flowing</h3>
+              <p>Timed walkthroughs capture what was rehearsed and how it went. Take notes mid-song. Stop, restart, jump sections.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
+              <div class="tag" style="color:#a9b1ff">🎯 Practice actions</div>
+              <h3>One specific thing to work on next</h3>
+              <p>After every rehearsal: "Focus on the bridge of Estimated Prophet" &mdash; not generic encouragement. Action-sized, song-specific.</p>
+            </div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. PERFORM -->
+      <section id="perform">
+        <div class="wrap">
+          <div class="sectionHead reveal" style="position:relative">
+            <span class="ghostnum" aria-hidden="true">03</span>
+            <div class="kick" style="color:var(--amber)"><span class="sq" style="background:var(--amber);box-shadow:0 0 12px var(--amber)"></span> Perform</div>
+            <h2>Stage-ready surfaces designed for the gig, not the rehearsal room.</h2>
+            <p class="sub">Big text. Glance-readable. One-tap navigation. Built for a tablet on a stand under stage lights.</p>
+          </div>
+
+          <div class="showcase reveal" style="--glow:rgba(255,194,75,.16)">
+            <div class="phoneCard">
+              <div class="phoneFrame"><img src="/images/gl-stageplot.png" width="402" height="874" alt="GrooveLinx stage plot with band positions, mics and monitors" loading="lazy" /></div>
+            </div>
+            <div class="copy">
+              <h3>The chart you actually need, the way you need it</h3>
+              <p>Per-song charts with auto-scroll, swipe or keyboard nav between songs, member assignments at the top so everyone knows their job, and a sub-second SLA &mdash; no spinner between you and the next song.</p>
+            </div>
+          </div>
+
+          <div class="grid2 reveal">
+            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
+              <div class="tag" style="color:var(--amber)">🎤 Setlist Stage View</div>
+              <h3>Your setlist in one glance</h3>
+              <p>The full set in stage-friendly type. Tap any song to jump there. Key and BPM visible without squinting. No nav chrome stealing the screen.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
+              <div class="tag" style="color:var(--amber)">📜 Live Gig charts</div>
+              <h3>Auto-scroll, swipe between songs, assignments up top</h3>
+              <p>Per-song charts with auto-scroll (tunable px/sec), swipe or keyboard navigation between songs, and member assignments at the top so everyone knows their job.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
+              <div class="tag" style="color:var(--amber)">🗺️ Stage Plot</div>
+              <h3>Member positions, mic and instrument layout</h3>
+              <p>Drag members onto a stage diagram. Save layouts per venue. Reference at sound check.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
+              <div class="tag" style="color:var(--amber)">⚡ Built for the room</div>
+              <h3>Sub-second load. Headphone-friendly. Tablet-first.</h3>
+              <p>Performance surfaces are built to a strict "instant" SLA &mdash; no spinner between you and the next song.</p>
+            </div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. LEARN -->
+      <section id="learn">
+        <div class="wrap">
+          <div class="sectionHead reveal" style="position:relative">
+            <span class="ghostnum" aria-hidden="true">04</span>
+            <div class="kick" style="color:var(--red)"><span class="sq" style="background:var(--red);box-shadow:0 0 12px var(--red)"></span> Review</div>
+            <h2>Learn parts faster &mdash; without burning hours on YouTube.</h2>
+            <p class="sub">Tools that speed the part-learning process. Honest framing: drafts you clean up, not magic transcription.</p>
+          </div>
+
+          <div class="showcase reveal" style="--glow:rgba(255,107,107,.16)">
+            <div class="phoneCard">
+              <div class="phoneFrame"><img src="/images/gl-stems.png" width="402" height="874" alt="GrooveLinx stems mixer separating drums, bass, guitar, keys and vocals with per-part waveforms" loading="lazy" /></div>
+            </div>
+            <div class="copy">
+              <h3>Stems mixer + Harmony Lab in one app</h3>
+              <p>Pull a recording in, separate drums/bass/vocals/keys/guitar, mute and solo per part. Split lead vs. backing vocals, pan each into its own ear, loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
+            </div>
+          </div>
+
+          <div class="grid2 reveal">
+            <div class="card lift" style="--accent:var(--red)"><div class="pad">
+              <div class="tag" style="color:var(--red)">🎚 Stems lens</div>
+              <h3>Isolate drums, bass, vocals, keys, guitar &mdash; from your recordings</h3>
+              <p>Self-hosted Demucs separation gives you 4 or 6 stems per song. Mute, solo, volume, pan, and tempo controls let you practice your part with the rest of the band still in the mix &mdash; or by itself.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--red)"><div class="pad">
+              <div class="tag" style="color:var(--red)">🎤 Harmony Lab</div>
+              <h3>Split lead vs. backing vocals. Loop a phrase. Sing along.</h3>
+              <p>LALAL.AI separates a recording into lead and backing tracks, lets you pan each into its own ear, and loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
+              <p style="margin-top:8px;font-size:13px;color:var(--muted2)"><em>We don't claim perfect harmony separation or perfect transcription. We claim faster part-learning than YouTube + paper.</em></p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--red)"><div class="pad">
+              <div class="tag" style="color:var(--red)">🎼 BPM &amp; key auto-detect</div>
+              <h3>Tempo and key, populated from the audio</h3>
+              <p>Drop a reference recording in &mdash; BPM and key get detected and saved to the song. Metronome auto-tunes. Manual override always available.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--red)"><div class="pad">
+              <div class="tag" style="color:var(--red)">🧠 Song intelligence</div>
+              <h3>What we know about your songs grows over time</h3>
+              <p>Sections, chords, lyrics, structure, tempo &mdash; populated as you use the app, not as a one-shot import. The catalog gets sharper rehearsal by rehearsal.</p>
+            </div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. IMPROVE -->
+      <section id="improve">
+        <div class="wrap">
+          <div class="sectionHead reveal" style="position:relative">
+            <span class="ghostnum" aria-hidden="true">05</span>
+            <div class="kick" style="color:#d3a8ff"><span class="sq" style="background:var(--grape);box-shadow:0 0 12px var(--grape)"></span> Improve</div>
+            <h2>What changed. What's working. What's next.</h2>
+            <p class="sub">Every rehearsal teaches the next one. Every gig feeds the dashboard. The band gets sharper over time &mdash; on purpose.</p>
+          </div>
+
+          <div class="showcase reveal" style="--glow:rgba(176,107,255,.18)">
+            <div class="phoneCard">
+              <div class="phoneFrame"><img src="/images/gl-setlists.png" width="402" height="874" alt="GrooveLinx setlists with upcoming gigs, songs and sets" loading="lazy" /></div>
+            </div>
+            <div class="copy">
+              <h3>"What's happening with my band?" &mdash; one screen, every morning</h3>
+              <p>Open the app and see the pulse: what changed across songs, takes, calendar, polls, ideas, gig prep. Cross-session insights show what tightened, what slipped, and what to do next. Real data, not "good job."</p>
+            </div>
+          </div>
+
+          <div class="grid2 reveal">
+            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
+              <div class="tag" style="color:#d3a8ff">📊 Post-rehearsal insights</div>
+              <h3>"This rehearsal vs last rehearsal" &mdash; for each song</h3>
+              <p>Cross-session attribution. Which songs improved. Which transitions tightened. Which sections need work. Real data, not "good job."</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
+              <div class="tag" style="color:#d3a8ff">📰 Activity feed</div>
+              <h3>Everything that changed, in one feed</h3>
+              <p>The Home feed shows what changed across the band: new takes, status changes, calendar events, polls, ideas, gig prep. Open the app, see the pulse.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
+              <div class="tag" style="color:#d3a8ff">💓 Band pulse</div>
+              <h3>Readiness across songs, members, and weeks</h3>
+              <p>A glanceable view of how prepared the band is for what's next. Not a vanity metric &mdash; a way to spot the song that's quietly slipping before the gig.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
+              <div class="tag" style="color:#d3a8ff">🔔 Notifications</div>
+              <h3>Three layers, one band</h3>
+              <p>In-app banners for active users, browser/OS push for backgrounded tabs, SMS for the bandmate who never opens the app. Keep everyone aligned without anyone getting buried.</p>
+            </div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DIFFERENTIATION -->
+      <section id="compare">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Why GrooveLinx</div>
+            <h2>Not a group chat with a calendar. An operating&nbsp;system.</h2>
+            <p class="sub">Most bands run on a Frankenstein of Slack, Google Docs, paper, and three apps that don't talk to each other. GrooveLinx replaces all of it &mdash; in one connected system.</p>
+          </div>
+
+          <div class="card reveal"><div class="pad" style="padding:6px">
+            <table class="cmp">
+              <thead>
+                <tr><th></th><th class="h-old">Typical band stack</th><th class="h-new">GrooveLinx</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="rowlabel">Songs &amp; charts</td><td class="old">Spreadsheet + paper + Drive folder</td><td class="new">Structured catalog with key, BPM, structure, references &mdash; band-shared.</td></tr>
+                <tr><td class="rowlabel">Setlists</td><td class="old">Notes app or last-minute paper</td><td class="new">Versioned, shared, drag-to-reorder, feeds Stage View directly.</td></tr>
+                <tr><td class="rowlabel">Calendar</td><td class="old">Google Calendar in a separate tab</td><td class="new">Two-way Google sync, time-aware classification, drives rehearsal planning.</td></tr>
+                <tr><td class="rowlabel">Stage / live</td><td class="old">PDFs on a phone screen</td><td class="new">Stage View + Live Gig charts with auto-scroll, swipe nav, big text.</td></tr>
+                <tr><td class="rowlabel">Part-learning</td><td class="old">YouTube on loop + paper transcribing</td><td class="new">Stems mixer + Harmony Lab + auto-draft notation. Drafts you finish.</td></tr>
+                <tr><td class="rowlabel">Post-rehearsal insight</td><td class="old">"That was good, right?"</td><td class="new">What stood out, what changed, what to do next &mdash; per song.</td></tr>
+                <tr><td class="rowlabel">Band visibility</td><td class="old">Group chat scrollback</td><td class="new">"What's happening with my band?" feed on the Home screen.</td></tr>
+              </tbody>
+            </table>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- BAND TYPES -->
+      <section id="bands">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> For Every Band</div>
+            <h2>Built for any band that rehearses and performs.</h2>
+            <p class="sub">Jam bands, cover bands, tribute acts, church and worship teams, wedding/event bands, original projects.</p>
+          </div>
+
+          <div class="bandgrid reveal">
+            <div class="bandcard"><div class="emo">🎸</div><h3>Jam Band</h3><p>Dead, Phish, WSP, Goose</p></div>
+            <div class="bandcard"><div class="emo">🎤</div><h3>Cover Band</h3><p>60s through today</p></div>
+            <div class="bandcard"><div class="emo">🌟</div><h3>Tribute</h3><p>Beatles, Billy Joel, Fleetwood</p></div>
+            <div class="bandcard"><div class="emo">⛪</div><h3>Church / Worship</h3><p>Contemporary, gospel, hymns</p></div>
+            <div class="bandcard"><div class="emo">💒</div><h3>Wedding / Event</h3><p>Dance floor to cocktail hour</p></div>
+            <div class="bandcard"><div class="emo">🔥</div><h3>Acoustic / Campfire</h3><p>Singalongs, easy guitar</p></div>
+            <div class="bandcard"><div class="emo">🎹</div><h3>Piano Songbook</h3><p>Billy Joel, Elton, standards</p></div>
+            <div class="bandcard"><div class="emo">✍️</div><h3>Original Band</h3><p>Your own music</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT SHIPPED THIS MONTH -->
+      <section id="changelog">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Active development</div>
+            <h2>What shipped this month</h2>
+            <p class="sub">GrooveLinx is in active beta. New surfaces ship weekly. Here's what landed recently.</p>
+          </div>
+
+          <div class="ticker reveal" aria-label="Recently shipped features">
+            <div class="tickerTrack">
+              <span class="shipPill">🎤 LALAL Auto-Split harmonies <span class="d">Apr 30</span></span>
+              <span class="shipPill">🎚 Stems lens pan knob <span class="d">Apr 30</span></span>
+              <span class="shipPill">🎼 Harmony Lab Split Mixer + abcjs notation <span class="d">Apr 30</span></span>
+              <span class="shipPill">🎵 Self-hosted Demucs stems pipeline <span class="d">Apr 29</span></span>
+              <span class="shipPill">📅 Calendar sync hardening <span class="d">Apr 28</span></span>
+              <span class="shipPill">🔔 3-layer notifications (in-app + push + SMS) <span class="d">Apr 26</span></span>
+              <!-- duplicate set for seamless loop -->
+              <span class="shipPill" aria-hidden="true">🎤 LALAL Auto-Split harmonies <span class="d">Apr 30</span></span>
+              <span class="shipPill" aria-hidden="true">🎚 Stems lens pan knob <span class="d">Apr 30</span></span>
+              <span class="shipPill" aria-hidden="true">🎼 Harmony Lab Split Mixer + abcjs notation <span class="d">Apr 30</span></span>
+              <span class="shipPill" aria-hidden="true">🎵 Self-hosted Demucs stems pipeline <span class="d">Apr 29</span></span>
+              <span class="shipPill" aria-hidden="true">📅 Calendar sync hardening <span class="d">Apr 28</span></span>
+              <span class="shipPill" aria-hidden="true">🔔 3-layer notifications (in-app + push + SMS) <span class="d">Apr 26</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10-MINUTE PROMISE -->
+      <section>
+        <div class="wrap">
+          <div class="panel reveal">
+            <div class="inner">
+              <div class="bigemo">⏱️</div>
+              <h2 style="margin-top:0">The 10-minute promise.</h2>
+              <p class="sub" style="max-width:560px;margin:0 auto 22px;text-align:center">
+                Create your band. Get songs seeded. Build your first setlist. Run a rehearsal. See what happened.
+                <strong>All in under 10 minutes once you&rsquo;re in. No setup wizard.</strong>
+              </p>
+              <button class="btn primary" type="button" data-open="beta" style="height:50px;padding:0 28px;font-size:16px">Join the list &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROOF -->
+      <section id="proof">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Built with a band</div>
+            <h2>Built with a real band that gigs every month.</h2>
+            <p class="sub">GrooveLinx isn&rsquo;t a prototype &mdash; it&rsquo;s the operating system DeadCetera actually runs on, rehearsal to stage. The shipping log above is the receipts: real features, real dates, driven by real gigs.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> FAQ</div>
+            <h2>Questions bands ask.</h2>
+          </div>
+          <div class="card reveal faq"><div class="pad" style="padding:8px 22px 16px">
+            <details><summary>What is GrooveLinx?</summary><p>GrooveLinx is the operating system for working bands: one web app to practice, rehearse, play, review, and improve, built around your songs, setlists, and shared schedule.</p></details>
+            <details><summary>Is GrooveLinx a setlist app?</summary><p>It includes a full setlist manager &mdash; build once, reuse across gigs, and print stage-ready setlists &mdash; but it&rsquo;s broader: setlists are one of five connected systems.</p></details>
+            <details><summary>How does GrooveLinx help with rehearsals?</summary><p>It builds a rehearsal plan from your band&rsquo;s data, tracks per-song and per-member readiness, and points you at the one thing to work on next.</p></details>
+            <details><summary>How is it different from a group chat with a shared calendar?</summary><p>Group chats lose context every week. GrooveLinx keeps your band&rsquo;s operational memory &mdash; songs, readiness, setlists, and history &mdash; in one place that carries over.</p></details>
+            <details><summary>Can the whole band use it together?</summary><p>Yes &mdash; songs, setlists, schedule, and readiness are shared, so everyone sees one source of truth, with RSVP so you know your lineup.</p></details>
+            <details><summary>What kinds of bands is it for?</summary><p>Working bands that rehearse and perform &mdash; jam bands, cover bands, tributes, and church or worship teams.</p></details>
+            <details><summary>What does it cost?</summary><p>GrooveLinx is in invite-only beta. Join the list for the next bands we onboard.</p></details>
+            <details><summary>Do I need to install anything?</summary><p>No &mdash; it runs in the browser and installs as a phone or tablet app (PWA); no app store needed.</p></details>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section>
+        <div class="wrap">
+          <div class="panel reveal">
+            <div class="inner">
+              <h2 style="margin-top:0">Run your band like an operating system.</h2>
+              <p class="sub" style="max-width:520px;margin:0 auto 24px;text-align:center">GrooveLinx is in invite-only beta. Join the list for the next bands we onboard &mdash; and help shape what gets built.</p>
+              <div class="heroBtns" style="justify-content:center">
+                <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
+                <a class="btn ghost" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <div class="wrap">
+          <div class="footRow">
+            <div class="copy">&copy; <span id="year"></span> GrooveLinx &mdash; Band Operating System</div>
+            <div class="footLinks">
+              <a href="#plan">Practice</a>
+              <a href="#rehearse">Rehearse</a>
+              <a href="#perform">Play</a>
+              <a href="#learn">Review</a>
+              <a href="#improve">Improve</a>
+              <a href="/privacy.html">Privacy</a>
+              <a href="/terms.html">Terms</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Join Beta Modal -->
+    <div class="modalOverlay" id="betaOverlay" role="dialog" aria-modal="true" aria-label="Join Beta form">
+      <div class="modal" role="document">
+        <div class="modalHead">
+          <strong>Join the GrooveLinx beta</strong>
+          <button class="x" type="button" data-close="beta">&times;</button>
+        </div>
+        <div class="modalBody">
+          <p class="fineprint">Invite-only beta &mdash; get on the list for the next bands we onboard.</p>
+          <form action="https://formspree.io/f/xdkovpvv" method="POST">
+            <div class="formRow">
+              <div><label>Name</label><input name="name" required placeholder="Your name" /></div>
+              <div><label>Email</label><input type="email" name="email" required placeholder="you@band.com" /></div>
+            </div>
+            <div class="formRow">
+              <div><label>Band / Project</label><input name="band" placeholder="Band name" /></div>
+              <div><label>City</label><input name="city" placeholder="City, State" /></div>
+            </div>
+            <label>What kind of band?</label>
+            <input name="band_type" placeholder="Jam, Cover, Tribute, Church, Wedding, Acoustic, Original..." />
+            <button class="btn primary" type="submit" style="width:100%;margin-top:8px">Join the list &rarr;</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  </div><!-- /.skin -->
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
@@ -1176,15 +985,11 @@
     if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-visible");
-            io.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
       document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     } else {
-      // Fallback — show everything immediately
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
     }
   </script>
