@@ -289,6 +289,7 @@ background:radial-gradient(420px 200px at 12% 0%, var(--glow,rgba(176,107,255,.1
 .cmp .rowlabel{ width:auto; color:var(--grape); font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; }
 .cmp .old:before{ content:"Typical: "; color:var(--muted2); font-family:var(--mono); font-size:11px; }
 .cmp .new:before{ content:"GrooveLinx: "; color:var(--green); font-family:var(--mono); font-size:11px; }
+.cmp.cmp-bh .old:before{ content:"BandHelper: "; }
 }
 
 /* ── Band types ─────────────────────────────────────────────────── */

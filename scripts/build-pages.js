@@ -27,8 +27,10 @@ function head({ title, desc, canonical, jsonld }) {
   <meta name="description" content="${desc}" />
   <link rel="canonical" href="${canonical}" />
   <meta name="robots" content="index,follow" />
-  <link rel="icon" type="image/png" href="/groovelinx_app_icon.png" />
-  <link rel="apple-touch-icon" href="/images/groovelinx_app_icon_dark.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icon-180.png" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="GrooveLinx" />
@@ -146,6 +148,7 @@ const footer = `      <footer>
               <a href="/for-cover-bands.html">Cover bands</a>
               <a href="/for-worship-teams.html">Worship teams</a>
               <a href="/for-tribute-bands.html">Tributes</a>
+              <a href="/vs-bandhelper.html">vs BandHelper</a>
               <a href="/privacy.html">Privacy</a>
               <a href="/terms.html">Terms</a>
             </div>
@@ -566,9 +569,176 @@ ${rows}
   return page({ headOpts: { title: "GrooveLinx Features — Band Practice, Rehearsal, Setlist & Stage Tools", desc: "Every GrooveLinx feature across all five systems: shared song catalog, reusable setlists, rehearsal plans and readiness, stage-ready charts, stems and Harmony Lab, and band insights.", canonical, jsonld }, body });
 }
 
+/* ── /vs-bandhelper — comparison + migration (the switch-capture page) ── */
+
+function vsBandhelperPage() {
+  const canonical = "https://groovelinx.com/vs-bandhelper.html";
+
+  const hero = `      <section class="hero">
+        <div class="spotlight" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="heroGrid">
+            <div class="heroCopy">
+              <div class="kick"><span class="sq"></span> // Thinking about switching?</div>
+              <h1>BandHelper got you<br/>this far. <span class="grad">Here's what's next.</span></h1>
+              <p class="heroLead">BandHelper is a genuinely good, mature tool — if it's working for your band, that's great. GrooveLinx takes a different angle: one connected operating system that doesn't just store your songs and sets, but tells you what to rehearse next and helps you learn the parts. Here's an honest comparison.</p>
+              <div class="heroBtns">
+                <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
+                <a class="btn ghost" href="#compare">See the comparison</a>
+              </div>
+              <div class="heroMeta">
+                <span class="chip"><span class="eq"><i></i><i></i><i></i><i></i><i></i></span> <b>Honest comparison — no trash-talk</b></span>
+              </div>
+            </div>
+            <div class="heroStage">
+              <div class="phoneCard">
+                <div class="phoneFrame">
+                  <img src="/images/gl-rehearsal.png" width="402" height="874" alt="GrooveLinx rehearsal plan showing focus songs and per-member readiness" loading="lazy" />
+                </div>
+              </div>
+              <div class="floatchip fc1" style="color:var(--green)"><b>What to rehearse</b> next</div>
+              <div class="floatchip fc2" style="color:var(--amber)"><b>Readiness</b> per song</div>
+              <div class="floatchip fc3" style="color:var(--cyan)"><b>Stems</b> built in</div>
+            </div>
+          </div>
+        </div>
+      </section>`;
+
+  const fair = `      <section>
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Credit where it's due</div>
+            <h2>What BandHelper does well.</h2>
+            <p class="sub">A fair comparison starts here. BandHelper is established, deep, and battle-tested — it has earned its place in a lot of bands' workflows. If these are what you need most, it may still be the better fit today, and that's an honest answer.</p>
+          </div>
+          <div class="grid2 reveal">
+            <div class="card"><div class="pad"><h3 style="font-size:17px">Mature and feature-deep</h3><p>Years of polish across setlists, repertoire, smart documents, layouts, scheduling and member management. A broad, configurable toolkit.</p></div></div>
+            <div class="card"><div class="pad"><h3 style="font-size:17px">Native apps + offline</h3><p>Established native iOS and Android apps with offline use — a real advantage if your stage or rehearsal space has no signal.</p></div></div>
+            <div class="card"><div class="pad"><h3 style="font-size:17px">Highly configurable</h3><p>Lots of settings, custom fields, and layout control for bands that want to tune everything to their exact workflow.</p></div></div>
+            <div class="card"><div class="pad"><h3 style="font-size:17px">Proven at scale</h3><p>A large, long-standing user base across many kinds of bands and performers. It works, and a lot of people rely on it.</p></div></div>
+          </div>
+        </div>
+      </section>`;
+
+  const table = `      <section id="compare">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Side by side</div>
+            <h2>Two philosophies, honestly compared.</h2>
+            <p class="sub">BandHelper is a deep <em>toolkit</em>. GrooveLinx is a connected <em>operating system</em> that adds rehearsal intelligence and part-learning. Neither is "better" for every band — here's the real difference.</p>
+          </div>
+          <div class="card reveal"><div class="pad" style="padding:6px">
+            <table class="cmp cmp-bh">
+              <thead>
+                <tr><th></th><th class="h-old">BandHelper</th><th class="h-new">GrooveLinx</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="rowlabel">Core model</td><td class="old">A deep, configurable toolkit for setlists, documents and scheduling.</td><td class="new">A connected operating system — five systems sharing one source of truth.</td></tr>
+                <tr><td class="rowlabel">Songs &amp; setlists</td><td class="old">Robust, established repertoire and setlist management.</td><td class="new">Shared catalog with key/BPM/structure; versioned setlists that feed Stage View directly.</td></tr>
+                <tr><td class="rowlabel">Rehearsal</td><td class="old">Scheduling and availability.</td><td class="new">Rehearsal intelligence: per-song &amp; per-member readiness, a plan of what to work on, and post-rehearsal insights.</td></tr>
+                <tr><td class="rowlabel">Learning parts</td><td class="old">Attach reference audio and documents to songs.</td><td class="new">Isolate stems (drums/bass/keys/guitar/vocals) and split lead vs. backing vocals — in the same app.</td></tr>
+                <tr><td class="rowlabel">Insight</td><td class="old">Stores your band's data.</td><td class="new">Turns it into "what changed, what's ready, what's next" — a band pulse on the Home screen.</td></tr>
+                <tr><td class="rowlabel">Platform</td><td class="old">Native iOS/Android apps + web, with offline.</td><td class="new">Web app that installs as a PWA — no app store, always current.</td></tr>
+                <tr><td class="rowlabel">Maturity</td><td class="old">Established and broad, with years of polish.</td><td class="new">Younger, invite-only beta, shipping new surfaces weekly — built with a band that gigs monthly.</td></tr>
+              </tbody>
+            </table>
+          </div></div>
+          <p class="sub reveal" style="margin-top:14px;font-size:14px;color:var(--muted2)"><em>Honest note: BandHelper has more breadth and years of polish, plus native offline apps. GrooveLinx's edge is the connected model, rehearsal intelligence, and built-in part-learning. Pick the one that matches how your band actually works.</em></p>
+        </div>
+      </section>`;
+
+  const why = `      <section>
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick" style="color:var(--green)"><span class="sq"></span> Why bands switch</div>
+            <h2>The three reasons bands move to GrooveLinx.</h2>
+          </div>
+          <div class="grid2 reveal">
+            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
+              <div class="tag" style="color:#a9b1ff">🎯 Tells you what to do next</div>
+              <h3>Rehearsal intelligence, not just storage</h3>
+              <p>Per-song and per-member readiness, a rehearsal plan built from your band's data, and "this rehearsal vs last" insights — so practice time goes where it's needed instead of "what should we play tonight?"</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--red)"><div class="pad">
+              <div class="tag" style="color:var(--red)">🎚 Learn parts in the same app</div>
+              <h3>Stems + Harmony Lab built in</h3>
+              <p>Isolate any instrument from a recording, split lead vs. backing vocals, loop the hard bars — without leaving the app or paying for a separate stem tool.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--green)"><div class="pad">
+              <div class="tag" style="color:var(--green)">🔗 One connected system</div>
+              <h3>Songs, sets, schedule and stage — joined up</h3>
+              <p>Your catalog feeds your setlists, your setlists feed Stage View, your calendar drives your rehearsal plan. One source of truth instead of separate modules.</p>
+            </div></div>
+            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
+              <div class="tag" style="color:#d3a8ff">🤘 Built by a working band</div>
+              <h3>Made at real rehearsals and real gigs</h3>
+              <p>GrooveLinx is the operating system DeadCetera actually runs on, rehearsal to stage. Features ship because a gigging band needed them this week.</p>
+            </div></div>
+          </div>
+        </div>
+      </section>`;
+
+  const migrate = `      <section>
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> Switching</div>
+            <h2>Moving over is low-risk.</h2>
+            <p class="sub">You don't have to flip a switch and abandon BandHelper on day one. Here's how bands make the move.</p>
+          </div>
+          <div class="grid2 reveal">
+            <div class="card"><div class="pad"><h3 style="font-size:17px">1 · Get on the list</h3><p>GrooveLinx is invite-only beta. Join the list and we'll onboard your band when a slot opens.</p></div></div>
+            <div class="card"><div class="pad"><h3 style="font-size:17px">2 · We help you set up</h3><p>We hand-onboard you: get your songs seeded, your first setlist built, and your band invited — typically under 10 minutes of real setup.</p></div></div>
+            <div class="card"><div class="pad"><h3 style="font-size:17px">3 · Run both for a bit</h3><p>Keep BandHelper for your next gig or two while the band gets comfortable. No pressure to migrate everything at once.</p></div></div>
+            <div class="card"><div class="pad"><h3 style="font-size:17px">4 · Switch when it sticks</h3><p>Once rehearsals and sets are running in GrooveLinx, make it home. We're hands-on through the whole transition.</p></div></div>
+          </div>
+          <p class="sub reveal" style="margin-top:14px;font-size:14px;color:var(--muted2)"><em>Honest note: there's no one-click BandHelper importer yet — during the beta we set your band up with you by hand, which is also when we learn what would make the switch easier.</em></p>
+        </div>
+      </section>`;
+
+  const faqs = [
+    ["Is GrooveLinx a BandHelper replacement?", "For many bands, yes — it covers songs, setlists, scheduling and stage view, and adds rehearsal intelligence and part-learning. But BandHelper is more mature and has native offline apps, so the honest answer depends on what your band needs most."],
+    ["Can I import my BandHelper data?", "There's no automated importer yet. During the invite-only beta we hand-onboard your band — seeding songs and building your first setlist with you — which is usually quick and gives us a chance to learn what would make migration easier."],
+    ["What does GrooveLinx do that BandHelper doesn't?", "The biggest differences are rehearsal intelligence (per-song and per-member readiness plus a plan of what to work on next) and built-in part-learning (isolate stems and split lead vs. backing vocals inside the app)."],
+    ["What does BandHelper do better?", "It's more mature and feature-deep, it has established native iOS/Android apps with offline use, and it's proven across a large user base. If those matter most to you, it may be the better fit today."],
+    ["What does GrooveLinx cost?", "GrooveLinx is in invite-only beta — free for the bands we onboard during the beta. Join the list for the next round."],
+    ["Do I have to quit BandHelper to try it?", "No. Run both during the transition — keep BandHelper for an upcoming gig while your band gets comfortable, and switch when it sticks."],
+  ];
+  const faqSection = `      <section id="faq">
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick"><span class="sq"></span> FAQ</div>
+            <h2>Switching questions, answered.</h2>
+          </div>
+          <div class="card reveal faq"><div class="pad" style="padding:8px 22px 16px">
+${faqs.map(([q, a]) => `            <details><summary>${q}</summary><p>${a}</p></details>`).join("\n")}
+          </div></div>
+        </div>
+      </section>`;
+
+  const jsonld = [
+    { "@context": "https://schema.org", "@type": "SoftwareApplication", name: "GrooveLinx", applicationCategory: "MusicApplication", operatingSystem: "Web, iOS (PWA)", description: "GrooveLinx is a band operating system and a BandHelper alternative — songs, setlists, rehearsal intelligence, stage-ready charts, and built-in stems for learning parts.", url: canonical, offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Invite-only beta" } },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+      { "@type": "ListItem", position: 1, name: "GrooveLinx", item: "https://groovelinx.com/" },
+      { "@type": "ListItem", position: 2, name: "GrooveLinx vs BandHelper", item: canonical },
+    ] },
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) },
+  ];
+
+  const body = [hero, fair, table, why, migrate, faqSection, ctaPanel()].join("\n\n");
+  return page({
+    headOpts: {
+      title: "GrooveLinx vs BandHelper — a working musician's honest comparison",
+      desc: "An honest GrooveLinx vs BandHelper comparison: where each one wins, and how bands switch. GrooveLinx adds rehearsal intelligence and built-in stems for learning parts.",
+      canonical, jsonld,
+    },
+    body,
+  });
+}
+
 /* ── Emit ─────────────────────────────────────────────────────────────── */
 
 const written = [];
 BANDS.forEach((b) => { const f = path.join(ROOT, `${b.slug}.html`); fs.writeFileSync(f, buildBand(b)); written.push(`${b.slug}.html`); });
 fs.writeFileSync(path.join(ROOT, "features.html"), featuresPage()); written.push("features.html");
+fs.writeFileSync(path.join(ROOT, "vs-bandhelper.html"), vsBandhelperPage()); written.push("vs-bandhelper.html");
 console.log("Generated:\n  " + written.join("\n  "));
