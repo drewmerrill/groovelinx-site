@@ -406,3 +406,97 @@ background:radial-gradient(520px 520px at var(--mx,70%) var(--my,28%), rgba(196,
 .aurora, .ghostnum{ transition:none; }
 html{ scroll-behavior:auto; }
 }
+
+/* ── In-frame app mockups (fake data, one differentiating surface per page) ─
+   A rendered HTML "app screen" sits inside .phoneFrame in place of a static
+   screenshot, so each band-type page SHOWS THE APP DOING SOMETHING that band
+   cares about — worship: Sunday-set readiness · tribute: stems mixer ·
+   cover: stage-ready live chart · home: what-to-rehearse-next. Data is fake
+   but genre-accurate. Shared shell + per-surface components below. */
+.appui{
+  --screen-accent:var(--grape);
+  aspect-ratio:402 / 874; width:100%;
+  display:flex; flex-direction:column; overflow:hidden;
+  background:linear-gradient(180deg,#0d0722 0%,#080513 58%,#05030a 100%);
+  color:var(--ink); text-align:left;
+}
+.appui-top{
+  padding:16px 15px 13px; border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--screen-accent) 16%, transparent), transparent);
+}
+.appui-eyebrow{ font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--screen-accent); }
+.appui-title{ font-family:var(--disp); font-weight:800; font-size:19px; letter-spacing:-.01em; margin-top:4px; }
+.appui-sub{ margin-top:2px; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted2); }
+.appui-body{ flex:1; display:flex; flex-direction:column; gap:9px; padding:11px; overflow:hidden; }
+
+/* Team-readiness meter (worship) */
+.appui-meter{ margin-top:11px; }
+.appui-meter .lab{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:9px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+.appui-meter .lab b{ color:var(--ink); }
+.appui-bar{ height:6px; border-radius:99px; background:var(--glass2); overflow:hidden; }
+.appui-bar > i{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--green),var(--screen-accent)); }
+
+.setrow{ padding:10px 11px; border-radius:12px; background:var(--glass); border:1px solid var(--line); }
+.setrow .top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+.setrow .nm{ font-family:var(--body); font-weight:800; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.setrow .key{ font-family:var(--mono); font-size:10px; color:var(--muted); flex-shrink:0; }
+.setrow .key b{ color:var(--ink); }
+.setrow .dots{ display:flex; gap:5px; margin-top:9px; }
+.dot{ width:16px; height:16px; border-radius:50%; font-family:var(--mono); font-size:8px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.dot.rdy{ background:var(--green); color:#05030a; }
+.dot.wip{ background:var(--amber); color:#05030a; }
+.dot.non{ background:transparent; border:1.5px solid var(--line2); color:var(--muted2); }
+.appui-legend{ display:flex; gap:13px; padding:3px 2px 0; font-family:var(--mono); font-size:8.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted2); }
+.appui-legend i{ width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; vertical-align:middle; }
+
+/* Stems mixer (tribute) */
+.transport{ display:flex; align-items:center; gap:10px; padding:9px 11px; border-radius:12px; background:var(--glass2); border:1px solid var(--line); }
+.transport .play{ width:30px; height:30px; border-radius:50%; background:var(--screen-accent); color:#05030a; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+.transport .scrub{ flex:1; height:5px; border-radius:99px; background:var(--glass2); position:relative; }
+.transport .scrub > i{ position:absolute; inset:0 60% 0 0; border-radius:99px; background:var(--screen-accent); }
+.transport .loop{ font-family:var(--mono); font-size:8.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--screen-accent); border:1px solid var(--screen-accent); border-radius:99px; padding:4px 8px; flex-shrink:0; }
+.stem{ display:flex; align-items:center; gap:9px; padding:8px 10px; border-radius:11px; background:var(--glass); border:1px solid var(--line); }
+.stem.solo{ border-color:var(--screen-accent); background:color-mix(in srgb, var(--screen-accent) 13%, var(--glass)); }
+.stem.muted{ opacity:.5; }
+.stem .ic{ width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; background:var(--glass2); flex-shrink:0; }
+.stem .nm{ font-family:var(--body); font-weight:700; font-size:11.5px; width:46px; flex-shrink:0; }
+.stem .wave{ flex:1; height:22px; display:flex; align-items:center; gap:2px; overflow:hidden; }
+.stem .wave i{ flex:1; background:var(--screen-accent); opacity:.45; border-radius:1px; }
+.stem.solo .wave i{ opacity:.95; }
+.stem .ms{ display:flex; gap:4px; flex-shrink:0; }
+.stem .ms span{ width:20px; height:20px; border-radius:6px; font-family:var(--mono); font-size:9px; font-weight:700; display:flex; align-items:center; justify-content:center; background:var(--glass2); color:var(--muted); border:1px solid var(--line); }
+.stem .ms .on{ background:var(--screen-accent); color:#05030a; border-color:transparent; }
+.stem .ms .onr{ background:var(--red); color:#05030a; border-color:transparent; }
+
+/* Stage-ready live chart (cover) */
+.chart-head{ padding:14px 14px 12px; border-bottom:1px solid var(--line); background:linear-gradient(180deg, color-mix(in srgb, var(--screen-accent) 16%, transparent), transparent); }
+.chart-head .eye{ font-family:var(--mono); font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--screen-accent); }
+.chart-head .row{ display:flex; align-items:center; gap:8px; margin-top:6px; }
+.chart-head .t{ font-family:var(--disp); font-weight:800; font-size:16px; flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.badge{ font-family:var(--mono); font-size:11px; font-weight:700; padding:5px 8px; border-radius:8px; background:var(--glass2); color:var(--ink); border:1px solid var(--line); flex-shrink:0; }
+.badge.k{ color:var(--amber); border-color:color-mix(in srgb,var(--amber) 35%,transparent); }
+.chart-body{ flex:1; padding:13px 14px; overflow:hidden; }
+.crow{ margin-bottom:12px; }
+.crow .ch{ font-family:var(--mono); font-weight:700; font-size:12px; color:var(--amber); white-space:pre; }
+.crow .ly{ font-family:var(--body); font-size:14px; color:var(--muted); margin-top:1px; }
+.crow.now{ border-left:2px solid var(--screen-accent); padding-left:10px; margin-left:-12px; }
+.crow.now .ly{ color:var(--ink); }
+.chart-foot{ display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-top:1px solid var(--line); font-family:var(--mono); font-size:9px; text-transform:uppercase; letter-spacing:.07em; color:var(--muted2); }
+.chart-foot .scroll{ color:var(--screen-accent); }
+
+/* What-to-rehearse-next intelligence (home) */
+.act{ display:flex; gap:11px; padding:11px; border-radius:12px; background:var(--glass); border:1px solid var(--line); align-items:flex-start; }
+.act .n{ width:22px; height:22px; border-radius:7px; background:var(--glass2); font-family:var(--mono); font-size:11px; font-weight:700; color:var(--screen-accent); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.act .c{ flex:1; min-width:0; }
+.act .c .h{ font-family:var(--body); font-weight:800; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.act .c .p{ font-family:var(--mono); font-size:9px; color:var(--muted2); margin-top:3px; letter-spacing:.03em; }
+.act .flag{ font-family:var(--mono); font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:4px 7px; border-radius:99px; flex-shrink:0; }
+.flag.hot{ color:var(--red); background:rgba(255,107,107,.15); }
+.flag.warn{ color:var(--amber); background:rgba(255,194,75,.15); }
+.flag.new{ color:var(--muted2); background:var(--glass2); }
+
+@media (max-width:430px){
+  .appui-top{ padding:14px 13px 11px; }
+  .appui-title{ font-size:17px; }
+  .chart-head .t{ font-size:15px; }
+}

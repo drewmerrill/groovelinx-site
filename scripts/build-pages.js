@@ -311,10 +311,88 @@ ${script}
 
 /* ── Band-type hero + body ────────────────────────────────────────────── */
 
+// Rendered in-frame "app screen" of FAKE but genre-accurate data. Each page
+// shows the ONE app surface that band type cares about (a song list is table
+// stakes — this shows the app DOING something): worship → Sunday-set readiness,
+// tribute → stems mixer, cover → stage-ready live chart. Falls back to a static
+// screenshot when b.screen is absent (jam keeps DeadCetera's real capture).
+function appuiTop(b) {
+  const s = b.screen;
+  const meter = s.meterPct == null ? "" : `
+                    <div class="appui-meter"><div class="lab"><span>${s.meterLabel}</span><b>${s.meterPct}%</b></div><div class="appui-bar"><i style="width:${s.meterPct}%"></i></div></div>`;
+  return `                  <div class="appui-top">
+                    <div class="appui-eyebrow">${s.eyebrow}</div>
+                    <div class="appui-title">${s.title}</div>
+                    <div class="appui-sub">${s.sub}</div>${meter}
+                  </div>`;
+}
+
+function readinessInner(b) {
+  const rows = b.screen.songs
+    .map((sg) => {
+      const dots = sg.dots.map(([ini, st]) => `<div class="dot ${st}">${ini}</div>`).join("");
+      return `                    <div class="setrow"><div class="top"><div class="nm">${sg.nm}</div><div class="key">Key <b>${sg.key}</b></div></div><div class="dots">${dots}</div></div>`;
+    })
+    .join("\n");
+  const legend = `                    <div class="appui-legend"><span><i style="background:var(--green)"></i>Ready</span><span><i style="background:var(--amber)"></i>Needs work</span><span><i style="background:transparent;border:1.5px solid var(--line2)"></i>Not started</span></div>`;
+  return `${appuiTop(b)}
+                  <div class="appui-body">
+${rows}
+${legend}
+                  </div>`;
+}
+
+function stemsInner(b) {
+  const s = b.screen;
+  const base = [40, 72, 54, 88, 60, 92, 46, 76, 50, 82, 64, 96, 52, 70, 58, 90, 48, 66];
+  const wave = (off) => base.map((_, i) => `<i style="height:${base[(i + off * 4) % base.length]}%"></i>`).join("");
+  const rows = s.stems
+    .map((st, i) => {
+      const cls = st.solo ? " solo" : st.mute ? " muted" : "";
+      const mBtn = st.mute ? `<span class="onr">M</span>` : `<span>M</span>`;
+      const sBtn = st.solo ? `<span class="on">S</span>` : `<span>S</span>`;
+      return `                    <div class="stem${cls}"><div class="ic">${st.ic}</div><div class="nm">${st.nm}</div><div class="wave">${wave(i)}</div><div class="ms">${mBtn}${sBtn}</div></div>`;
+    })
+    .join("\n");
+  return `${appuiTop(b)}
+                  <div class="appui-body">
+                    <div class="transport"><div class="play">&#9654;</div><div class="scrub"><i></i></div><div class="loop">${s.loop}</div></div>
+${rows}
+                  </div>`;
+}
+
+function chartInner(b) {
+  const s = b.screen;
+  const lines = s.lines
+    .map((l) => `                    <div class="crow${l.now ? " now" : ""}"><div class="ch">${l.ch}</div><div class="ly">${l.ly}</div></div>`)
+    .join("\n");
+  return `                  <div class="chart-head">
+                    <div class="eye">${s.eyebrow}</div>
+                    <div class="row"><div class="t">${s.title}</div><div class="badge k">${s.key}</div><div class="badge">${s.bpm} BPM</div></div>
+                  </div>
+                  <div class="chart-body">
+${lines}
+                  </div>
+                  <div class="chart-foot"><span class="scroll">&#9656; Auto-scroll</span><span>Next: ${s.next}</span></div>`;
+}
+
+function phoneScreen(b) {
+  const inner =
+    b.screen.kind === "readiness" ? readinessInner(b) :
+    b.screen.kind === "stems" ? stemsInner(b) :
+    b.screen.kind === "chart" ? chartInner(b) : "";
+  return `                <div class="appui" style="--screen-accent:var(--${b.accent})" role="img" aria-label="${b.screen.aria}">
+${inner}
+                </div>`;
+}
+
 function bandHero(b) {
   const chips = b.chips
     .map((c) => `                <div class="floatchip ${c.pos}" style="color:var(--${c.color})">${c.text}</div>`)
     .join("\n");
+  const stage = b.screen
+    ? phoneScreen(b)
+    : `                <img src="/images/${b.shot}" width="402" height="874" alt="${b.shotAlt}" loading="lazy" />`;
   return `      <section class="hero">
         <div class="spotlight" aria-hidden="true"></div>
         <div class="wrap">
@@ -334,7 +412,7 @@ function bandHero(b) {
             <div class="heroStage">
               <div class="phoneCard">
                 <div class="phoneFrame">
-                  <img src="/images/${b.shot}" width="402" height="874" alt="${b.shotAlt}" loading="lazy" />
+${stage}
                 </div>
               </div>
 ${chips}
@@ -440,10 +518,25 @@ const BANDS = [
     tagline: "Your whole book, shared and current",
     shot: "gl-songs.png", shotAlt: "GrooveLinx song library for a cover band with per-song readiness scores",
     chips: [
-      { pos: "fc1", color: "green", text: "<b>Active</b> 63 · Library 549" },
-      { pos: "fc2", color: "amber", text: "Key <b>G</b> · <b>118</b> BPM" },
-      { pos: "fc3", color: "cyan", text: "<b>Search</b> any song" },
+      { pos: "fc1", color: "green", text: "Key <b>E</b> · <b>119</b>" },
+      { pos: "fc2", color: "amber", text: "<b>Auto</b>-scroll" },
+      { pos: "fc3", color: "cyan", text: "Take the <b>request</b>" },
     ],
+    screen: {
+      kind: "chart",
+      eyebrow: "// Live chart · stage view",
+      title: "Don't Stop Believin'", key: "E", bpm: 119,
+      aria: "GrooveLinx stage-ready live chart for Don't Stop Believin' in the key of E at 119 BPM, chords over lyrics with auto-scroll and the next song queued",
+      lines: [
+        { ch: "E                 B", ly: "Just a small town girl" },
+        { ch: "C#m               A", ly: "Livin' in a lonely world", now: true },
+        { ch: "E                 B", ly: "She took the midnight train" },
+        { ch: "C#m           A", ly: "Goin' anywhere" },
+        { ch: "E                 B", ly: "Just a city boy" },
+        { ch: "C#m               A", ly: "Born and raised in South Detroit" },
+      ],
+      next: "Livin' on a Prayer",
+    },
     whyHead: "Your repertoire, finally in one place.",
     whySub: "Stop hunting through a spreadsheet, a Drive folder, and three group chats. One catalog the whole band shares — searchable, current, stage-ready.",
     why: [
@@ -462,10 +555,23 @@ const BANDS = [
     tagline: "One source of truth for the whole team",
     shot: "gl-songs.png", shotAlt: "GrooveLinx shared song library for a worship team with keys and readiness",
     chips: [
-      { pos: "fc1", color: "green", text: "<b>This week's</b> set" },
-      { pos: "fc2", color: "amber", text: "Key <b>D</b> · capo 2" },
-      { pos: "fc3", color: "cyan", text: "<b>Team</b> readiness" },
+      { pos: "fc1", color: "green", text: "<b>This Sunday</b> · Aug 3" },
+      { pos: "fc2", color: "amber", text: "Team <b>82%</b> ready" },
+      { pos: "fc3", color: "cyan", text: "Per-<b>member</b> prep" },
     ],
+    screen: {
+      kind: "readiness",
+      eyebrow: "// This Sunday", title: "Sunday Set", sub: "Aug 3 · 6 on the team",
+      meterLabel: "Team readiness", meterPct: 82,
+      aria: "GrooveLinx worship-team view for this Sunday's set — Goodness of God, 10,000 Reasons, Way Maker — with a per-member ready / needs-work / not-started dot for each song",
+      songs: [
+        { nm: "Goodness of God", key: "A", dots: [["J", "rdy"], ["M", "rdy"], ["K", "rdy"], ["R", "wip"], ["S", "rdy"], ["T", "non"]] },
+        { nm: "10,000 Reasons", key: "G", dots: [["J", "rdy"], ["M", "rdy"], ["K", "rdy"], ["R", "rdy"], ["S", "wip"], ["T", "rdy"]] },
+        { nm: "What A Beautiful Name", key: "D", dots: [["J", "rdy"], ["M", "wip"], ["K", "rdy"], ["R", "rdy"], ["S", "non"], ["T", "wip"]] },
+        { nm: "Way Maker", key: "E", dots: [["J", "wip"], ["M", "wip"], ["K", "rdy"], ["R", "wip"], ["S", "wip"], ["T", "non"]] },
+        { nm: "King of Kings", key: "D", dots: [["J", "non"], ["M", "non"], ["K", "wip"], ["R", "non"], ["S", "non"], ["T", "wip"]] },
+      ],
+    },
     whyHead: "Built for a rotating team and a weekly set.",
     whySub: "Worship teams change week to week — different leads, different keys, different volunteers. GrooveLinx keeps everyone on the same page without the Sunday-morning scramble.",
     why: [
@@ -484,10 +590,24 @@ const BANDS = [
     tagline: "Get it right, every show",
     shot: "gl-stems.png", shotAlt: "GrooveLinx stems mixer for a tribute act isolating drums, bass, guitar, keys and vocals",
     chips: [
-      { pos: "fc1", color: "green", text: "<b>6 stems</b> isolated" },
+      { pos: "fc1", color: "green", text: "<b>Guitar</b> soloed" },
       { pos: "fc2", color: "amber", text: "Loop the <b>bridge</b>" },
-      { pos: "fc3", color: "cyan", text: "<b>Key</b> · <b>BPM</b> matched" },
+      { pos: "fc3", color: "cyan", text: "<b>6 stems</b> isolated" },
     ],
+    screen: {
+      kind: "stems",
+      eyebrow: "// Part isolation", title: "Come Together", sub: "The Beatles · Dm · 82 BPM",
+      loop: "Loop · Bridge",
+      aria: "GrooveLinx stems mixer isolating drums, bass, guitar, keys and vocals on the Beatles' Come Together, with guitar soloed and the bridge looped",
+      stems: [
+        { ic: "&#129345;", nm: "Drums", solo: false, mute: false },
+        { ic: "&#127928;", nm: "Bass", solo: false, mute: false },
+        { ic: "&#127928;", nm: "Guitar", solo: true, mute: false },
+        { ic: "&#127929;", nm: "Keys", solo: false, mute: false },
+        { ic: "&#127908;", nm: "Vocals", solo: false, mute: true },
+        { ic: "&#127925;", nm: "BG Vox", solo: false, mute: false },
+      ],
+    },
     whyHead: "For acts that have to get it exactly right.",
     whySub: "When the whole show is faithfulness to the original, the details matter. GrooveLinx is built to get the parts, the keys, and the set right.",
     why: [
