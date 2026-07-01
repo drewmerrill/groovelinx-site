@@ -500,3 +500,14 @@ html{ scroll-behavior:auto; }
   .appui-title{ font-size:17px; }
   .chart-head .t{ font-size:15px; }
 }
+
+/* ── FAQ (band-type pages) — crawlable <details> accordion, FAQPage schema ── */
+.faqList{ display:flex; flex-direction:column; gap:10px; max-width:840px; }
+.faqItem{ border:1px solid var(--line); border-radius:14px; background:var(--glass); padding:0 16px; }
+.faqItem summary{ cursor:pointer; list-style:none; padding:16px 0; font-family:var(--body); font-weight:700; font-size:16px; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:14px; }
+.faqItem summary::-webkit-details-marker{ display:none; }
+.faqItem summary::after{ content:"+"; font-family:var(--mono); font-size:20px; color:var(--muted); line-height:1; flex-shrink:0; }
+.faqItem[open] summary::after{ content:"\2212"; }
+.faqItem[open]{ border-color:var(--line2); }
+.faqA{ padding:0 0 16px; }
+.faqA p{ margin:0; color:var(--muted); line-height:1.6; font-size:15px; }

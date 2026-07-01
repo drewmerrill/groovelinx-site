@@ -52,7 +52,7 @@ ${blocks}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/styles.css?v=20260604-3" />`;
+  <link rel="stylesheet" href="/styles.css?v=20260701-1" />`;
 }
 
 const announce = `    <div class="announce">
@@ -471,6 +471,60 @@ ${pills}
       </section>`;
 }
 
+// Per-band FAQs — genre-specific, targeting real search intent, and claiming
+// ONLY real GrooveLinx capabilities. Rendered as a crawlable <details> list AND
+// emitted as FAQPage structured data (eligible for expanded SERP results).
+// Keep answers plain text (no HTML entities / double-quotes): the SAME string
+// goes into both the visible HTML and the JSON-LD.
+const FAQS = {
+  "for-jam-bands": [
+    { q: "Can GrooveLinx handle a huge, rotating repertoire?", a: "Yes. Your full catalog lives in one shared, searchable library, with an Active-versus-Library split so the songs you are actually gigging stay front and center while the deep cuts stay one search away." },
+    { q: "Does it support segues and jams between songs?", a: "Setlists let you mark transitions and segues between songs, so the flow you planned is on everyone's screen. Build a set once and reuse it across gigs." },
+    { q: "Can we change keys or stretch a song on the fly?", a: "Charts show the key and let you transpose, and the stage view is built for improvisation: big readable text, one tap to the next song, and auto-scroll you can pause when the jam runs long." },
+    { q: "Will it work at an outdoor gig with bad service?", a: "GrooveLinx is built to stay reliable on stage. It runs as a web app and an iOS PWA on your iPad or phone, and the surfaces you need during a show are designed to load in under a second." },
+  ],
+  "for-cover-bands": [
+    { q: "How do we manage hundreds of cover songs?", a: "One shared catalog holds your whole book, each song with its key, BPM, structure, and chart, all searchable. Replace the spreadsheet, the Drive folder, and the group-chat scramble with one current source of truth." },
+    { q: "Can we take requests we have not rehearsed?", a: "If it is in your catalog, the stage-ready chart is one search away: chords over lyrics, the right key, auto-scroll, so you can take the request without scrambling." },
+    { q: "Can everyone see the same setlist at the gig?", a: "Yes. Setlists are band-shared and update for everyone, so the whole band is on the same set, in the same order, on whatever device they bring." },
+    { q: "Does it run on an iPad on a mic stand?", a: "iPad is the band's primary device. The stage surfaces use big, glance-readable text and one-tap navigation, designed for a tablet under stage lights." },
+  ],
+  "for-worship-teams": [
+    { q: "Does GrooveLinx work for a rotating worship team?", a: "Yes. It is built for teams that change week to week, different leads, volunteers, and keys. This week's set, the songs, and who is prepared all live in one shared place." },
+    { q: "Can we set a different key or capo for each song?", a: "Each song carries its key and capo, so when a song moves keys for whoever is leading, the whole team sees the right chart for this Sunday." },
+    { q: "Can we see who has practiced before Sunday?", a: "Readiness is tracked per song and per member, so a leader can see at a glance who is ready and what still needs work before the service, with no Sunday-morning scramble." },
+    { q: "Is it free for our team?", a: "GrooveLinx is in an invite-only beta right now and free for the bands we onboard. Join the list and we will reach out as spots open." },
+  ],
+  "for-tribute-bands": [
+    { q: "Can GrooveLinx help us nail parts note for note?", a: "Yes. Built-in stems let you isolate drums, bass, guitar, keys, or vocals and loop any section, so you can learn a part exactly as recorded." },
+    { q: "Can we match the original keys and tempos?", a: "Every song carries its key and BPM, and charts and setlists keep the details consistent so the show stays faithful to the record night after night." },
+    { q: "Does it keep the setlist true to the era or album?", a: "Setlists are reusable and shareable, so once you build the show in the right order you run the same faithful set every night without rebuilding it." },
+    { q: "Can the whole tribute act share one source of truth?", a: "Yes. The catalog, keys, charts, and stems are band-shared, so everyone is working from the same details instead of scattered files." },
+  ],
+};
+
+function bandFAQ(b) {
+  const items = FAQS[b.slug] || [];
+  if (!items.length) return "";
+  const rows = items
+    .map((f) => `            <details class="faqItem">
+              <summary>${f.q}</summary>
+              <div class="faqA"><p>${f.a}</p></div>
+            </details>`)
+    .join("\n");
+  return `      <section>
+        <div class="wrap">
+          <div class="sectionHead reveal">
+            <div class="kick" style="color:var(--${b.accentText})"><span class="sq" style="background:var(--${b.accent});box-shadow:0 0 12px var(--${b.accent})"></span> FAQ</div>
+            <h2>Questions ${b.label.toLowerCase()} ask</h2>
+          </div>
+          <div class="faqList reveal">
+${rows}
+          </div>
+        </div>
+      </section>`;
+}
+
 function buildBand(b) {
   const canonical = `https://groovelinx.com/${b.slug}.html`;
   const jsonld = [
@@ -480,7 +534,11 @@ function buildBand(b) {
       { "@type": "ListItem", position: 2, name: b.label, item: canonical },
     ] },
   ];
-  const body = [bandHero(b), bandWhy(b), systemsStrip, bandSwitch(b.slug), ctaPanel()].join("\n\n");
+  const faqs = FAQS[b.slug] || [];
+  if (faqs.length) {
+    jsonld.push({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
+  }
+  const body = [bandHero(b), bandWhy(b), systemsStrip, bandFAQ(b), bandSwitch(b.slug), ctaPanel()].join("\n\n");
   return page({ headOpts: { title: b.title, desc: b.desc, canonical, jsonld }, body });
 }
 
