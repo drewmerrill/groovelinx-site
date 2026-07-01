@@ -601,8 +601,8 @@
           <button class="x" type="button" data-close="beta">&times;</button>
         </div>
         <div class="modalBody">
-          <p class="fineprint">Invite-only beta &mdash; get on the list for the next bands we onboard.</p>
-          <form action="https://formspree.io/f/xdkovpvv" method="POST">
+          <p class="fineprint" id="betaIntro">Invite-only beta &mdash; get on the list for the next bands we onboard.</p>
+          <form id="betaForm" action="https://formspree.io/f/xdkovpvv" method="POST">
             <div class="formRow">
               <div><label>Name</label><input name="name" required placeholder="Your name" /></div>
               <div><label>Email</label><input type="email" name="email" required placeholder="you@band.com" /></div>
@@ -613,8 +613,18 @@
             </div>
             <label>What kind of band?</label>
             <input name="band_type" placeholder="Jam, Cover, Tribute, Church, Wedding, Acoustic, Original..." />
+            <!-- Attribution: which channel this signup came from (set by JS on load). -->
+            <input type="hidden" name="source" />
+            <input type="hidden" name="_subject" value="New GrooveLinx beta signup" />
             <button class="btn primary" type="submit" style="width:100%;margin-top:8px">Join the list &rarr;</button>
           </form>
+          <!-- Branded on-site confirmation — shown after a successful submit so the
+               highest-intent moment stays on-brand instead of a Formspree page. -->
+          <div id="betaSuccess" style="display:none;text-align:center;padding:20px 4px 8px">
+            <div style="font-size:36px;line-height:1">&#127928;</div>
+            <strong style="display:block;font-size:20px;margin:12px 0 6px">You're on the list.</strong>
+            <p class="fineprint">We onboard new bands in small waves &mdash; we'll email <span id="betaSuccessEmail" style="color:var(--ink)"></span> the moment your spot opens. Keep an eye out.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -645,6 +655,58 @@
 
     document.addEventListener("keydown", (e) => { if(e.key === "Escape"){ closeOverlay("beta"); closePanel(); } });
     document.querySelectorAll('[data-close="menu"]').forEach(a => a.addEventListener("click", () => closePanel()));
+
+    // ── Beta waitlist: source attribution + branded on-site confirmation ──
+    // Progressive enhancement: the form POSTs natively without JS (lead still
+    // captured), but with JS we (a) stamp where the signup came from and (b) keep
+    // the confirmation on-brand instead of bouncing to Formspree's generic page.
+    (function(){
+      const form = document.getElementById("betaForm");
+      if(!form) return;
+
+      // First-touch source, persisted so the original channel survives navigation
+      // between landing and signup. UTM params win; else referrer; else direct.
+      const KEY = "gl_first_touch";
+      let src = null;
+      try { src = localStorage.getItem(KEY); } catch(e){}
+      if(!src){
+        const p = new URLSearchParams(location.search);
+        const utm = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"]
+          .map(k => { const v = p.get(k); return v ? k.replace("utm_","")+":"+v : null; })
+          .filter(Boolean).join(" ");
+        const ref = document.referrer || "direct";
+        src = (utm ? utm+" | " : "") + "ref:" + ref + " | landing:" + location.pathname;
+        try { localStorage.setItem(KEY, src); } catch(e){}
+      }
+      const hidden = form.querySelector('input[name="source"]');
+      if(hidden) hidden.value = src;
+
+      form.addEventListener("submit", function(e){
+        if(form.dataset.fallback === "1") return; // native submit already in flight
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const emailEl = form.querySelector('input[name="email"]');
+        if(btn){ btn.disabled = true; btn.textContent = "Adding you…"; }
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        }).then(function(r){
+          if(!r.ok) throw new Error("bad status " + r.status);
+          const succ = document.getElementById("betaSuccess");
+          const se = document.getElementById("betaSuccessEmail");
+          if(se && emailEl) se.textContent = emailEl.value;
+          form.style.display = "none";
+          const intro = document.getElementById("betaIntro");
+          if(intro) intro.style.display = "none";
+          if(succ) succ.style.display = "block";
+        }).catch(function(){
+          // Never lose a signup: fall back to a real POST (Formspree page).
+          form.dataset.fallback = "1";
+          form.submit();
+        });
+      });
+    })();
 
     // Scroll-reveal — fade-up on enter viewport, single-shot.
     // FAILSAFE FIRST: content must NEVER be stuck invisible. On Safari an
