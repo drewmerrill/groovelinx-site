@@ -501,6 +501,11 @@ html{ scroll-behavior:auto; }
   .chart-head .t{ font-size:15px; }
 }
 
+/* ── Footer social icons ── */
+.footSocial{ display:flex; gap:16px; align-items:center; }
+.footSocial a{ color:var(--muted); display:inline-flex; transition:color .15s ease, transform .15s ease; }
+.footSocial a:hover{ color:var(--ink); transform:translateY(-1px); }
+
 /* ── FAQ (band-type pages) — crawlable <details> accordion, FAQPage schema ── */
 .faqList{ display:flex; flex-direction:column; gap:10px; max-width:840px; }
 .faqItem{ border:1px solid var(--line); border-radius:14px; background:var(--glass); padding:0 16px; }
