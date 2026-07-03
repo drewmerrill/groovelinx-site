@@ -24,10 +24,21 @@
 <nav class="nav" id="nav" aria-label="Main">
   <a class="nav-logo" href="#top">GrooveLinx</a>
   <div class="nav-links">
+    <a href="features.html">How it works</a>
     <a href="why-bands-break-up.html">Why Bands Break Up</a>
     <a href="#founding">Founding Bands</a>
+    <a href="about.html">About</a>
     <a href="https://app.groovelinx.com">Sign in</a>
   </div>
+  <details class="nav-menu"><summary>Menu</summary>
+    <div class="menu-panel">
+      <a href="features.html">How it works</a>
+      <a href="why-bands-break-up.html">Why Bands Break Up</a>
+      <a href="#founding">Founding Bands</a>
+      <a href="about.html">About</a>
+      <a href="https://app.groovelinx.com">Sign in</a>
+    </div>
+  </details>
 </nav>
 
 <!-- ═══ Scene 0 — Arrival ═══ -->
@@ -148,7 +159,9 @@
     <p class="reveal"><strong>What we ask:</strong> use it for real. Tell us the truth, especially when it’s unflattering. That’s the whole deal.</p>
 
     <form id="founding-form" action="https://formspree.io/f/xdkovpvv" method="POST">
-      <input type="hidden" name="source" value="founding_bands_preview" />
+      <input type="hidden" name="source" value="founding_bands_home" />
+      <input type="hidden" name="framing_variant" id="f-variant" value="A" />
+      <input type="hidden" name="first_touch_ref" id="f-ref" value="" />
       <div class="field">
         <label for="f-band">What’s your band called, and what do you play?</label>
         <input type="text" id="f-band" name="band" required autocomplete="off" />
@@ -204,6 +217,31 @@
 <script>
 (function () {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Two-framings test (Q1 experiment) — mechanism ready, DISABLED until
+     Drew blesses variant-B copy AND pre-commits in writing to obey the result
+     (Future History #4). Flip AB_ENABLED to true to arm. Assignment is
+     50/50, sticky per device, and rides into the application via #f-variant
+     so conversions-per-framing are measurable in Formspree. ── */
+  var AB_ENABLED = false;
+  var VARIANTS = {
+    A: null, /* the shipped hero: forgetting problem (experience/tension frame) */
+    B: { l1: 'What if your band actually got better every week?',   /* improvement frame — DRAFT, needs Drew */
+         l2: 'Most rehearsals just keep the wheels on.' }
+  };
+  try {
+    var v = localStorage.getItem('gl_frame');
+    if (AB_ENABLED) {
+      if (!v) { v = Math.random() < 0.5 ? 'A' : 'B'; localStorage.setItem('gl_frame', v); }
+      if (v === 'B' && VARIANTS.B) {
+        var spans = document.querySelectorAll('#s0 h1 .reveal');
+        spans[0].textContent = VARIANTS.B.l1;
+        spans[1].textContent = VARIANTS.B.l2;
+      }
+    } else { v = 'A'; }
+    var fv = document.getElementById('f-variant'); if (fv) fv.value = v;
+    var fr = document.getElementById('f-ref'); if (fr) fr.value = (document.referrer || 'direct').slice(0, 120);
+  } catch (e) { /* instrumentation must never break the page */ }
 
   /* Reveal choreography: two-bar phrasing via data-delay */
   var io = new IntersectionObserver(function (entries) {

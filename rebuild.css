@@ -220,3 +220,36 @@ body {
   .nav-links a { font-size: 0.8rem; }
   .scene { padding: 14vh 20px; }
 }
+
+/* ── Week 2/3 additions ─────────────────────────────────── */
+/* Phone menu (Bible §9: hamburger <768px) — no-JS details/summary */
+.nav-menu { display: none; position: relative; }
+.nav-menu summary { list-style: none; cursor: pointer; color: var(--dim); font-size: 0.85rem; padding: 6px 2px; }
+.nav-menu summary::-webkit-details-marker { display: none; }
+.nav-menu[open] summary { color: var(--room); }
+.nav-menu .menu-panel { position: absolute; right: 0; top: 34px; background: #1C1813; border: 1px solid #2A2620; border-radius: 6px; padding: 10px 18px; display: flex; flex-direction: column; gap: 12px; min-width: 200px; }
+.nav-menu .menu-panel a { color: var(--room); text-decoration: none; font-size: 0.95rem; padding: 6px 0; }
+@media (max-width: 767px) { .nav-links { display: none; } .nav-menu { display: block; } }
+
+/* Chapter layout (How it works) */
+.chapter { min-height: 72svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 10vh 24px; }
+.chapter .hand-label { margin-bottom: 18px; }
+.chapter .moment { font-family: var(--voice); font-weight: 600; font-size: clamp(24px, 4vw, 44px); margin-bottom: 22px; }
+.chapter .body-measure { color: var(--dim); font-style: italic; font-size: 1.1rem; }
+
+/* FAQ (plain stacked — nothing hidden on a trust page) */
+.faq { max-width: 62ch; margin: 0 auto; padding: 16vh 24px 8vh; }
+.faq h1 { font-family: var(--voice); font-weight: 600; font-size: clamp(30px, 5vw, 48px); text-align: center; margin-bottom: 8vh; }
+.faq .q { font-family: var(--voice); font-style: italic; font-size: 1.25rem; color: var(--room); margin-top: 6vh; }
+.faq .a { color: #D8D1C5; font-size: 1.05rem; line-height: 1.8; margin-top: 14px; }
+
+/* Audience pages */
+.aud-hero { min-height: 88svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 16vh 24px 10vh; }
+.aud-frag { font-family: var(--voice); font-style: italic; font-size: clamp(19px, 3vw, 30px); color: var(--dim); margin: 0.4em 0; }
+.aud-punch { font-family: var(--voice); font-weight: 600; font-size: clamp(26px, 4.6vw, 52px); margin-top: 5vh; max-width: 24ch; }
+.aud-sub { color: var(--dim); max-width: 52ch; margin-top: 24px; font-size: 1.05rem; }
+.forget-list { max-width: 56ch; margin: 0 auto; padding: 4vh 24px 10vh; text-align: center; }
+.forget-list p { font-family: var(--voice); font-style: italic; font-size: clamp(17px, 2.4vw, 24px); color: var(--dim); margin: 3.5vh 0; }
+.mini-beat { padding: 7vh 24px; text-align: center; }
+.mini-beat .hand-label { margin-bottom: 12px; }
+.mini-beat p.line { font-family: var(--voice); font-size: clamp(19px, 2.8vw, 30px); max-width: 34ch; margin: 0 auto; }
