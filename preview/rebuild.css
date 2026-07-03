@@ -1,0 +1,222 @@
+/* ============================================================
+   GrooveLinx rebuild — design system
+   Source of truth: deadcetera/02_GrooveLinx/brand/PRODUCTION_PACKAGE_v1.md
+   Copy frozen per BRAND_BIBLE_v1.md §§10–19. Typography-first build:
+   no footage exists yet → scenes ship as typography (constitutional rule).
+   ============================================================ */
+
+:root {
+  --stage: #12100D;        /* warm near-black — the dark of a stage */
+  --room:  #F5F1EA;        /* warm off-white — reading surfaces */
+  --amber: #E8A03C;        /* tube-glow accent: primary CTAs only */
+  --dim:   #9A9184;        /* warm gray — secondary text on stage */
+  --dim-on-room: #6E675C;  /* warm gray — secondary text on room */
+  --voice: 'Literata', Georgia, serif;
+  --hand:  'Inter', -apple-system, system-ui, sans-serif;
+  --ease-breathe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--stage);
+  color: var(--room);
+  font-family: var(--hand);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Type voices ─────────────────────────────────────────── */
+.voice {
+  font-family: var(--voice);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.voice-hero  { font-size: clamp(30px, 6.5vw, 84px); }   /* cinema lean, pending design review */
+.voice-scene { font-size: clamp(24px, 4.5vw, 54px); }
+.voice-line  { font-size: clamp(20px, 3.2vw, 36px); }
+.hand-label {
+  font-family: var(--hand);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ── Scenes ──────────────────────────────────────────────── */
+.scene {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18vh 24px;
+  position: relative;
+  text-align: center;
+}
+.scene-half { min-height: 56svh; }
+.scene .measure { max-width: 22ch; }
+.scene .measure-wide { max-width: 34ch; }
+.scene .body-measure { max-width: 60ch; font-size: 1.05rem; }
+
+/* Reveal choreography: 600ms breathe, two-bar phrasing via delays set in HTML */
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 600ms var(--ease-breathe), transform 600ms var(--ease-breathe);
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* ── Nav (minimal; appears after Scene 0) ────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 500ms var(--ease-breathe), background 400ms;
+}
+.nav.is-visible { opacity: 1; pointer-events: auto; }
+.nav.is-solid { background: rgba(18, 16, 13, 0.86); backdrop-filter: blur(8px); }
+.nav-logo { font-family: var(--voice); font-size: 17px; color: var(--room); text-decoration: none; letter-spacing: 0.01em; }
+.nav-links { display: flex; gap: 26px; align-items: center; }
+.nav-links a { color: var(--dim); text-decoration: none; font-size: 0.85rem; transition: color 200ms; }
+.nav-links a:hover, .nav-links a:focus-visible { color: var(--room); }
+
+/* ── CTAs (one verb family; no hover theatrics) ──────────── */
+.cta-row { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 40px; }
+.cta {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-family: var(--hand);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 120ms ease, color 120ms ease;
+  min-height: 44px;
+}
+.cta-primary { background: var(--amber); color: var(--stage); }
+.cta-primary:hover { background: #F0AC4E; }
+.cta-quiet { color: var(--dim); padding: 14px 6px; }
+.cta-quiet:hover, .cta-quiet:focus-visible { color: var(--room); }
+
+/* ── Scene 0: arrival ────────────────────────────────────── */
+#s0 .line2 { margin-top: 1.1em; }
+.scroll-cue {
+  position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+  color: var(--dim); font-size: 20px;
+  animation: cue-pulse 4s var(--ease-breathe) infinite;
+}
+@keyframes cue-pulse { 0%,86%,100% { opacity: 0.25; } 90% { opacity: 0.9; } }
+
+/* ── Scene 2: Tuesday (the one daylight scene) ───────────── */
+#s2 { background: var(--room); color: var(--stage); }
+#s2 .hand-label { color: var(--dim-on-room); }
+.tstamp { font-family: var(--voice); font-size: clamp(20px, 3vw, 30px); font-weight: 600; margin-bottom: 8vh; }
+.voices { display: flex; flex-direction: column; gap: 3.2vh; align-items: stretch; max-width: 560px; width: 100%; }
+/* Voices, not bubbles: bare fragments overheard from corners of the room */
+.voice-frag {
+  font-family: var(--voice);
+  font-style: italic;
+  color: var(--stage);
+}
+.voice-frag:nth-child(1) { align-self: flex-start; font-size: clamp(19px, 2.6vw, 27px); }
+.voice-frag:nth-child(2) { align-self: flex-end;   font-size: clamp(16px, 2.2vw, 22px); opacity: 0.85; }
+.voice-frag:nth-child(3) { align-self: flex-start; font-size: clamp(21px, 3vw, 30px); margin-left: 6%; }
+.voice-frag:nth-child(4) { align-self: center;     font-size: clamp(16px, 2.1vw, 21px); opacity: 0.8; }
+.voice-frag:nth-child(5) { align-self: flex-end;   font-size: clamp(18px, 2.4vw, 24px); margin-right: 4%; }
+.jitter.is-in { animation: unease 140ms steps(2) infinite; }
+@keyframes unease { 0% { transform: translate(0.6px, -0.4px); } 100% { transform: translate(-0.6px, 0.5px); } }
+.tuesday-verdict { margin-top: 9vh; font-family: var(--voice); font-weight: 600; font-size: clamp(20px, 3vw, 32px); }
+.tuesday-reset { margin-top: 22vh; }
+.tuesday-reset .lets-start { font-family: var(--voice); font-weight: 600; font-size: clamp(26px, 4.5vw, 48px); margin-top: 5vh; }
+
+/* ── Scene 3: the cost (lines fade as read; final line stays) ── */
+#s3 .cost-line {
+  font-family: var(--voice);
+  font-style: italic;
+  font-size: clamp(18px, 2.8vw, 30px);
+  color: var(--room);
+  margin: 5.5vh 0;
+  transition: opacity 200ms linear;
+}
+#s3 .cost-keeper { font-style: normal; font-weight: 600; font-size: clamp(22px, 3.6vw, 42px); margin-top: 12vh; opacity: 1 !important; }
+
+/* ── Scene 4: five beats, dark → stage light ─────────────── */
+.beat { min-height: 92svh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 12vh 24px; text-align: center; }
+.beat .hand-label { margin-bottom: 20px; }
+#b1 { background: #12100D; } #b1, #b2, #b3 { color: var(--room); }
+#b2 { background: #1C1813; }
+#b3 { background: #2E2820; }
+#b4 { background: #6E6154; color: #FBF8F2; }
+#b5 { background: #F5F1EA; color: var(--stage); }
+#b4 .hand-label { color: #CFC5B6; }
+#b5 .hand-label { color: var(--dim-on-room); }
+
+/* ── Scene 6: covenant (paper, not screen; no animation) ─── */
+#s6 { background: var(--room); color: var(--stage); }
+#s6 p { font-family: var(--hand); font-size: clamp(16px, 2vw, 20px); line-height: 2.1; max-width: 44ch; }
+#s6 .covenant-final { font-weight: 600; margin-top: 1.2em; }
+
+/* ── Scene 9: founding (a letter, not a form) ────────────── */
+#s9 { align-items: center; }
+.letter { max-width: 560px; width: 100%; text-align: left; }
+.letter p { color: var(--dim); margin: 1em 0; }
+.letter p strong { color: var(--room); }
+.field { margin: 34px 0; }
+.field label { display: block; font-family: var(--voice); font-style: italic; font-size: 1.05rem; color: var(--room); margin-bottom: 10px; }
+.field input[type="text"], .field textarea {
+  width: 100%;
+  background: transparent;
+  border: 0; border-bottom: 1px solid #3A342B;   /* ruled lines — letter aesthetic */
+  color: var(--room);
+  font-family: var(--hand); font-size: 1rem;
+  padding: 10px 2px;
+  border-radius: 0;
+}
+.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--amber); }
+.field textarea { resize: vertical; min-height: 74px; }
+.keeper-check { display: flex; gap: 26px; margin-top: 12px; }
+.keeper-check label { display: flex; align-items: center; gap: 9px; font-family: var(--hand); font-style: normal; font-size: 0.95rem; color: var(--room); cursor: pointer; }
+.keeper-check input { width: 17px; height: 17px; accent-color: var(--amber); }
+.letter .cta-primary { margin-top: 10px; border: 0; cursor: pointer; width: 100%; text-align: center; font-size: 1rem; }
+.letter-note { font-size: 0.85rem; color: var(--dim); margin-top: 16px; text-align: center; }
+.form-received { text-align: center; padding: 8vh 0; }
+
+/* ── Footer ──────────────────────────────────────────────── */
+.footer { padding: 12vh 24px 8vh; text-align: center; }
+.footer .thesis { font-family: var(--voice); font-style: italic; font-size: 1.05rem; color: var(--dim); }
+.footer-links { margin-top: 34px; display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+.footer-links a { color: #5C554A; font-size: 0.8rem; text-decoration: none; }
+.footer-links a:hover { color: var(--dim); }
+
+/* ── Essay layout (Why Bands Break Up) ───────────────────── */
+.essay { max-width: 65ch; margin: 0 auto; padding: 16vh 24px 10vh; }
+.essay-kicker { text-align: center; margin-bottom: 26px; }
+.essay h1 { font-family: var(--voice); font-weight: 600; font-size: clamp(34px, 6vw, 58px); line-height: 1.15; text-align: center; margin-bottom: 10px; }
+.essay .read-time { text-align: center; color: var(--dim); font-size: 0.85rem; margin-bottom: 9vh; }
+.essay p { font-size: 1.12rem; line-height: 1.85; margin: 1.7em 0; color: #E4DDD1; }
+.essay p.pivot { font-family: var(--voice); font-weight: 600; font-size: 1.45rem; line-height: 1.5; color: var(--room); }
+.essay .essay-close { border-top: 1px solid #2A2620; margin-top: 10vh; padding-top: 5vh; font-style: italic; color: var(--dim); font-size: 1rem; }
+.essay a { color: var(--amber); text-decoration: none; }
+.essay a:hover { text-decoration: underline; }
+
+/* ── Reduced motion: the full experience, opacity-only ───── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { transform: none; transition: opacity 300ms ease; }
+  .jitter.is-in { animation: none; }
+  .scroll-cue { animation: none; opacity: 0.5; }
+  #s3 .cost-line { opacity: 1 !important; }
+}
+
+/* ── Phone-first guards ──────────────────────────────────── */
+@media (max-width: 640px) {
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 0.8rem; }
+  .scene { padding: 14vh 20px; }
+}
