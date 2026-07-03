@@ -1,815 +1,293 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#07040e" />
-  <title>GrooveLinx — Band Rehearsal, Setlist &amp; Management App</title>
-  <meta name="description" content="GrooveLinx is the operating system for working bands: practice, rehearse, play, review, and improve — songs, setlists, and shared schedule in one place." />
-  <link rel="canonical" href="https://groovelinx.com/" />
-  <meta name="robots" content="index,follow" />
-  <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png?v=2" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=2" />
-  <link rel="apple-touch-icon" href="/icon-180.png" />
-
-  <!-- OpenGraph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="GrooveLinx" />
-  <meta property="og:title" content="GrooveLinx — The Operating System for Working Bands" />
-  <meta property="og:description" content="Practice, rehearse, play, review, and improve — songs, setlists, and shared schedule in one place the whole band can see." />
-  <meta property="og:url" content="https://groovelinx.com/" />
-  <meta property="og:image" content="https://groovelinx.com/images/og-card.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrooveLinx — Where bands lock in</title>
+  <meta name="description" content="Your band doesn't have a talent problem. It has a forgetting problem. GrooveLinx is the band's memory — where bands lock in." />
+  <meta property="og:title" content="GrooveLinx — Where bands lock in" />
+  <meta property="og:description" content="Your band doesn't have a talent problem. It has a forgetting problem." />
+  <meta property="og:image" content="https://groovelinx.com/og-home.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="GrooveLinx — The Operating System for Working Bands" />
-  <meta name="twitter:description" content="Practice, rehearse, play, review, and improve — all built around your songs." />
-  <meta name="twitter:image" content="https://groovelinx.com/images/og-card.png" />
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"GrooveLinx","applicationCategory":"MusicApplication","operatingSystem":"Web, iOS (PWA)","description":"GrooveLinx is the operating system for working bands — practice, rehearse, play, review, and improve, with songs, setlists, a shared calendar, rehearsal intelligence, and stage-ready charts.","url":"https://groovelinx.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Invite-only beta"}}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"GrooveLinx","url":"https://groovelinx.com/","logo":"https://groovelinx.com/images/groovelinx_clean_logo.png","sameAs":["https://www.instagram.com/groovelinxapp","https://www.facebook.com/profile.php?id=61591392068150","https://www.youtube.com/@GrooveLinx"]}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"What is GrooveLinx?","acceptedAnswer":{"@type":"Answer","text":"GrooveLinx is the operating system for working bands: one web app to practice, rehearse, play, review, and improve, built around your songs, setlists, and shared schedule."}},
-    {"@type":"Question","name":"Is GrooveLinx a setlist app?","acceptedAnswer":{"@type":"Answer","text":"It includes a full setlist manager — build once, reuse across gigs, and print stage-ready setlists — but it's broader: setlists are one of five connected systems."}},
-    {"@type":"Question","name":"How does GrooveLinx help with rehearsals?","acceptedAnswer":{"@type":"Answer","text":"It builds a rehearsal plan from your band's data, tracks per-song and per-member readiness, and points you at the one thing to work on next."}},
-    {"@type":"Question","name":"How is it different from a group chat with a shared calendar?","acceptedAnswer":{"@type":"Answer","text":"Group chats lose context every week. GrooveLinx keeps your band's operational memory — songs, readiness, setlists, and history — in one place that carries over."}},
-    {"@type":"Question","name":"Can the whole band use it together?","acceptedAnswer":{"@type":"Answer","text":"Yes — songs, setlists, schedule, and readiness are shared, so everyone sees one source of truth, with RSVP so you know your lineup."}},
-    {"@type":"Question","name":"What kinds of bands is it for?","acceptedAnswer":{"@type":"Answer","text":"Working bands that rehearse and perform — jam bands, cover bands, tributes, and church or worship teams."}},
-    {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"GrooveLinx is in invite-only beta. Join the list for the next bands we onboard."}},
-    {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"No — it runs in the browser and installs as a phone or tablet app (PWA); no app store needed."}}
-  ]}
-  </script>
-
-  <!-- Type: distinctive display + grotesk body + mono data -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="/styles.css?v=20260701-2" />
+  <link rel="canonical" href="https://groovelinx.com/" />
+  <link rel="icon" href="icon-32.png" />
+  <!-- Font choreography: the Voice preloads; a system font never renders Scene 0 -->
+  <link rel="preload" href="fonts/literata-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts/fonts-local.css" />
+  <link rel="stylesheet" href="rebuild.css" />
 </head>
-
 <body>
-  <!-- Living background -->
-  <div class="bg" aria-hidden="true">
-    <div class="aurora"><b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b></div>
+
+<!-- Nav: hidden on Scene 0; minimal after -->
+<nav class="nav" id="nav" aria-label="Main">
+  <a class="nav-logo" href="#top">GrooveLinx</a>
+  <div class="nav-links">
+    <a href="why-bands-break-up.html">Why Bands Break Up</a>
+    <a href="#founding">Founding Bands</a>
+    <a href="https://app.groovelinx.com">Sign in</a>
   </div>
-  <div class="grain" aria-hidden="true"></div>
+</nav>
 
-  <div class="skin">
-    <!-- Invite-only beta announcement bar -->
-    <div class="announce">
-      <div class="row">
-        <span>🎸 GrooveLinx is in <strong>invite-only beta</strong> — get your band on the list.</span>
-        <button type="button" class="announce-cta" data-open="beta">Join the list &rarr;</button>
+<!-- ═══ Scene 0 — Arrival ═══ -->
+<section class="scene" id="s0" aria-label="Opening">
+  <h1 class="voice voice-hero measure">
+    <span class="reveal" data-delay="200">Your band doesn’t have a talent problem.</span><br />
+    <span class="reveal line2" data-delay="1700" style="display:inline-block">It has a forgetting problem.</span>
+  </h1>
+  <div class="scroll-cue" aria-hidden="true">▾</div>
+</section>
+
+<!-- ═══ Scene 1 — The click ═══
+     CONSTITUTIONAL FALLBACK APPLIED: the count-off film does not exist yet,
+     so this scene ships as typography only. Film slot reserved here:
+     full-bleed muted loop, freeze on the eye contact, poster for reduced-motion. -->
+<a id="top"></a>
+<section class="scene" id="s1" aria-label="Where bands lock in">
+  <p class="voice voice-scene measure reveal">Every band remembers the night it all clicked.</p>
+  <p class="voice voice-scene measure reveal" data-delay="1500" style="font-weight:600; margin-top:0.9em">GrooveLinx is where bands lock in.</p>
+  <div class="cta-row reveal" data-delay="2400">
+    <a class="cta cta-primary" href="#founding">Bring your band</a>
+    <a class="cta cta-quiet" href="why-bands-break-up.html">Read: Why Bands Break Up →</a>
+  </div>
+</section>
+
+<!-- ═══ Scene 2 — Tuesday Night, 7:02 (the one daylight scene) ═══ -->
+<section class="scene" id="s2" aria-label="Tuesday night, with and without GrooveLinx">
+  <p class="tstamp" id="tick" aria-hidden="true">7:02 PM</p>
+  <p class="hand-label" style="position:absolute; left:-9999px">Without GrooveLinx, seven oh two PM</p>
+  <div class="voices">
+    <p class="voice-frag jitter reveal">“What are we playing?”</p>
+    <p class="voice-frag jitter reveal" data-delay="700">“Wait — what key?”</p>
+    <p class="voice-frag jitter reveal" data-delay="1400">“Didn’t we change that ending?”</p>
+    <p class="voice-frag jitter reveal" data-delay="2100">“Who starts it?”</p>
+    <p class="voice-frag jitter reveal" data-delay="2800">“Hang on, it’s in the group chat somewhere—”</p>
+  </div>
+  <p class="tuesday-verdict reveal"><span class="voice">7:23 PM.</span>&nbsp; Twenty minutes disappear.</p>
+  <div class="tuesday-reset reveal">
+    <p class="tstamp" style="margin-bottom:0">7:02 PM</p>
+    <p class="lets-start">“Let’s start.”</p>
+  </div>
+</section>
+
+<!-- ═══ Scene 3 — The cost of forgotten decisions ═══ -->
+<section class="scene" id="s3" aria-label="What bands lose">
+  <p class="cost-line">The arrangement you fixed three rehearsals ago.</p>
+  <p class="cost-line">The harmony everyone finally agreed on.</p>
+  <p class="cost-line">The transition that landed perfectly. Once.</p>
+  <p class="cost-line">The tempo that felt right.</p>
+  <p class="cost-line">The incredible jam nobody can find.</p>
+  <p class="voice cost-keeper measure-wide">Great bands don’t lose songs.<br />They lose memories.</p>
+</section>
+
+<!-- ═══ Scene 4 — Five beats, dark → stage light ═══
+     Product-glimpse slots reserved per beat (constitutional: real data +
+     consent before any screen is photographed — pending the content plan). -->
+<section aria-label="What GrooveLinx does">
+  <div class="beat" id="b1">
+    <p class="hand-label reveal">Memory</p>
+    <p class="voice voice-line measure-wide reveal" data-delay="400">Nothing your band decides, learns, or captures is ever lost again. Every key change, every ending, every “we fixed this last time” — kept, and there when you reach for it.</p>
+  </div>
+  <div class="beat" id="b2">
+    <p class="hand-label reveal">Preparation</p>
+    <p class="voice voice-line measure-wide reveal" data-delay="400">Everyone walks in knowing the plan, their parts, and the one thing to work on. Practice happens at home. Rehearsal happens together.</p>
+  </div>
+  <div class="beat" id="b3">
+    <p class="hand-label reveal">Synchronization</p>
+    <p class="voice voice-line measure-wide reveal" data-delay="400">Parts become roles. The band starts listening.</p>
+  </div>
+  <div class="beat" id="b4">
+    <p class="hand-label reveal">Trust</p>
+    <p class="voice voice-line measure-wide reveal" data-delay="400">The hard note about the second verse has a place to live. So it gets said early — and lands soft.</p>
+  </div>
+  <div class="beat" id="b5">
+    <p class="hand-label reveal">Flow</p>
+    <p class="voice voice-line measure-wide reveal" data-delay="400">And some nights, it clicks again. On purpose.</p>
+  </div>
+</section>
+
+<!-- ═══ Scene 5 — The Keeper (portrait slot reserved; typography until the shoot) ═══ -->
+<section class="scene" id="s5" aria-label="For the one who carries the band">
+  <p class="voice voice-scene measure reveal">Every band has one person who holds it together.</p>
+  <p class="body-measure reveal" data-delay="1200" style="margin-top:26px; color:var(--dim)">The one who books the room. Builds the setlist. Texts everyone twice. Remembers what everyone else forgets.</p>
+  <p class="voice voice-line measure reveal" data-delay="2000" style="margin-top:30px; font-weight:600">This is for you — so you can put some of it down.</p>
+  <a class="cta cta-quiet reveal" data-delay="2600" href="#founding" style="margin-top:16px"><em>You’re probably the one reading this. Start here.</em></a>
+</section>
+
+<!-- ═══ Scene 6 — What we will never do (paper, not screen; nothing animates) ═══ -->
+<section class="scene" id="s6" aria-label="Our covenant">
+  <div>
+    <p>We will never replace your band.</p>
+    <p>We will never make music feel like homework.</p>
+    <p>We will never judge a musician.</p>
+    <p>Your band’s memory belongs to your band — exportable, always.</p>
+    <p class="covenant-final">If your band ends tomorrow, your memories remain yours.</p>
+  </div>
+</section>
+
+<!-- ═══ Scene 7 — Origin (photo slot reserved: DeadCetera, real, unglamorous) ═══ -->
+<section class="scene" id="s7" aria-label="Where this came from">
+  <p class="body-measure reveal" style="color:var(--dim)">GrooveLinx was built by a band. Five busy adults driving across Atlanta to rehearse — and spending half the night remembering what they’d already decided. They kept making the drive for the nights it locked in anyway. Then they built the thing they needed.</p>
+  <p class="voice voice-line measure-wide reveal" data-delay="1400" style="margin-top:34px; font-weight:600">Built by a band that kept making the drive.</p>
+</section>
+
+<!-- ═══ Scene 8 — The doorway (half-height: a breath, not a chapter) ═══ -->
+<section class="scene scene-half" id="s8" aria-label="Why bands break up">
+  <p class="voice voice-line measure-wide reveal">Bands rarely break up because they run out of talent.</p>
+  <a class="cta cta-quiet reveal" data-delay="1200" href="why-bands-break-up.html" style="margin-top:14px">Read: Why Bands Break Up →</a>
+</section>
+
+<!-- ═══ Scene 9 — Founding Bands (a letter, not a form) ═══ -->
+<section class="scene" id="founding" aria-label="Apply as a founding band">
+  <div class="letter">
+    <p class="hand-label reveal" style="margin-bottom:22px">Founding Bands</p>
+    <p class="voice voice-line reveal" style="color:var(--room)">We’re not launching. We’re onboarding a small number of founding bands — and working with each one directly.</p>
+    <p class="reveal">Here’s the honest picture: GrooveLinx has been built and battle-tested by one working band for over a year — ours. Every feature exists because a real rehearsal or a real gig demanded it. Now it needs bands that aren’t ours. Bands that will use it on their own Tuesdays and tell us the truth.</p>
+    <p class="reveal"><strong>What founding bands get:</strong> the product, free, for the founding period · a direct line to the people building it · a real say in what it becomes · your band’s memory, compounding from day one — and yours forever, exportable, whatever happens.</p>
+    <p class="reveal"><strong>What we ask:</strong> use it for real. Tell us the truth, especially when it’s unflattering. That’s the whole deal.</p>
+
+    <form id="founding-form" action="https://formspree.io/f/xdkovpvv" method="POST">
+      <input type="hidden" name="source" value="founding_bands_preview" />
+      <div class="field">
+        <label for="f-band">What’s your band called, and what do you play?</label>
+        <input type="text" id="f-band" name="band" required autocomplete="off" />
       </div>
+      <div class="field">
+        <label for="f-lockin">Tell us about a night your band locked in.</label>
+        <textarea id="f-lockin" name="locked_in_night"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-forgets">What does your band keep forgetting?</label>
+        <textarea id="f-forgets" name="keeps_forgetting"></textarea>
+      </div>
+      <div class="field">
+        <label id="keeper-label">Are you the one who carries the band?</label>
+        <div class="keeper-check" role="group" aria-labelledby="keeper-label">
+          <label><input type="radio" name="keeper" value="yes" /> Yes</label>
+          <label><input type="radio" name="keeper" value="complicated" /> It’s complicated</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-email">Where should a human reply? (email)</label>
+        <input type="text" id="f-email" name="email" inputmode="email" required />
+      </div>
+      <div class="field">
+        <label for="f-else">Anything else we should know?</label>
+        <textarea id="f-else" name="anything_else"></textarea>
+      </div>
+      <button class="cta cta-primary" type="submit">Apply as a Founding Band</button>
+      <p class="letter-note" id="form-error" hidden style="color:var(--amber)">That didn’t send — nothing was lost; your answers are still here. Try again, or email hello@groovelinx.com.</p>
+      <p class="letter-note">A real person reads every application and replies within three days.</p>
+    </form>
+    <!-- Post-submit moment: safe default per Production Package Addendum A;
+         full design held for the first live design review -->
+    <div class="form-received" id="form-received" hidden>
+      <p class="voice voice-line">It’s with us now.</p>
+      <p style="color:var(--dim); margin-top:14px">A human reads every one — you’ll hear back within three days.</p>
     </div>
+  </div>
+</section>
 
-    <!-- Top navigation -->
-    <header class="topbar" role="banner">
-      <div class="wrap">
-        <div class="nav" aria-label="Primary">
-          <a class="brand" href="#top" aria-label="GrooveLinx home">
-            <img src="/images/gl-logo-sm.png" width="96" height="96" alt="GrooveLinx logo" fetchpriority="high"
-                 onerror="this.onerror=null;this.src='/icon-192.png';" />
-            <div class="nm">
-              <strong>GrooveLinx</strong>
-              <span>Band Operating System</span>
-            </div>
-          </a>
+<!-- ═══ Scene 10 — Footer ═══
+     Living Footer concept HELD for design review (story-not-telemetry, §10). -->
+<footer class="footer">
+  <p class="thesis">The software disappears. The music remains.</p>
+  <div class="footer-links">
+    <a href="why-bands-break-up.html">Why Bands Break Up</a>
+    <a href="https://app.groovelinx.com">Sign in</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</footer>
 
-          <nav class="navlinks" aria-label="Site links">
-            <a href="#plan">Practice</a>
-            <a href="#rehearse">Rehearse</a>
-            <a href="#perform">Play</a>
-            <a href="#learn">Review</a>
-            <a href="#improve">Improve</a>
-            <a href="/features.html">Features</a>
-          </nav>
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-          <div class="actions">
-            <a class="btn ghost" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
-            <button class="btn primary" type="button" data-open="beta">Join the list</button>
-            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" data-open="menu">
-              <span></span>
-            </button>
-          </div>
-        </div>
-
-        <div class="mobilepanel" id="mobilepanel" aria-label="Mobile menu">
-          <div class="pcard">
-            <a href="#plan" data-close="menu">Practice</a>
-            <a href="#rehearse" data-close="menu">Rehearse</a>
-            <a href="#perform" data-close="menu">Play</a>
-            <a href="#learn" data-close="menu">Review</a>
-            <a href="#improve" data-close="menu">Improve</a>
-            <a href="/features.html" data-close="menu">Features</a>
-            <div class="spacer"></div>
-            <a class="btn ghost" style="width:100%" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
-            <button class="btn primary" style="width:100%; margin-top:10px" type="button" data-open="beta">Join the list &rarr;</button>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <main id="top">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="spotlight" aria-hidden="true"></div>
-        <div class="wrap">
-          <div class="heroGrid">
-            <div class="heroCopy">
-              <div class="kick"><span class="sq"></span> // Band Operating System</div>
-              <h1>Run better<br/>rehearsals.<br/><span class="grad">Play tighter shows.</span></h1>
-              <p class="heroLead">
-                GrooveLinx is the operating system for working bands. Practice your songs, rehearse with intent, play with stage-ready charts, review what changed since last time, and improve &mdash; week over week.
-              </p>
-              <div class="heroBtns">
-                <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
-                <a class="btn ghost" href="#plan">See what's inside</a>
-              </div>
-              <div class="heroMeta">
-                <span class="chip"><span class="eq"><i></i><i></i><i></i><i></i><i></i></span> <b>Practice · Rehearse · Play · Review · Improve</b></span>
-                <span class="chip"><span class="d" style="background:var(--green);box-shadow:0 0 10px var(--green)"></span> One source of truth</span>
-                <span class="chip"><span class="d" style="background:var(--cyan);box-shadow:0 0 10px var(--cyan)"></span> The whole band</span>
-              </div>
-            </div>
-
-            <div class="heroStage">
-              <div class="phoneCard">
-                <div class="phoneFrame">
-                  <div class="appui" style="--screen-accent:var(--grape)" role="img" aria-label="GrooveLinx home screen showing what to rehearse next before Friday's gig — Come Together bridge shaky, Billie Jean not run in 3 weeks, Goodness of God new with 2 of 6 ready — built from the band's own readiness data">
-                    <div class="appui-top">
-                      <div class="appui-eyebrow">// What matters now</div>
-                      <div class="appui-title">Rehearse next</div>
-                      <div class="appui-sub">Before Fri · built from your band</div>
-                      <div class="appui-meter"><div class="lab"><span>Band readiness</span><b>78%</b></div><div class="appui-bar"><i style="width:78%"></i></div></div>
-                    </div>
-                    <div class="appui-body">
-                      <div class="act"><div class="n">1</div><div class="c"><div class="h">Come Together</div><div class="p">Bridge harmonies still shaky</div></div><div class="flag warn">needs work</div></div>
-                      <div class="act"><div class="n">2</div><div class="c"><div class="h">Billie Jean</div><div class="p">Not run in 3 weeks — going cold</div></div><div class="flag hot">cold</div></div>
-                      <div class="act"><div class="n">3</div><div class="c"><div class="h">Livin' on a Prayer</div><div class="p">Gig Friday · confirm the key</div></div><div class="flag warn">gig fri</div></div>
-                      <div class="act"><div class="n">4</div><div class="c"><div class="h">Goodness of God</div><div class="p">New — 2 of 6 members ready</div></div><div class="flag new">new</div></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="floatchip fc1"><b>Readiness</b> 4.8/5 ▲</div>
-              <div class="floatchip fc2">Key <b>A</b> · <b>124</b> BPM</div>
-              <div class="floatchip fc3"><b>LIVE</b> · Fri 6/5</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FIVE SYSTEMS OVERVIEW -->
-      <section id="systems">
-        <div class="wrap">
-          <div class="sectionHead reveal">
-            <div class="kick"><span class="sq"></span> Five Systems</div>
-            <h2>One platform. Five systems. Built around how bands&nbsp;actually&nbsp;work.</h2>
-            <p class="sub">Not a chat app with a calendar bolted on. A connected operating system for bands &mdash; from first idea to last encore.</p>
-          </div>
-
-          <div class="console reveal">
-            <a href="#plan" class="consoleItem" style="--accent:var(--green)"><div class="ix">01</div><h3 style="color:var(--green)">Practice</h3><p>Songs, setlists &amp; shared schedule</p><span class="bar"></span></a>
-            <a href="#rehearse" class="consoleItem" style="--accent:var(--violet)"><div class="ix">02</div><h3 style="color:#a9b1ff">Rehearse</h3><p>Plans, readiness &amp; what to work on</p><span class="bar"></span></a>
-            <a href="#perform" class="consoleItem" style="--accent:var(--amber)"><div class="ix">03</div><h3 style="color:var(--amber)">Play</h3><p>Stage view, live charts &amp; setlists</p><span class="bar"></span></a>
-            <a href="#learn" class="consoleItem" style="--accent:var(--red)"><div class="ix">04</div><h3 style="color:var(--red)">Review</h3><p>Listen back, isolate parts &amp; study takes</p><span class="bar"></span></a>
-            <a href="#improve" class="consoleItem" style="--accent:var(--grape)"><div class="ix">05</div><h3 style="color:#d3a8ff">Improve</h3><p>Trends, readiness &amp; your next step</p><span class="bar"></span></a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 1. PLAN -->
-      <section id="plan">
-        <div class="wrap">
-          <div class="sectionHead reveal" style="position:relative">
-            <span class="ghostnum" aria-hidden="true">01</span>
-            <div class="kick" style="color:var(--green)"><span class="sq"></span> Plan</div>
-            <h2>Songs, setlists, and schedules &mdash; in one place the whole band can see.</h2>
-            <p class="sub">Stop hunting through Slack threads, group chats, and shared docs. Plan once, in a place built for it.</p>
-          </div>
-
-          <div class="showcase reveal" style="--glow:rgba(110,231,168,.16)">
-            <div class="phoneCard">
-              <div class="phoneFrame"><img src="/images/gl-songs.png" width="402" height="874" alt="GrooveLinx song library with per-song readiness scores" loading="lazy" /></div>
-            </div>
-            <div class="copy">
-              <h3>One source of truth for the whole band</h3>
-              <p>Active songs, library songs, structure, key, BPM, references &mdash; all band-shared, all searchable, all current. Replace your spreadsheet, your Drive folder, and your "where's the chart?" Slack thread with one place.</p>
-            </div>
-          </div>
-
-          <div class="grid2 reveal">
-            <div class="card lift" style="--accent:var(--green)"><div class="pad">
-              <div class="tag" style="color:var(--green)">🎵 Songs</div>
-              <h3>Your band's catalog &mdash; structured, searchable, shared</h3>
-              <p>Active vs library status. Per-song key, BPM, structure, lyrics, chord charts, and reference recordings. One source of truth instead of five.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--green)"><div class="pad">
-              <div class="tag" style="color:var(--green)">📋 Setlists</div>
-              <h3>Build, share, and reuse setlists across gigs</h3>
-              <p>Drag-and-drop reorder. Tied to specific gigs in your calendar. Versioned so last weekend's set doesn't overwrite next weekend's.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--green)"><div class="pad">
-              <div class="tag" style="color:var(--green)">📆 Shared Google Calendar mode</div>
-              <h3>One calendar, syncing both ways</h3>
-              <p>Sync rehearsals and gigs to a Google Calendar everyone in the band can subscribe to. Pick which calendars to import. Time-aware classification keeps personal events from blocking rehearsal availability.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--green)"><div class="pad">
-              <div class="tag" style="color:var(--green)">🗓 Gigs queue</div>
-              <h3>What's next, and what to prepare for</h3>
-              <p>Upcoming gigs surface what to rehearse, what setlist needs building, and which songs aren't ready yet. The calendar drives the work.</p>
-            </div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2. REHEARSE -->
-      <section id="rehearse">
-        <div class="wrap">
-          <div class="sectionHead reveal" style="position:relative">
-            <span class="ghostnum" aria-hidden="true">02</span>
-            <div class="kick" style="color:#a9b1ff"><span class="sq" style="background:var(--violet);box-shadow:0 0 12px var(--violet)"></span> Rehearse</div>
-            <h2>Walk into rehearsal knowing what to work on.</h2>
-            <p class="sub">No more "what should we play tonight?" Rehearsal becomes intentional &mdash; with a plan that adapts to what your band actually needs.</p>
-          </div>
-
-          <div class="showcase reveal" style="--glow:rgba(139,92,246,.18)">
-            <div class="phoneCard">
-              <div class="phoneFrame"><img src="/images/gl-rehearsal.png" width="402" height="874" alt="GrooveLinx rehearsal plan with focus songs and readiness" loading="lazy" /></div>
-            </div>
-            <div class="copy">
-              <h3>Walkthroughs that capture what happened</h3>
-              <p>Run a song, take notes mid-walkthrough, jump sections, log readiness per member. Every rehearsal feeds the next one's agenda &mdash; and the next one's gig prep.</p>
-            </div>
-          </div>
-
-          <div class="grid2 reveal">
-            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
-              <div class="tag" style="color:#a9b1ff">📝 Rehearsal plans</div>
-              <h3>An agenda built from your band's data</h3>
-              <p>Suggests which songs to walk through based on readiness, recent rehearsal coverage, and what's coming up on the gig calendar. Edit it, ignore it, or hand it to the band.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
-              <div class="tag" style="color:#a9b1ff">📊 Readiness</div>
-              <h3>Per-song, per-member readiness</h3>
-              <p>See which songs are stage-ready, which are still woodshedding, and which haven't been touched in a month. Weak links surface automatically.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
-              <div class="tag" style="color:#a9b1ff">▶️ Walkthrough mode</div>
-              <h3>Run through a song with notes flowing</h3>
-              <p>Timed walkthroughs capture what was rehearsed and how it went. Take notes mid-song. Stop, restart, jump sections.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--violet)"><div class="pad">
-              <div class="tag" style="color:#a9b1ff">🎯 Practice actions</div>
-              <h3>One specific thing to work on next</h3>
-              <p>After every rehearsal: a specific call like "tighten the bridge harmonies on your closer" &mdash; not generic encouragement. Action-sized, song-specific.</p>
-            </div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. PERFORM -->
-      <section id="perform">
-        <div class="wrap">
-          <div class="sectionHead reveal" style="position:relative">
-            <span class="ghostnum" aria-hidden="true">03</span>
-            <div class="kick" style="color:var(--amber)"><span class="sq" style="background:var(--amber);box-shadow:0 0 12px var(--amber)"></span> Perform</div>
-            <h2>Stage-ready surfaces designed for the gig, not the rehearsal room.</h2>
-            <p class="sub">Big text. Glance-readable. One-tap navigation. Built for a tablet on a stand under stage lights.</p>
-          </div>
-
-          <div class="showcase reveal" style="--glow:rgba(255,194,75,.16)">
-            <div class="phoneCard">
-              <div class="phoneFrame"><img src="/images/gl-stageplot.png" width="402" height="874" alt="GrooveLinx 3D stage plot showing each member's position, monitor mixes, DI and IEM placement and the full gear pull for the show" loading="lazy" /></div>
-            </div>
-            <div class="copy">
-              <h3>Everyone knows where they stand &mdash; before you load in</h3>
-              <p>Map the whole stage: each member's spot, monitor mixes, DI boxes and IEMs, with a channel list and a gear pull &mdash; "4 vocal mics, 4 DI boxes, 5 monitor mixes" &mdash; generated for you. Flip to a 3D view to check sightlines, then share it with the venue or FOH so nobody's guessing on show day.</p>
-            </div>
-          </div>
-
-          <div class="showcase reveal" style="--glow:rgba(255,194,75,.16)">
-            <div class="phoneCard">
-              <div class="phoneFrame"><img src="/images/gl-chart.png" width="402" height="874" alt="GrooveLinx live-gig per-song chart with chords over lyrics, auto-scroll, a tempo readout and the next songs queued" loading="lazy" /></div>
-            </div>
-            <div class="copy">
-              <h3>The chart you actually need, the way you need it</h3>
-              <p>Per-song charts with auto-scroll, swipe or keyboard nav between songs, member assignments at the top so everyone knows their job, and a sub-second SLA &mdash; no spinner between you and the next song.</p>
-            </div>
-          </div>
-
-          <div class="grid2 reveal">
-            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
-              <div class="tag" style="color:var(--amber)">🎤 Setlist Stage View</div>
-              <h3>Your setlist in one glance</h3>
-              <p>The full set in stage-friendly type. Tap any song to jump there. Key and BPM visible without squinting. No nav chrome stealing the screen.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
-              <div class="tag" style="color:var(--amber)">📜 Live Gig charts</div>
-              <h3>Auto-scroll, swipe between songs, assignments up top</h3>
-              <p>Per-song charts with auto-scroll (tunable px/sec), swipe or keyboard navigation between songs, and member assignments at the top so everyone knows their job.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
-              <div class="tag" style="color:var(--amber)">🗺️ Stage Plot</div>
-              <h3>Member positions, mic and instrument layout</h3>
-              <p>Drag members onto a stage diagram. Save layouts per venue. Reference at sound check.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--amber)"><div class="pad">
-              <div class="tag" style="color:var(--amber)">⚡ Built for the room</div>
-              <h3>Sub-second load. Headphone-friendly. Tablet-first.</h3>
-              <p>Performance surfaces are built to a strict "instant" SLA &mdash; no spinner between you and the next song.</p>
-            </div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. LEARN -->
-      <section id="learn">
-        <div class="wrap">
-          <div class="sectionHead reveal" style="position:relative">
-            <span class="ghostnum" aria-hidden="true">04</span>
-            <div class="kick" style="color:var(--red)"><span class="sq" style="background:var(--red);box-shadow:0 0 12px var(--red)"></span> Review</div>
-            <h2>Learn parts faster &mdash; without burning hours on YouTube.</h2>
-            <p class="sub">Tools that speed the part-learning process. Honest framing: drafts you clean up, not magic transcription.</p>
-          </div>
-
-          <div class="showcase reveal" style="--glow:rgba(255,107,107,.16)">
-            <div class="phoneCard">
-              <div class="phoneFrame"><img src="/images/gl-stems.png" width="402" height="874" alt="GrooveLinx stems mixer separating drums, bass, guitar, keys and vocals with per-part waveforms" loading="lazy" /></div>
-            </div>
-            <div class="copy">
-              <h3>Stems mixer + Harmony Lab in one app</h3>
-              <p>Pull a recording in, separate drums/bass/vocals/keys/guitar, mute and solo per part. Split lead vs. backing vocals, pan each into its own ear, loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
-            </div>
-          </div>
-
-          <div class="grid2 reveal">
-            <div class="card lift" style="--accent:var(--red)"><div class="pad">
-              <div class="tag" style="color:var(--red)">🎚 Stems lens</div>
-              <h3>Isolate drums, bass, vocals, keys, guitar &mdash; from your recordings</h3>
-              <p>Self-hosted Demucs separation gives you 4 or 6 stems per song. Mute, solo, volume, pan, and tempo controls let you practice your part with the rest of the band still in the mix &mdash; or by itself.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--red)"><div class="pad">
-              <div class="tag" style="color:var(--red)">🎤 Harmony Lab</div>
-              <h3>Split lead vs. backing vocals. Loop a phrase. Sing along.</h3>
-              <p>LALAL.AI separates a recording into lead and backing tracks, lets you pan each into its own ear, and loop the bars you're learning. Auto-draft notation appears alongside &mdash; review and clean up by hand.</p>
-              <p style="margin-top:8px;font-size:13px;color:var(--muted2)"><em>We don't claim perfect harmony separation or perfect transcription. We claim faster part-learning than YouTube + paper.</em></p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--red)"><div class="pad">
-              <div class="tag" style="color:var(--red)">🎼 BPM &amp; key auto-detect</div>
-              <h3>Tempo and key, populated from the audio</h3>
-              <p>Drop a reference recording in &mdash; BPM and key get detected and saved to the song. Metronome auto-tunes. Manual override always available.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--red)"><div class="pad">
-              <div class="tag" style="color:var(--red)">🧠 Song intelligence</div>
-              <h3>What we know about your songs grows over time</h3>
-              <p>Sections, chords, lyrics, structure, tempo &mdash; populated as you use the app, not as a one-shot import. The catalog gets sharper rehearsal by rehearsal.</p>
-            </div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. IMPROVE -->
-      <section id="improve">
-        <div class="wrap">
-          <div class="sectionHead reveal" style="position:relative">
-            <span class="ghostnum" aria-hidden="true">05</span>
-            <div class="kick" style="color:#d3a8ff"><span class="sq" style="background:var(--grape);box-shadow:0 0 12px var(--grape)"></span> Improve</div>
-            <h2>What changed. What's working. What's next.</h2>
-            <p class="sub">Every rehearsal teaches the next one. Every gig feeds the dashboard. The band gets sharper over time &mdash; on purpose.</p>
-          </div>
-
-          <div class="showcase reveal" style="--glow:rgba(176,107,255,.18)">
-            <div class="phoneCard">
-              <div class="phoneFrame"><img src="/images/gl-setlists.png" width="402" height="874" alt="GrooveLinx setlists with upcoming gigs, songs and sets" loading="lazy" /></div>
-            </div>
-            <div class="copy">
-              <h3>"What's happening with my band?" &mdash; one screen, every morning</h3>
-              <p>Open the app and see the pulse: what changed across songs, takes, calendar, polls, ideas, gig prep. Cross-session insights show what tightened, what slipped, and what to do next. Real data, not "good job."</p>
-            </div>
-          </div>
-
-          <div class="grid2 reveal">
-            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
-              <div class="tag" style="color:#d3a8ff">📊 Post-rehearsal insights</div>
-              <h3>"This rehearsal vs last rehearsal" &mdash; for each song</h3>
-              <p>Cross-session attribution. Which songs improved. Which transitions tightened. Which sections need work. Real data, not "good job."</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
-              <div class="tag" style="color:#d3a8ff">📰 Activity feed</div>
-              <h3>Everything that changed, in one feed</h3>
-              <p>The Home feed shows what changed across the band: new takes, status changes, calendar events, polls, ideas, gig prep. Open the app, see the pulse.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
-              <div class="tag" style="color:#d3a8ff">💓 Band pulse</div>
-              <h3>Readiness across songs, members, and weeks</h3>
-              <p>A glanceable view of how prepared the band is for what's next. Not a vanity metric &mdash; a way to spot the song that's quietly slipping before the gig.</p>
-            </div></div>
-            <div class="card lift" style="--accent:var(--grape)"><div class="pad">
-              <div class="tag" style="color:#d3a8ff">🔔 Notifications</div>
-              <h3>Three layers, one band</h3>
-              <p>In-app banners for active users, browser/OS push for backgrounded tabs, SMS for the bandmate who never opens the app. Keep everyone aligned without anyone getting buried.</p>
-            </div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- DIFFERENTIATION -->
-      <section id="compare">
-        <div class="wrap">
-          <div class="sectionHead reveal">
-            <div class="kick"><span class="sq"></span> Why GrooveLinx</div>
-            <h2>Not a group chat with a calendar. An operating&nbsp;system.</h2>
-            <p class="sub">Most bands run on a Frankenstein of Slack, Google Docs, paper, and three apps that don't talk to each other. GrooveLinx replaces all of it &mdash; in one connected system.</p>
-          </div>
-
-          <div class="card reveal"><div class="pad" style="padding:6px">
-            <table class="cmp">
-              <thead>
-                <tr><th></th><th class="h-old">Typical band stack</th><th class="h-new">GrooveLinx</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="rowlabel">Songs &amp; charts</td><td class="old">Spreadsheet + paper + Drive folder</td><td class="new">Structured catalog with key, BPM, structure, references &mdash; band-shared.</td></tr>
-                <tr><td class="rowlabel">Setlists</td><td class="old">Notes app or last-minute paper</td><td class="new">Versioned, shared, drag-to-reorder, feeds Stage View directly.</td></tr>
-                <tr><td class="rowlabel">Calendar</td><td class="old">Google Calendar in a separate tab</td><td class="new">Two-way Google sync, time-aware classification, drives rehearsal planning.</td></tr>
-                <tr><td class="rowlabel">Stage / live</td><td class="old">PDFs on a phone screen</td><td class="new">Stage View + Live Gig charts with auto-scroll, swipe nav, big text.</td></tr>
-                <tr><td class="rowlabel">Part-learning</td><td class="old">YouTube on loop + paper transcribing</td><td class="new">Stems mixer + Harmony Lab + auto-draft notation. Drafts you finish.</td></tr>
-                <tr><td class="rowlabel">Post-rehearsal insight</td><td class="old">"That was good, right?"</td><td class="new">What stood out, what changed, what to do next &mdash; per song.</td></tr>
-                <tr><td class="rowlabel">Band visibility</td><td class="old">Group chat scrollback</td><td class="new">"What's happening with my band?" feed on the Home screen.</td></tr>
-              </tbody>
-            </table>
-          </div></div>
-        </div>
-      </section>
-
-      <!-- BAND TYPES -->
-      <section id="bands">
-        <div class="wrap">
-          <div class="sectionHead reveal">
-            <div class="kick"><span class="sq"></span> For Every Band</div>
-            <h2>Built for any band that rehearses and performs.</h2>
-            <p class="sub">Jam bands, cover bands, tribute acts, church and worship teams, wedding/event bands, original projects.</p>
-          </div>
-
-          <div class="bandgrid reveal">
-            <a class="bandcard" href="/for-jam-bands.html"><div class="emo">🎸</div><h3>Jam Band</h3><p>Dead, Phish, WSP, Goose</p></a>
-            <a class="bandcard" href="/for-cover-bands.html"><div class="emo">🎤</div><h3>Cover Band</h3><p>60s through today</p></a>
-            <a class="bandcard" href="/for-tribute-bands.html"><div class="emo">🌟</div><h3>Tribute</h3><p>Beatles, Billy Joel, Fleetwood</p></a>
-            <a class="bandcard" href="/for-worship-teams.html"><div class="emo">⛪</div><h3>Church / Worship</h3><p>Contemporary, gospel, hymns</p></a>
-            <div class="bandcard"><div class="emo">💒</div><h3>Wedding / Event</h3><p>Dance floor to cocktail hour</p></div>
-            <div class="bandcard"><div class="emo">🔥</div><h3>Acoustic / Campfire</h3><p>Singalongs, easy guitar</p></div>
-            <div class="bandcard"><div class="emo">🎹</div><h3>Piano Songbook</h3><p>Billy Joel, Elton, standards</p></div>
-            <div class="bandcard"><div class="emo">✍️</div><h3>Original Band</h3><p>Your own music</p></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- WHAT SHIPPED THIS MONTH -->
-      <section id="changelog">
-        <div class="wrap">
-          <div class="sectionHead reveal">
-            <div class="kick"><span class="sq"></span> Active development</div>
-            <h2>What shipped this month</h2>
-            <p class="sub">GrooveLinx is in active beta. New surfaces ship weekly. Here's what landed recently.</p>
-          </div>
-
-          <div class="ticker reveal" aria-label="Recently shipped features">
-            <div class="tickerTrack">
-              <span class="shipPill">🎤 LALAL Auto-Split harmonies <span class="d">Apr 30</span></span>
-              <span class="shipPill">🎚 Stems lens pan knob <span class="d">Apr 30</span></span>
-              <span class="shipPill">🎼 Harmony Lab Split Mixer + abcjs notation <span class="d">Apr 30</span></span>
-              <span class="shipPill">🎵 Self-hosted Demucs stems pipeline <span class="d">Apr 29</span></span>
-              <span class="shipPill">📅 Calendar sync hardening <span class="d">Apr 28</span></span>
-              <span class="shipPill">🔔 3-layer notifications (in-app + push + SMS) <span class="d">Apr 26</span></span>
-              <!-- duplicate set for seamless loop -->
-              <span class="shipPill" aria-hidden="true">🎤 LALAL Auto-Split harmonies <span class="d">Apr 30</span></span>
-              <span class="shipPill" aria-hidden="true">🎚 Stems lens pan knob <span class="d">Apr 30</span></span>
-              <span class="shipPill" aria-hidden="true">🎼 Harmony Lab Split Mixer + abcjs notation <span class="d">Apr 30</span></span>
-              <span class="shipPill" aria-hidden="true">🎵 Self-hosted Demucs stems pipeline <span class="d">Apr 29</span></span>
-              <span class="shipPill" aria-hidden="true">📅 Calendar sync hardening <span class="d">Apr 28</span></span>
-              <span class="shipPill" aria-hidden="true">🔔 3-layer notifications (in-app + push + SMS) <span class="d">Apr 26</span></span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 10-MINUTE PROMISE -->
-      <section>
-        <div class="wrap">
-          <div class="panel reveal">
-            <div class="inner">
-              <div class="bigemo">⏱️</div>
-              <h2 style="margin-top:0">The 10-minute promise.</h2>
-              <p class="sub" style="max-width:560px;margin:0 auto 22px;text-align:center">
-                Create your band. Get songs seeded. Build your first setlist. Run a rehearsal. See what happened.
-                <strong>All in under 10 minutes once you&rsquo;re in. No setup wizard.</strong>
-              </p>
-              <button class="btn primary" type="button" data-open="beta" style="height:50px;padding:0 28px;font-size:16px">Join the list &rarr;</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROOF -->
-      <section id="proof">
-        <div class="wrap">
-          <div class="sectionHead reveal">
-            <div class="kick"><span class="sq"></span> Built with a band</div>
-            <h2>Built with a real band that gigs every month.</h2>
-            <p class="sub">GrooveLinx isn&rsquo;t a prototype &mdash; it&rsquo;s the operating system DeadCetera actually runs on, rehearsal to stage. The shipping log above is the receipts: real features, real dates, driven by real gigs.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section id="faq">
-        <div class="wrap">
-          <div class="sectionHead reveal">
-            <div class="kick"><span class="sq"></span> FAQ</div>
-            <h2>Questions bands ask.</h2>
-          </div>
-          <div class="card reveal faq"><div class="pad" style="padding:8px 22px 16px">
-            <details><summary>What is GrooveLinx?</summary><p>GrooveLinx is the operating system for working bands: one web app to practice, rehearse, play, review, and improve, built around your songs, setlists, and shared schedule.</p></details>
-            <details><summary>Is GrooveLinx a setlist app?</summary><p>It includes a full setlist manager &mdash; build once, reuse across gigs, and print stage-ready setlists &mdash; but it&rsquo;s broader: setlists are one of five connected systems.</p></details>
-            <details><summary>How does GrooveLinx help with rehearsals?</summary><p>It builds a rehearsal plan from your band&rsquo;s data, tracks per-song and per-member readiness, and points you at the one thing to work on next.</p></details>
-            <details><summary>How is it different from a group chat with a shared calendar?</summary><p>Group chats lose context every week. GrooveLinx keeps your band&rsquo;s operational memory &mdash; songs, readiness, setlists, and history &mdash; in one place that carries over.</p></details>
-            <details><summary>Can the whole band use it together?</summary><p>Yes &mdash; songs, setlists, schedule, and readiness are shared, so everyone sees one source of truth, with RSVP so you know your lineup.</p></details>
-            <details><summary>What kinds of bands is it for?</summary><p>Working bands that rehearse and perform &mdash; jam bands, cover bands, tributes, and church or worship teams.</p></details>
-            <details><summary>What does it cost?</summary><p>GrooveLinx is in invite-only beta. Join the list for the next bands we onboard.</p></details>
-            <details><summary>Do I need to install anything?</summary><p>No &mdash; it runs in the browser and installs as a phone or tablet app (PWA); no app store needed.</p></details>
-          </div></div>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <section>
-        <div class="wrap">
-          <div class="panel reveal">
-            <div class="inner">
-              <h2 style="margin-top:0">Run your band like an operating system.</h2>
-              <p class="sub" style="max-width:520px;margin:0 auto 24px;text-align:center">GrooveLinx is in invite-only beta. Join the list for the next bands we onboard &mdash; and help shape what gets built.</p>
-              <div class="heroBtns" style="justify-content:center">
-                <button class="btn primary" type="button" data-open="beta">Join the list &rarr;</button>
-                <a class="btn ghost" href="https://app.groovelinx.com" target="_blank">Member sign-in</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer>
-        <div class="wrap">
-          <div class="footRow">
-            <div class="copy">&copy; <span id="year"></span> GrooveLinx &mdash; Band Operating System</div>
-            <div class="footSocial">
-              <a href="https://www.instagram.com/groovelinxapp" target="_blank" rel="noopener" aria-label="GrooveLinx on Instagram"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.77.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.65.94 3.32.63 4.11c-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zM12 16a4 4 0 114-4 4 4 0 01-4 4zm6.41-10.85a1.44 1.44 0 11-1.44-1.44 1.44 1.44 0 011.44 1.44z"/></svg></a>
-              <a href="https://www.facebook.com/profile.php?id=61591392068150" target="_blank" rel="noopener" aria-label="GrooveLinx on Facebook"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6 4.39 10.97 10.13 11.86v-8.39H7.08v-3.47h3.05V9.41c0-3.02 1.79-4.68 4.53-4.68 1.31 0 2.68.23 2.68.23v2.97h-1.51c-1.49 0-1.96.93-1.96 1.87v2.25h3.33l-.53 3.47h-2.8v8.39C19.61 23.04 24 18.07 24 12.07z"/></svg></a>
-              <a href="https://www.youtube.com/@GrooveLinx" target="_blank" rel="noopener" aria-label="GrooveLinx on YouTube"><svg viewBox="0 0 24 24" width="23" height="23" fill="currentColor" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 00.5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 002.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 002.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81zM9.6 15.57V8.43L15.82 12 9.6 15.57z"/></svg></a>
-            </div>
-            <div class="footLinks">
-              <a href="#plan">Practice</a>
-              <a href="#rehearse">Rehearse</a>
-              <a href="#perform">Play</a>
-              <a href="#learn">Review</a>
-              <a href="#improve">Improve</a>
-              <a href="/features.html">Features</a>
-              <a href="/for-jam-bands.html">Jam bands</a>
-              <a href="/for-cover-bands.html">Cover bands</a>
-              <a href="/for-worship-teams.html">Worship teams</a>
-              <a href="/for-tribute-bands.html">Tributes</a>
-              <a href="/vs-bandhelper.html">vs BandHelper</a>
-              <a href="/privacy.html">Privacy</a>
-              <a href="/terms.html">Terms</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </main>
-
-    <!-- Join Beta Modal -->
-    <div class="modalOverlay" id="betaOverlay" role="dialog" aria-modal="true" aria-label="Join Beta form">
-      <div class="modal" role="document">
-        <div class="modalHead">
-          <strong>Join the GrooveLinx beta</strong>
-          <button class="x" type="button" data-close="beta">&times;</button>
-        </div>
-        <div class="modalBody">
-          <p class="fineprint" id="betaIntro">Invite-only beta &mdash; get on the list for the next bands we onboard.</p>
-          <form id="betaForm" action="https://formspree.io/f/xdkovpvv" method="POST">
-            <div class="formRow">
-              <div><label>Name</label><input name="name" required placeholder="Your name" /></div>
-              <div><label>Email</label><input type="email" name="email" required placeholder="you@band.com" /></div>
-            </div>
-            <div class="formRow">
-              <div><label>Band / Project</label><input name="band" placeholder="Band name" /></div>
-              <div><label>City</label><input name="city" placeholder="City, State" /></div>
-            </div>
-            <label>What kind of band?</label>
-            <input name="band_type" placeholder="Jam, Cover, Tribute, Church, Wedding, Acoustic, Original..." />
-            <!-- Attribution: which channel this signup came from (set by JS on load). -->
-            <input type="hidden" name="source" />
-            <input type="hidden" name="_subject" value="New GrooveLinx beta signup" />
-            <button class="btn primary" type="submit" style="width:100%;margin-top:8px">Join the list &rarr;</button>
-          </form>
-          <!-- Branded on-site confirmation — shown after a successful submit so the
-               highest-intent moment stays on-brand instead of a Formspree page. -->
-          <div id="betaSuccess" style="display:none;text-align:center;padding:20px 4px 8px">
-            <div style="font-size:36px;line-height:1">&#127928;</div>
-            <strong style="display:block;font-size:20px;margin:12px 0 6px">You're on the list.</strong>
-            <p class="fineprint">We onboard new bands in small waves &mdash; we'll email <span id="betaSuccessEmail" style="color:var(--ink)"></span> the moment your spot opens. Keep an eye out.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div><!-- /.skin -->
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const mobilePanel = document.getElementById("mobilepanel");
-    const hamburger = document.querySelector(".hamburger");
-
-    function openPanel(){ mobilePanel.style.display = "block"; hamburger.setAttribute("aria-expanded", "true"); }
-    function closePanel(){ mobilePanel.style.display = "none"; hamburger.setAttribute("aria-expanded", "false"); }
-    function togglePanel(){ mobilePanel.style.display === "block" ? closePanel() : openPanel(); }
-
-    const betaOverlay = document.getElementById("betaOverlay");
-
-    function openOverlay(which){ if(which === "beta") betaOverlay.style.display = "flex"; closePanel(); }
-    function closeOverlay(which){ if(which === "beta") betaOverlay.style.display = "none"; }
-
-    document.addEventListener("click", (e) => {
-      const open = e.target.closest("[data-open]");
-      const close = e.target.closest("[data-close]");
-      if(open){ const w = open.getAttribute("data-open"); if(w === "menu") togglePanel(); else openOverlay(w); return; }
-      if(close){ const w = close.getAttribute("data-close"); if(w === "menu") closePanel(); else closeOverlay(w); return; }
-      if(e.target === betaOverlay) closeOverlay("beta");
+  /* Reveal choreography: two-bar phrasing via data-delay */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      var d = reduced ? 0 : (parseInt(el.getAttribute('data-delay') || '0', 10));
+      setTimeout(function () { el.classList.add('is-in'); }, d);
+      io.unobserve(el);
     });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.reveal, .jitter').forEach(function (el) { io.observe(el); });
 
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape"){ closeOverlay("beta"); closePanel(); } });
-    document.querySelectorAll('[data-close="menu"]').forEach(a => a.addEventListener("click", () => closePanel()));
+  /* Scene 0 reveals fire on load (it's the first viewport) */
+  document.querySelectorAll('#s0 .reveal').forEach(function (el) {
+    var d = reduced ? 0 : parseInt(el.getAttribute('data-delay') || '0', 10);
+    setTimeout(function () { el.classList.add('is-in'); }, d);
+  });
 
-    // ── Beta waitlist: source attribution + branded on-site confirmation ──
-    // Progressive enhancement: the form POSTs natively without JS (lead still
-    // captured), but with JS we (a) stamp where the signup came from and (b) keep
-    // the confirmation on-brand instead of bouncing to Formspree's generic page.
-    (function(){
-      const form = document.getElementById("betaForm");
-      if(!form) return;
+  /* Nav: appears after Scene 0, gains backdrop deeper in */
+  var nav = document.getElementById('nav');
+  var s0 = document.getElementById('s0');
+  window.addEventListener('scroll', function () {
+    var past = window.scrollY > s0.offsetHeight * 0.6;
+    nav.classList.toggle('is-visible', past);
+    nav.classList.toggle('is-solid', window.scrollY > s0.offsetHeight * 1.4);
+  }, { passive: true });
 
-      // First-touch source, persisted so the original channel survives navigation
-      // between landing and signup. UTM params win; else referrer; else direct.
-      const KEY = "gl_first_touch";
-      let src = null;
-      try { src = localStorage.getItem(KEY); } catch(e){}
-      if(!src){
-        const p = new URLSearchParams(location.search);
-        const utm = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"]
-          .map(k => { const v = p.get(k); return v ? k.replace("utm_","")+":"+v : null; })
-          .filter(Boolean).join(" ");
-        const ref = document.referrer || "direct";
-        src = (utm ? utm+" | " : "") + "ref:" + ref + " | landing:" + location.pathname;
-        try { localStorage.setItem(KEY, src); } catch(e){}
-      }
-      const hidden = form.querySelector('input[name="source"]');
-      if(hidden) hidden.value = src;
+  /* Scene 2: the timestamp ticks 7:02 → 7:23 across the without-scene */
+  var tick = document.getElementById('tick');
+  var s2 = document.getElementById('s2');
+  if (!reduced) {
+    window.addEventListener('scroll', function () {
+      var r = s2.getBoundingClientRect();
+      var span = r.height * 0.5;
+      var p = Math.min(1, Math.max(0, (0 - r.top) / span));
+      var mins = 2 + Math.round(p * 21);
+      tick.textContent = '7:' + String(mins).padStart(2, '0') + ' PM';
+    }, { passive: true });
+  }
+  /* The jitter stops dead at the reset: remove it once the verdict is on screen */
+  var verdict = document.querySelector('.tuesday-verdict');
+  new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (e.isIntersecting) document.querySelectorAll('.jitter').forEach(function (el) { el.classList.remove('is-in'); el.classList.add('reveal', 'is-in'); });
+    });
+  }, { threshold: 0.5 }).observe(verdict);
 
-      form.addEventListener("submit", function(e){
-        if(form.dataset.fallback === "1") return; // native submit already in flight
-        e.preventDefault();
-        const btn = form.querySelector('button[type="submit"]');
-        const emailEl = form.querySelector('input[name="email"]');
-        if(btn){ btn.disabled = true; btn.textContent = "Adding you…"; }
-        fetch(form.action, {
-          method: "POST",
-          body: new FormData(form),
-          headers: { "Accept": "application/json" }
-        }).then(function(r){
-          if(!r.ok) throw new Error("bad status " + r.status);
-          const succ = document.getElementById("betaSuccess");
-          const se = document.getElementById("betaSuccessEmail");
-          if(se && emailEl) se.textContent = emailEl.value;
-          form.style.display = "none";
-          const intro = document.getElementById("betaIntro");
-          if(intro) intro.style.display = "none";
-          if(succ) succ.style.display = "block";
-        }).catch(function(){
-          // Never lose a signup: fall back to a real POST (Formspree page).
-          form.dataset.fallback = "1";
-          form.submit();
+  /* Scene 3: lines fade toward 0.15 as they pass 40% viewport; final line exempt */
+  if (!reduced) {
+    var lines = document.querySelectorAll('#s3 .cost-line');
+    var raf = false;
+    window.addEventListener('scroll', function () {
+      if (raf) return; raf = true;
+      requestAnimationFrame(function () {
+        raf = false;
+        lines.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          var gate = window.innerHeight * 0.42;
+          if (r.top >= gate) { el.style.opacity = 1; return; }
+          var gone = Math.min(1, (gate - r.top) / (window.innerHeight * 0.5));
+          el.style.opacity = String(1 - gone * 0.85);   /* floor 0.15 */
         });
       });
-    })();
+    }, { passive: true });
+  }
 
-    // Scroll-reveal — fade-up on enter viewport, single-shot.
-    // FAILSAFE FIRST: content must NEVER be stuck invisible. On Safari an
-    // anchor-jump (e.g. the "Practice" nav -> #plan) can skip past sections
-    // before the observer fires, leaving them blank. So we (a) eagerly reveal
-    // anything already in or above the viewport, (b) re-run that on scroll /
-    // hashchange / resize, and (c) hard-reveal everything after a short timeout.
-    const _reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-    const _revealVisible = () => {
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      for (let i = _reveals.length - 1; i >= 0; i--) {
-        const el = _reveals[i];
-        if (el.getBoundingClientRect().top < vh * 0.92) { el.classList.add("is-visible"); _reveals.splice(i, 1); }
-      }
-    };
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.01, rootMargin: "0px 0px 0px 0px" });
-      _reveals.forEach((el) => io.observe(el));
-      _revealVisible();
-      window.addEventListener("scroll", _revealVisible, { passive: true });
-      window.addEventListener("hashchange", () => setTimeout(_revealVisible, 50));
-      window.addEventListener("resize", _revealVisible, { passive: true });
-      // hard safety net — nothing stays blank past this regardless of the observer
-      setTimeout(() => document.querySelectorAll(".reveal:not(.is-visible)").forEach((el) => el.classList.add("is-visible")), 1200);
-    } else {
-      document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-    }
-
-    // ── Hero interaction ──
-    // The cursor-driven tilt + stage-light respond to the user's OWN pointer
-    // (interaction feedback), so they run even under prefers-reduced-motion —
-    // that setting targets autoplay/scroll motion, not direct manipulation.
-    // The AUTONOMOUS effects (aurora parallax, ghost-numeral scroll drift) stay
-    // gated behind reduce-motion.
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const hero = document.querySelector(".hero");
-    const spot = document.querySelector(".spotlight");
-    const aurora = document.querySelector(".aurora");
-    const phone = document.querySelector(".heroStage .phoneCard");
-    const clamp = (v) => Math.max(-1, Math.min(1, v));
-
-    if (window.matchMedia("(pointer: fine)").matches && (spot || phone)) {
-      window.addEventListener("pointermove", (e) => {
-        // stage light — user-initiated, always on
-        if (spot && hero) {
-          const r = hero.getBoundingClientRect();
-          spot.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-          spot.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
-        }
-        // 3D phone tilt — user-initiated, always on. Anchored to the phone so
-        // moving across the screencap leans it strongly toward the cursor.
-        if (phone) {
-          const r = phone.getBoundingClientRect();
-          const nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-          const ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-          const px = clamp(nx), py = clamp(ny);
-          phone.style.setProperty("--ry", (px * 16).toFixed(2) + "deg");
-          phone.style.setProperty("--rx", (py * -13).toFixed(2) + "deg");
-          phone.style.setProperty("--sc", "1.04");
-          const inside = nx > -1 && nx < 1 && ny > -1 && ny < 1; // over the screencap
-          phone.style.setProperty("--gl", inside ? "1" : "0");
-          phone.style.setProperty("--gx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
-          phone.style.setProperty("--gy", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
-        }
-        // aurora parallax — autonomous background motion, only when motion allowed
-        if (aurora && !reduceMotion) {
-          const dx = (e.clientX / window.innerWidth - 0.5) * -30;
-          const dy = (e.clientY / window.innerHeight - 0.5) * -30;
-          aurora.style.transform = "translate(" + dx + "px," + dy + "px)";
-        }
-      }, { passive: true });
-
-      // ease the phone back to its resting tilt when the cursor leaves the window
-      document.addEventListener("mouseleave", () => {
-        if (phone) { phone.style.setProperty("--ry", "-8deg"); phone.style.setProperty("--rx", "4deg"); phone.style.setProperty("--sc", "1"); phone.style.setProperty("--gl", "0"); }
+  /* Founding form: inline confirmation (post-submit design held for review) */
+  var form = document.getElementById('founding-form');
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var btn = form.querySelector('button');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        if (r.ok) { form.hidden = true; document.getElementById('form-received').hidden = false; }
+        else { throw new Error(); }
+      })
+      .catch(function () {
+        btn.disabled = false; btn.textContent = 'Apply as a Founding Band';
+        document.getElementById('form-error').hidden = false;
       });
-    }
-
-    // Ghost section-numeral scroll parallax — scroll-driven, gated behind reduce-motion
-    if (!reduceMotion) {
-      const ghosts = document.querySelectorAll(".ghostnum");
-      if (ghosts.length) {
-        let ticking = false;
-        const update = () => {
-          ghosts.forEach((g) => {
-            const r = g.getBoundingClientRect();
-            g.style.transform = "translateY(" + ((r.top - window.innerHeight / 2) * -0.06).toFixed(1) + "px)";
-          });
-          ticking = false;
-        };
-        window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-        update();
-      }
-    }
-  </script>
+  });
+})();
+</script>
 </body>
 </html>
