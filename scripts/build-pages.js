@@ -1,4 +1,7 @@
-/**
+/** ⚠ STALE — DO NOT RUN (2026-07-04): these partials predate the July-3 site rebuild.
+ * Running this will REGENERATE pages with the OLD design and clobber the rebuilt site.
+ * The rebuilt pages are hand-maintained until this generator is re-templated.
+ *
  * build-pages.js — static page generator for groovelinx.com
  *
  * Emits per-band-type landing pages + the deep /features page from shared

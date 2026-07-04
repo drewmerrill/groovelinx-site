@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founding Bands — GrooveLinx</title>
+  <meta name="description" content="The product, free, for the founding period. A direct line to the people building it. A real say in what it becomes. A real person replies within three days." />
+  <link rel="canonical" href="https://groovelinx.com/founding-bands.html" />
+  <meta property="og:title" content="Founding Bands" />
+  <meta property="og:description" content="The product, free, for the founding period. A direct line to the people building it. A real say in what it becomes. A real person replies within three days." />
+  <meta property="og:image" content="https://groovelinx.com/og-home.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="icon-32.png" />
+  <link rel="preload" href="fonts/literata-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="fonts/fonts-local.css" />
+  <link rel="stylesheet" href="rebuild.css" />
+</head>
+<body>
+
+<nav class="nav is-visible is-solid" aria-label="Main">
+  <a class="nav-logo" href="./">GrooveLinx</a>
+  <div class="nav-links">
+    <a href="features.html">How it works</a>
+    <a href="why-bands-break-up.html">Why Bands Break Up</a>
+    <a href="./#founding">Founding Bands</a>
+    <a href="about.html">About</a>
+    <a href="https://app.groovelinx.com">Sign in</a>
+  </div>
+  <details class="nav-menu"><summary>Menu</summary>
+    <div class="menu-panel">
+      <a href="features.html">How it works</a>
+      <a href="why-bands-break-up.html">Why Bands Break Up</a>
+      <a href="./#founding">Founding Bands</a>
+      <a href="about.html">About</a>
+      <a href="https://app.groovelinx.com">Sign in</a>
+    </div>
+  </details>
+</nav>
+
+<article class="essay" style="padding-bottom:2vh">
+  <p class="hand-label essay-kicker">Founding Bands</p>
+  <h1>We&rsquo;re not launching.</h1>
+  <p class="read-time">A small number of founding bands, worked with directly.</p>
+</article>
+<section class="scene" id="founding" style="min-height:auto;padding-top:0" aria-label="Apply as a founding band">
+  <div class="letter">
+    <p class="hand-label" style="margin-bottom:22px">Founding Bands</p>
+    <p>Here’s the honest picture: GrooveLinx has been built and battle-tested by one working band for over a year — ours. Every feature exists because a real rehearsal or a real gig demanded it. Now it needs bands that aren’t ours. Bands that will use it on their own Tuesdays and tell us the truth.</p>
+    <p><strong>What founding bands get:</strong> the product, free, for the founding period · a direct line to the people building it · a real say in what it becomes · your band’s memory, compounding from day one — and yours forever, exportable, whatever happens.</p>
+    <p><strong>What we ask:</strong> use it for real. Tell us the truth, especially when it’s unflattering. That’s the whole deal.</p>
+
+    <form id="founding-form" action="https://formspree.io/f/xdkovpvv" method="POST">
+      <input type="hidden" name="source" value="founding_bands_page" />
+      <input type="hidden" name="framing_variant" id="f-variant" value="A" />
+      <input type="hidden" name="first_touch_ref" id="f-ref" value="" />
+      <div class="field">
+        <label for="f-band">What’s your band called, and what do you play?</label>
+        <input type="text" id="f-band" name="band" required autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="f-lockin">Tell us about a night your band locked in.</label>
+        <textarea id="f-lockin" name="locked_in_night"></textarea>
+      </div>
+      <div class="field">
+        <label for="f-forgets">What does your band keep forgetting?</label>
+        <textarea id="f-forgets" name="keeps_forgetting"></textarea>
+      </div>
+      <div class="field">
+        <label id="keeper-label">Are you the one who carries the band?</label>
+        <div class="keeper-check" role="group" aria-labelledby="keeper-label">
+          <label><input type="radio" name="keeper" value="yes" /> Yes</label>
+          <label><input type="radio" name="keeper" value="complicated" /> It’s complicated</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-email">Where should a human reply? (email)</label>
+        <input type="text" id="f-email" name="email" inputmode="email" required />
+      </div>
+      <div class="field">
+        <label for="f-else">Anything else we should know?</label>
+        <textarea id="f-else" name="anything_else"></textarea>
+      </div>
+      <button class="cta cta-primary" type="submit">Apply as a Founding Band</button>
+      <p class="letter-note" id="form-error" hidden style="color:var(--amber)">That didn’t send — nothing was lost; your answers are still here. Try again, or email hello@groovelinx.com.</p>
+      <p class="letter-note">A real person reads every application and replies within three days.</p>
+    </form>
+    <!-- Post-submit moment: safe default per Production Package Addendum A;
+         full design held for the first live design review -->
+    <div class="form-received" id="form-received" hidden>
+      <p class="voice voice-line">It’s with us now.</p>
+      <p style="color:var(--dim); margin-top:14px">A human reads every one — you’ll hear back within three days.</p>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  var ref = document.getElementById('f-ref');
+  if (ref) { try { ref.value = document.referrer || ''; } catch (e) {} }
+  var form = document.getElementById('founding-form');
+  if (!form) return;
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var btn = form.querySelector('button');
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        if (r.ok) { form.hidden = true; document.getElementById('form-received').hidden = false; }
+        else { throw new Error(); }
+      })
+      .catch(function () {
+        btn.disabled = false; btn.textContent = 'Apply as a Founding Band';
+        document.getElementById('form-error').hidden = false;
+      });
+  });
+  var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
+<footer class="footer">
+  <p class="thesis">The software disappears. The music remains.</p>
+  <div class="footer-links">
+    <a href="./">Home</a>
+    <a href="features.html">How it works</a>
+    <a href="why-bands-break-up.html">Why Bands Break Up</a>
+    <a href="the-keeper-manifesto.html">The Keeper Manifesto</a>
+    <a href="writing.html">Writing</a>
+    <a href="for-jam-bands.html">For jam bands</a>
+    <a href="for-cover-bands.html">For cover bands</a>
+    <a href="for-wedding-bands.html">For wedding bands</a>
+    <a href="for-worship-teams.html">For worship teams</a>
+    <a href="for-tribute-bands.html">For tribute bands</a>
+    <a href="vs-your-group-chat.html">vs. your group chat</a>
+    <a href="faq.html">FAQ</a>
+    <a href="about.html">About</a>
+    <a href="founding-bands.html">Founding Bands</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+  <div class="footer-links" style="margin-top:14px">
+    <a href="https://www.instagram.com/groovelinxapp" rel="me">Instagram</a>
+    <a href="https://www.facebook.com/profile.php?id=61591392068150" rel="me">Facebook</a>
+    <a href="https://www.youtube.com/@GrooveLinx" rel="me">YouTube</a>
+  </div>
+</footer>
+
+</body>
+</html>
