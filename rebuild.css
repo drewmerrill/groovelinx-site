@@ -253,3 +253,32 @@ body {
 .mini-beat { padding: 7vh 24px; text-align: center; }
 .mini-beat .hand-label { margin-bottom: 12px; }
 .mini-beat p.line { font-family: var(--voice); font-size: clamp(19px, 2.8vw, 30px); max-width: 34ch; margin: 0 auto; }
+
+/* ── Proof moment (Bible §220 "one small in-situ screenshot" / §236 audience proof) ──
+   Warm stage-dark, one amber tube-glow accent, the Voice for the song. Small and
+   quiet — never a hero, never a dashboard glow (§8). Interim standing in for the real
+   phone-on-an-amp photograph the §4 shot list calls for, pending the DeadCetera shoot. */
+.proof-stage { margin-top: 42px; display: flex; justify-content: center; width: 100%; }
+.proof-phone {
+  width: 262px; max-width: 78vw;
+  background: #171410; border: 1px solid #2A2620; border-radius: 22px; padding: 10px;
+  box-shadow: 0 30px 64px rgba(0,0,0,.5);
+}
+.proof-screen { border-radius: 14px; overflow: hidden; background: #12100D; border: 1px solid #221E18; text-align: left; }
+.proof-chart-head { padding: 14px 15px 12px; border-bottom: 1px solid #221E18; }
+.proof-eye { font-family: var(--hand); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); }
+.proof-song { margin-top: 9px; }
+.proof-song .title { font-family: var(--voice); font-weight: 600; font-size: 1.08rem; line-height: 1.15; color: var(--room); }
+.proof-meta { display: flex; gap: 7px; margin-top: 9px; }
+.proof-badge { font-family: var(--hand); font-size: 0.62rem; font-weight: 600; color: var(--dim); border: 1px solid #2A2620; border-radius: 5px; padding: 3px 6px; flex-shrink: 0; }
+.proof-badge.key { color: var(--amber); border-color: rgba(232,160,60,.42); }
+.proof-lines { padding: 13px 15px 6px; }
+.proof-line { margin-bottom: 12px; }
+.proof-line .ch { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 700; font-size: 0.72rem; color: var(--amber); white-space: pre; }
+.proof-line .ly { font-family: var(--hand); font-size: 0.9rem; color: var(--dim); margin-top: 2px; }
+.proof-line.here { border-left: 2px solid var(--amber); padding-left: 11px; margin-left: -13px; }
+.proof-line.here .ly { color: var(--room); }
+.proof-foot { display: flex; justify-content: space-between; align-items: center; padding: 11px 15px; border-top: 1px solid #221E18; font-family: var(--hand); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+.proof-foot .scroll { color: var(--amber); }
+.proof-caption { font-family: var(--voice); font-size: clamp(17px, 2.4vw, 24px); line-height: 1.4; color: var(--dim); max-width: 32ch; margin: 34px auto 0; }
+.proof-caption em { color: var(--room); font-style: italic; }
