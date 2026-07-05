@@ -323,3 +323,32 @@ body {
 .proof-stem.solo .proof-wave i { opacity: 0.85; }
 .proof-tag { font-family: var(--hand); font-size: 0.52rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--dim); flex-shrink: 0; width: 30px; text-align: right; }
 .proof-stem.solo .proof-tag { color: var(--amber); }
+
+/* Features — small per-chapter in-situ glimpses, the loop: plan · play · keep (§13/§220) */
+.proof-phone.sm { width: 212px; }
+.chapter .proof-stage { margin-top: 32px; }
+/* Plan / what-to-work-on (Before the room) */
+.proof-plan { padding: 11px 13px 8px; display: flex; flex-direction: column; gap: 7px; }
+.proof-act { display: flex; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 10px; background: #171410; border: 1px solid #221E18; }
+.proof-act.focus { border-color: rgba(232,160,60,.55); }
+.proof-act .rk { width: 20px; height: 20px; border-radius: 6px; background: #221E18; font-family: var(--hand); font-size: 0.6rem; font-weight: 700; color: var(--amber); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.proof-act .ac { flex: 1; min-width: 0; }
+.proof-act .ac .h { font-family: var(--voice); font-weight: 600; font-size: 0.84rem; color: var(--room); line-height: 1.15; }
+.proof-act .ac .s { font-family: var(--hand); font-size: 0.56rem; color: var(--dim); margin-top: 3px; letter-spacing: 0.02em; }
+.proof-act .fl { font-family: var(--hand); font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 6px; border-radius: 99px; flex-shrink: 0; color: var(--dim); border: 1px solid #2A2620; }
+.proof-act.focus .fl { color: var(--amber); border-color: rgba(232,160,60,.5); }
+/* Review / kept recording (After the gig) */
+.proof-review { padding: 12px 13px; }
+.proof-rec { padding: 11px 11px 9px; border-radius: 10px; background: #171410; border: 1px solid #221E18; }
+.proof-rec .rh { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.proof-rec .rh .t { font-family: var(--voice); font-weight: 600; font-size: 0.84rem; color: var(--room); }
+.proof-rec .rh .d { font-family: var(--hand); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--dim); flex-shrink: 0; }
+.proof-recwave { height: 32px; display: flex; align-items: center; gap: 2px; margin-top: 10px; }
+.proof-recwave i { flex: 1; background: var(--amber); opacity: 0.26; border-radius: 1px; height: 38%; }
+.proof-recwave i:nth-child(3n) { height: 70%; }
+.proof-recwave i:nth-child(4n+1) { height: 52%; }
+.proof-recwave i:nth-child(7n) { height: 24%; }
+.proof-recwave i.mk { opacity: 0.95; height: 100%; }
+.proof-note { display: flex; gap: 8px; align-items: flex-start; margin-top: 9px; padding: 9px 11px; border-radius: 9px; background: #171410; border: 1px solid #221E18; border-left: 2px solid var(--amber); }
+.proof-note .nt { font-family: var(--hand); font-size: 0.68rem; line-height: 1.45; color: var(--room); }
+.proof-note .nt b { color: var(--amber); font-weight: 700; }
