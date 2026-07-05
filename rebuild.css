@@ -282,3 +282,44 @@ body {
 .proof-foot .scroll { color: var(--amber); }
 .proof-caption { font-family: var(--voice); font-size: clamp(17px, 2.4vw, 24px); line-height: 1.4; color: var(--dim); max-width: 32ch; margin: 34px auto 0; }
 .proof-caption em { color: var(--room); font-style: italic; }
+
+/* Proof variant — setlist / readiness (worship · jam · wedding) */
+.proof-meter { padding: 12px 14px 4px; }
+.proof-meter .lab { display: flex; justify-content: space-between; font-family: var(--hand); font-size: 0.58rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-bottom: 6px; }
+.proof-meter .lab b { color: var(--room); }
+.proof-bar { height: 5px; border-radius: 99px; background: #221E18; overflow: hidden; }
+.proof-bar > i { display: block; height: 100%; border-radius: 99px; background: var(--amber); }
+.proof-set { padding: 10px 13px 6px; display: flex; flex-direction: column; gap: 7px; }
+.proof-set-row { padding: 9px 11px; border-radius: 10px; background: #171410; border: 1px solid #221E18; }
+.proof-set-row.here { border-color: rgba(232,160,60,.55); }
+.proof-set-row .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.proof-set-row .nm { font-family: var(--voice); font-weight: 600; font-size: 0.88rem; line-height: 1.2; color: var(--room); }
+.proof-set-row .nm .seg { color: var(--amber); font-style: normal; }
+.proof-set-row .rmeta { font-family: var(--hand); font-size: 0.58rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dim); flex-shrink: 0; white-space: nowrap; }
+.proof-set-row.here .rmeta { color: var(--amber); }
+.proof-dots { display: flex; gap: 5px; margin-top: 9px; }
+.proof-dot { width: 14px; height: 14px; border-radius: 50%; }
+.proof-dot.rdy { background: var(--amber); }
+.proof-dot.wip { background: rgba(232,160,60,.42); }
+.proof-dot.non { background: transparent; border: 1.5px solid #3A342B; }
+
+/* Proof variant — stems mixer (tribute) */
+.proof-stems { padding: 11px 13px 7px; }
+.proof-transport { display: flex; align-items: center; gap: 9px; padding: 9px 10px; border-radius: 10px; background: #171410; border: 1px solid #221E18; margin-bottom: 10px; }
+.proof-play { width: 27px; height: 27px; border-radius: 50%; background: var(--amber); color: var(--stage); display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+.proof-scrub { flex: 1; height: 4px; border-radius: 99px; background: #221E18; position: relative; }
+.proof-scrub > i { position: absolute; inset: 0 62% 0 0; border-radius: 99px; background: var(--amber); }
+.proof-loop { font-family: var(--hand); font-size: 0.54rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--amber); border: 1px solid rgba(232,160,60,.5); border-radius: 99px; padding: 3px 7px; flex-shrink: 0; }
+.proof-stem { display: flex; align-items: center; gap: 9px; padding: 7px 9px; border-radius: 9px; background: #171410; border: 1px solid #221E18; margin-bottom: 6px; }
+.proof-stem.solo { border-color: rgba(232,160,60,.6); }
+.proof-stem.muted { opacity: 0.42; }
+.proof-stem .snm { font-family: var(--hand); font-weight: 700; font-size: 0.68rem; color: var(--room); width: 42px; flex-shrink: 0; }
+.proof-wave { flex: 1; height: 18px; display: flex; align-items: center; gap: 2px; overflow: hidden; }
+.proof-wave i { flex: 1; background: var(--amber); opacity: 0.3; border-radius: 1px; height: 45%; }
+.proof-wave i:nth-child(3n) { height: 80%; }
+.proof-wave i:nth-child(3n+2) { height: 100%; }
+.proof-wave i:nth-child(5n) { height: 32%; }
+.proof-wave i:nth-child(7n) { height: 66%; }
+.proof-stem.solo .proof-wave i { opacity: 0.85; }
+.proof-tag { font-family: var(--hand); font-size: 0.52rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--dim); flex-shrink: 0; width: 30px; text-align: right; }
+.proof-stem.solo .proof-tag { color: var(--amber); }
