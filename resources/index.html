@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Notes for Working Bands — GrooveLinx</title>
+  <meta name="description" content="Practical rehearsal, set-building, gig-prep, and band-dynamics notes for working bands who want to spend less time reconstructing the plan and more time in the music." />
+  <link rel="canonical" href="https://groovelinx.com/resources/" />
+  <meta property="og:title" content="Field Notes for Working Bands — GrooveLinx" />
+  <meta property="og:description" content="Practical notes for the rehearsal, the set, and the person who remembers what the band decided last time." />
+  <meta property="og:image" content="https://groovelinx.com/og-home.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../icon-32.png" />
+  <link rel="preload" href="../fonts/literata-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="../fonts/fonts-local.css" />
+  <link rel="stylesheet" href="../rebuild.css" />
+  <style>
+    .field-notes { max-width: 1120px; margin: 0 auto; padding: 17vh 24px 12vh; }
+    .field-notes__hero { max-width: 760px; margin: 0 auto 11vh; text-align: center; }
+    .field-notes__hero h1 { font-family: var(--voice); font-size: clamp(40px, 7vw, 76px); line-height: 1.05; margin: 20px 0; }
+    .field-notes__hero p { max-width: 56ch; margin: 0 auto; color: var(--dim); font-size: 1.08rem; line-height: 1.7; }
+    .field-notes__thread { margin-top: 30px; font-family: var(--hand); color: var(--amber); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .notes-index { border-top: 1px solid #2A2620; border-bottom: 1px solid #2A2620; }
+    .notes-index__header { display: flex; justify-content: space-between; gap: 24px; align-items: end; padding: 28px 0; }
+    .notes-index__header h2, .field-note h2 { font-family: var(--voice); font-size: clamp(28px, 4vw, 46px); line-height: 1.1; margin: 0; }
+    .notes-index__header p { color: var(--dim); margin: 0; max-width: 42ch; }
+    .notes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+    .note-link { display: block; padding: 28px 26px; min-height: 210px; color: var(--room); text-decoration: none; border-top: 1px solid #2A2620; transition: background 180ms, color 180ms; }
+    .note-link:nth-child(odd) { border-right: 1px solid #2A2620; }
+    .note-link:hover, .note-link:focus-visible { background: #1C1813; color: var(--room); }
+    .note-link__meta { display: flex; justify-content: space-between; color: var(--amber); font-family: var(--hand); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .note-link h3 { max-width: 22ch; margin: 30px 0 12px; font-family: var(--voice); font-size: clamp(22px, 2.8vw, 32px); line-height: 1.15; }
+    .note-link p { color: var(--dim); line-height: 1.55; margin: 0; }
+    .field-note { max-width: 760px; margin: 13vh auto 0; padding-top: 8vh; border-top: 1px solid #2A2620; }
+    .field-note__meta { color: var(--amber); font-family: var(--hand); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .field-note h2 { margin: 16px 0 18px; }
+    .field-note > p { color: #E4DDD1; line-height: 1.8; font-size: 1.07rem; }
+    .field-note h3 { margin: 38px 0 8px; font-family: var(--voice); font-size: 1.55rem; color: var(--room); }
+    .field-note .room-note { margin-top: 36px; padding: 24px 26px; background: #1C1813; border-left: 2px solid var(--amber); }
+    .room-note strong { display: block; color: var(--amber); font-family: var(--hand); font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .room-note ul { margin: 14px 0 0; padding-left: 18px; color: var(--dim); line-height: 1.8; }
+    .field-notes__close { max-width: 760px; margin: 14vh auto 0; padding-top: 8vh; border-top: 1px solid #2A2620; text-align: center; }
+    .field-notes__close h2 { font-family: var(--voice); font-size: clamp(32px, 5vw, 54px); line-height: 1.1; }
+    .field-notes__close p { color: var(--dim); line-height: 1.8; }
+    @media (max-width: 640px) { .field-notes { padding: 14vh 20px 10vh; } .notes-index__header { display: block; } .notes-index__header p { margin-top: 14px; } .notes-grid { grid-template-columns: 1fr; } .note-link:nth-child(odd) { border-right: 0; } .note-link { min-height: 0; padding: 24px 0; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav is-visible is-solid" aria-label="Main">
+  <a class="nav-logo" href="../">GrooveLinx</a>
+  <div class="nav-links">
+    <a href="../features.html">How it works</a>
+    <a href="../why-bands-break-up.html">Why Bands Break Up</a>
+    <a href="./" aria-current="page">Field Notes</a>
+    <a href="../#founding">Founding Bands</a>
+    <a href="../about.html">About</a>
+    <a href="https://app.groovelinx.com">Sign in</a>
+  </div>
+  <details class="nav-menu"><summary>Menu</summary>
+    <div class="menu-panel">
+      <a href="../features.html">How it works</a>
+      <a href="../why-bands-break-up.html">Why Bands Break Up</a>
+      <a href="./" aria-current="page">Field Notes</a>
+      <a href="../#founding">Founding Bands</a>
+      <a href="../about.html">About</a>
+      <a href="https://app.groovelinx.com">Sign in</a>
+    </div>
+  </details>
+</nav>
+
+<main class="field-notes">
+  <header class="field-notes__hero">
+    <p class="hand-label">Field Notes for Working Bands</p>
+    <h1>For the nights<br />your band locks in.</h1>
+    <p>Notes for the rehearsal, the set, and the one person who remembers what the band decided last time.</p>
+    <p class="field-notes__thread">The plan, the parts, and the one thing to fix—kept close.</p>
+  </header>
+
+  <section class="notes-index" aria-labelledby="notes-index-title">
+    <div class="notes-index__header">
+      <div><p class="hand-label">The index</p><h2>Notes for the bands<br />who keep showing up.</h2></div>
+      <p>Each note names a familiar band problem and ends with one useful thing to carry into the next room, the next show, or the next message thread.</p>
+    </div>
+    <div class="notes-grid">
+      <a class="note-link" href="#note-01"><span class="note-link__meta"><span>01 / Rehearsal</span><span>5 min</span></span><h3>The first 20 minutes of rehearsal should not be a meeting.</h3><p>Make the plan visible before anyone unloads an amp.</p></a>
+      <a class="note-link" href="#note-02"><span class="note-link__meta"><span>02 / Gig prep</span><span>4 min</span></span><h3>The 15-minute gig-prep check.</h3><p>Resolve the small details before they become a stage problem.</p></a>
+      <a class="note-link" href="#note-03"><span class="note-link__meta"><span>03 / Rehearsal</span><span>6 min</span></span><h3>Do not let a great rehearsal evaporate.</h3><p>Keep the few notes that make next Tuesday lighter.</p></a>
+      <a class="note-link" href="#note-04"><span class="note-link__meta"><span>04 / Band dynamics</span><span>7 min</span></span><h3>Your band’s hidden job descriptions.</h3><p>Name the invisible work so it can be shared.</p></a>
+      <a class="note-link" href="#note-05"><span class="note-link__meta"><span>05 / Gig prep</span><span>6 min</span></span><h3>A setlist should have a shape.</h3><p>Build a path through the night, not only a list of songs.</p></a>
+      <a class="note-link" href="#note-06"><span class="note-link__meta"><span>06 / Band dynamics</span><span>5 min</span></span><h3>The group text is not the problem. The missing decision is.</h3><p>Let the band talk freely while keeping the answer close.</p></a>
+      <a class="note-link" href="#note-07"><span class="note-link__meta"><span>07 / Rehearsal</span><span>6 min</span></span><h3>One song. One current version.</h3><p>Give every player the same confident place to begin.</p></a>
+      <a class="note-link" href="#note-08"><span class="note-link__meta"><span>08 / Gig prep</span><span>5 min</span></span><h3>The day-before-show message.</h3><p>Make every player feel prepared without asking them to search.</p></a>
+    </div>
+  </section>
+
+  <article class="field-note" id="note-01"><p class="field-note__meta">Room note / 01</p><h2>The first 20 minutes of rehearsal should not be a meeting.</h2><p>The most expensive part of rehearsal is often the beginning: time spent remembering what was decided, deciding what to play, and finding the current version. A rehearsal plan does not need to be elaborate. It needs to be shared before anyone has unloaded an amp.</p><h3>Name the one thing the room is for.</h3><p>Give the rehearsal a visible job. It might be a bridge that keeps rushing or a harmony entrance that needs a decision. One sentence gives everyone a reason to arrive prepared.</p><h3>Make the version explicit.</h3><p>Identify the recording, chart, key, cue, and ending that count today. A band can survive a wrong note. It struggles with five plausible versions of the same arrangement.</p><h3>Give every player a small arrival task.</h3><p>A specific focus gives each person a reason to prepare without making rehearsal feel like homework.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Confirm who is in the room.</li><li>Name the song or set section that matters tonight.</li><li>Link the current version, key, and ending.</li><li>Write down one decision you must not lose afterward.</li></ul></div></article>
+
+  <article class="field-note" id="note-02"><p class="field-note__meta">Stage note / 02</p><h2>The 15-minute gig-prep check.</h2><p>A good gig can be derailed by small uncertainty: an unconfirmed key, a buried chart, a last-minute set re-order, or a player who never saw the arrival plan. Fifteen calm minutes can protect the first song.</p><h3>Build the set around a shared clock.</h3><p>The set includes durations, breaks, transitions, and the breath between songs. Give everyone the same run-of-show early enough to notice an odd handoff before it becomes a stage problem.</p><h3>Surface the invisible cue.</h3><p>A hard stop, a count-in, a patch switch, or an alternate ending is invisible until it matters. Write down the cue that makes each difficult song feel easy.</p><h3>Leave one note for the next show.</h3><p>Mark the transition that landed and the thing that felt rushed. The last set holds better information than memory does.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Confirm final order, runtime, and breaks.</li><li>Verify keys, capos, charts, and special gear.</li><li>Confirm arrival time, parking, and load-in details.</li><li>Carry one useful note forward.</li></ul></div></article>
+
+  <article class="field-note" id="note-03"><p class="field-note__meta">Memory note / 03</p><h2>Do not let a great rehearsal evaporate.</h2><p>A rehearsal can contain useful evidence: a changed key, a cue that finally landed, a bridge that still runs away, or a harmony that needs another pass. The goal is not more note-taking. It is a small, usable memory.</p><h3>Keep the decision, not the transcript.</h3><p>Save the arrangement, tempo, ending, or order that now counts. No one needs a word-for-word record of a two-hour room.</p><h3>Make trouble spots specific enough to practice.</h3><p>“Bridge needs work” is too broad. “Bridge—tempo pushes after the second vocal line” gives the band something tangible to hear.</p><h3>Anchor the note to a moment.</h3><p>A recording timestamp turns a memory into something anyone can revisit on the drive to the next rehearsal.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Save the version that now counts.</li><li>Name one trouble spot precisely.</li><li>Capture a cue, harmony, or ending.</li><li>Mark the recording moment that proves what happened.</li></ul></div></article>
+
+  <article class="field-note" id="note-04"><p class="field-note__meta">Band note / 04</p><h2>Your band’s hidden job descriptions.</h2><p>Someone sends the reminder. Someone knows the current key. Someone remembers that the bridge changed. These roles are not glamorous, but they are why bands keep making the drive.</p><h3>The Keeper holds the thread.</h3><p>The Keeper carries dates, details, decisions, and reminders. The healthiest band is not the one without a Keeper; it is the one that does not make one person carry everything alone.</p><h3>The Translator makes feedback playable.</h3><p>They ask, “Do we mean push the tempo, or change the entrance?” Their questions keep feedback practical and make hard conversations land softly.</p><h3>The Evidence Keeper captures the moment of agreement.</h3><p>A recording, chart mark, or concise note prevents an old argument from returning as a new creative difference.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Notice who carries dates, setlists, and reminders.</li><li>Name one task that can be shared.</li><li>Agree where decisions and current versions live.</li><li>Thank the person carrying invisible work.</li></ul></div></article>
+
+  <article class="field-note" id="note-05"><p class="field-note__meta">Stage note / 05</p><h2>A setlist should have a shape.</h2><p>A setlist is not an inventory of songs you know. It is the path you give a room through the night. A shared reason for the order lets the stage stay responsive without becoming uncertain.</p><h3>Choose the first promise.</h3><p>The opener tells the room what kind of night it is. It does not need to be the fastest song. It needs to make the next song easier.</p><h3>Build in turns, not only peaks.</h3><p>Let the set breathe: a change in groove, a familiar hook, a chance to listen, then another rise. Shape is attention management.</p><h3>Mark the places where the list can bend.</h3><p>Identify the optional song, cuttable verse, or flex break before the night gets late. Flexibility works when everyone knows where it lives.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Name the opener and what it promises.</li><li>Mark energy turns after every few songs.</li><li>Confirm recovery moments and instrument changes.</li><li>Share the final set before load-in.</li></ul></div></article>
+
+  <article class="field-note" id="note-06"><p class="field-note__meta">Band note / 06</p><h2>The group text is not the problem. The missing decision is.</h2><p>The group text is where a band talks. It should not be the only place a band remembers. The messages are evidence that a decision happened somewhere and never got a stable home.</p><h3>Separate talking from deciding.</h3><p>Conversation is supposed to wander. Decisions should not. State an agreed key, ending, date, set order, or arrival plan in one clean sentence.</p><h3>Give a decision an owner and a date.</h3><p>“We should probably…” is not a decision. Naming the next action keeps good intentions from becoming invisible work.</p><h3>Close the loop in public.</h3><p>When something changes, say what changed and where the current version lives. A two-line update can save four people from preparing the wrong thing.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Pull one current decision out of the group chat.</li><li>Write it for a late-arriving player.</li><li>Name the next owner and date.</li><li>Link the current chart, set, recording, or calendar detail.</li></ul></div></article>
+
+  <article class="field-note" id="note-07"><p class="field-note__meta">Room note / 07</p><h2>One song. One current version.</h2><p>A song becomes expensive when every player practices a different memory of it. The original recording, a version learned at home, and the arrangement settled two rehearsals ago can quietly become three different songs.</p><h3>Choose the source that wins.</h3><p>For each active song, decide what counts as current: a live recording, chart, reference track, or rehearsal capture. Give a player who was absent a confident place to begin.</p><h3>Record changes that alter preparation.</h3><p>A changed key, form, intro cue, tempo feel, harmony split, cut verse, or ending deserves a clear record.</p><h3>Retire old versions clearly.</h3><p>Old links and old charts make uncertainty feel like a player mistake. Label the current source and take superseded versions out of the active path.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Choose a song with too many versions.</li><li>Name the single source that counts.</li><li>Record key, form, tempo feel, and ending.</li><li>Retire the version that should no longer be practiced.</li></ul></div></article>
+
+  <article class="field-note" id="note-08"><p class="field-note__meta">Stage note / 08</p><h2>The day-before-show message.</h2><p>The day before a show is a bad time to discover that someone has the wrong call time, a missing chart, or no idea who is bringing the extension cord. A useful final message does not create anxiety. It removes it.</p><h3>Start with the clock.</h3><p>Put arrival, load-in, soundcheck, first set, breaks, and finish time in a sequence anyone can scan. “Be there around seven” is not a schedule.</p><h3>Include the details that become urgent in a parking lot.</h3><p>Venue contact, parking, load-in entrance, payment detail, and special gear all seem small until they are not.</p><h3>End with a clean readiness ask.</h3><p>Ask each player to confirm they have seen the note and flag one problem now—not after arrival.</p><div class="room-note"><strong>Use this next time</strong><ul><li>Send the full arrival-to-finish sequence.</li><li>Include venue, contact, parking, and load-in detail.</li><li>Link the final setlist and any change.</li><li>Ask every player to confirm readiness.</li></ul></div></article>
+
+  <section class="field-notes__close">
+    <p class="hand-label">Keep the thread</p>
+    <h2>One place for the plan,<br />the parts, and what changed.</h2>
+    <p>GrooveLinx was born in a working band that kept making the drive. It helps the whole band keep the small details that protect the music.</p>
+    <p class="pivot"><a href="../founding-bands.html">Bring your band →</a></p>
+  </section>
+</main>
+
+<footer class="footer">
+  <p class="thesis">The software disappears. The music remains.</p>
+  <div class="footer-links">
+    <a href="../">Home</a>
+    <a href="../features.html">How it works</a>
+    <a href="../why-bands-break-up.html">Why Bands Break Up</a>
+    <a href="../the-keeper-manifesto.html">The Keeper Manifesto</a>
+    <a href="./">Field Notes</a>
+    <a href="../writing.html">Writing</a>
+    <a href="../for-jam-bands.html">For jam bands</a>
+    <a href="../for-cover-bands.html">For cover bands</a>
+    <a href="../for-wedding-bands.html">For wedding bands</a>
+    <a href="../for-worship-teams.html">For worship teams</a>
+    <a href="../for-tribute-bands.html">For tribute bands</a>
+    <a href="../vs-your-group-chat.html">vs. your group chat</a>
+    <a href="../operating-system-for-bands.html">Operating system for bands</a>
+    <a href="../faq.html">FAQ</a>
+    <a href="../about.html">About</a>
+    <a href="../founding-bands.html">Founding Bands</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy.html">Privacy</a>
+    <a href="../terms.html">Terms</a>
+  </div>
+  <div class="footer-links" style="margin-top:14px">
+    <a href="https://www.instagram.com/groovelinxapp" rel="me">Instagram</a>
+    <a href="https://www.facebook.com/profile.php?id=61591392068150" rel="me">Facebook</a>
+    <a href="https://www.youtube.com/@GrooveLinx" rel="me">YouTube</a>
+  </div>
+</footer>
+</body>
+</html>
